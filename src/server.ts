@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { config } from "dotenv";
 import {financeRouter} from "./modules/finance/routes/finance.routes";
+import {adminRouter} from "./modules/admin/routers/admin.routes";
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerOptions from "./config/swaggerOptions";
@@ -42,13 +43,14 @@ const main = async () => {
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
   app.use(express.json());
   app.use(financeRouter);
+  app.use(adminRouter)
   app.get('/', (req, res) => {
-    res.render("template/sign_in")
+    res.render("template/form/sign")
   });
   app.use(function  (req,res,next){
-    res.status(200).json({ message:"Not Found !"});
+    res.render("template/error/pages-misc-error")
+
 }) 
- 
   const port = process.env.PORT || 3000;
   app.listen(port, () => console.log(`http://localhost:${port}`));
 };
