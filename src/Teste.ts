@@ -18,8 +18,8 @@ const lerArquivoExcel = async (nomeArquivo: string) => {
   }
 };
 
-   async function name() {
+   async function Insert() {
     const data = await lerArquivoExcel(nomeArquivo);
     const user = await employeeRepository.addData(data)   
   }
-name()
+  Insert()
