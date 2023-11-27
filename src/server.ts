@@ -48,7 +48,7 @@ const main = async () => {
     res.render("template/form/sign")
   });
   app.use(function  (req,res,next){
-    res.render("template/error/pages-misc-error")
+    res.render("template/error/404")
 
 }) 
   const port = process.env.PORT || 3000;
