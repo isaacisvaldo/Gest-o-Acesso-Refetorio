@@ -1,4 +1,5 @@
 import * as XLSX from 'xlsx';
+import { employeeRepository } from './modules/employee/repository/employee.repository';
 
 
 const nomeArquivo = 'exemplo.xlsx';
@@ -16,4 +17,9 @@ const lerArquivoExcel = async (nomeArquivo: string) => {
     return null;
   }
 };
-lerArquivoExcel(nomeArquivo);
+
+   async function name() {
+    const data = await lerArquivoExcel(nomeArquivo);
+    const user = await employeeRepository.addData(data)   
+  }
+name()
