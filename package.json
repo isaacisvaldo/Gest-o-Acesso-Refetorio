@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "d": "tsnd --transpile-only --respawn --ignore-watch node_modules src/Teste.ts",
     "build": "tsup src --out-dir dist",
     "migration:create": "npx prisma migrate dev",
     "update:prisma": "npx prisma generate --watch",
@@ -36,7 +37,8 @@
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0",
     "tsup": "^7.1.0",
-    "validator": "^13.11.0"
+    "validator": "^13.11.0",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
