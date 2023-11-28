@@ -5,6 +5,8 @@ import { userRepository } from "../repository/user.repository";
 import { UsuarioDTO } from "../dto/user.dto";
 import { userValidate } from "../../util/validation/user.service.validate";
 import { hash } from 'bcryptjs';
+import fs from 'fs';
+import { lerArquivoExcel } from "../../util/readFile";
 interface UserSessionData {
   id: string;
   nome: string;
@@ -85,7 +87,7 @@ export async function login(req: Request, res: Response) {
     console.log(error);
   }
 }
-  export async function dashboard(req:Request, res:Response){
+export async function dashboard(req:Request, res:Response){
     try {
       const user = req.session.user;
       console.log(user)
@@ -94,7 +96,7 @@ export async function login(req: Request, res: Response) {
       console.log(error);
     }
   }
-  export async function logout(req: Request, res: Response) {
+export async function logout(req: Request, res: Response) {
     try {
       req.session.destroy;
       req.session.user = undefined;
@@ -104,4 +106,38 @@ export async function login(req: Request, res: Response) {
       return res.status(500).json({ error: "Failed to create user." });
     }
   }
+export async function uploadFile(req: Request, res: Response) {
+    try {
+      const file = req.file
+      return res.status(200).json({ filename: file?.filename});
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Failed to create user." });
+    }
+}
+export async function InsertDataFile(req: Request, res: Response) {
+  try {
+    const {name}=req.params
+    const nomeDoArquivo: string = `public/uploads/${name}`;
+    const data = await  lerArquivoExcel(nomeDoArquivo)
+    if(!data.error) {
+      console.log(data);
+      // Vou inserir 
+      // Depois vou deletar
+      fs.unlink(nomeDoArquivo, (err: NodeJS.ErrnoException | null) => {
+        if (err) {
+          console.error('Ocorreu um erro ao excluir o arquivo:', err);
+          return;
+        }
+        console.log('Arquivo removido com sucesso!');
+      });
+    }else{
+      return res.status(500).json({ error: "Error interno !" });
+    }
+   
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Failed to create user." });
+  }
+}
   
