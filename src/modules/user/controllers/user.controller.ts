@@ -133,7 +133,7 @@ export async function InsertDataFile(req: Request, res: Response) {
     const data = await  lerArquivoExcel(nomeDoArquivo)
     if(!data.error) {
       console.log(data);
-      // Vou inserir 
+      // Vou inserir na Bd os dados lidos
       // Depois vou deletar
       fs.unlink(nomeDoArquivo, (err: NodeJS.ErrnoException | null) => {
         if (err) {
