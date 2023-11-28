@@ -14,6 +14,15 @@ export const userRepository = {
         throw new Error(`Erro ao pesquisar : ${error}`);
      }
 
+    },
+    async create(data:any){
+        try {
+            const user = await conexao.user.createMany({data}) 
+            return user
+        } catch (error) {
+            throw new Error(`Erro ao Cadastrar : ${error}`);
+        }
+
     }
 
 }
