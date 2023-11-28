@@ -6,11 +6,22 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+model Perfil {
+  Id  String   @id @default(uuid())
+  designacao String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User[]
+}
 
 model User {
-  Id   Int      @id @default(autoincrement())
+  Id    String   @id @default(uuid())
   nome String   
-  Funcao String
+  sobrenome String
+  username String @unique
+  password String
+  perfil            Perfil?      @relation(fields: [fk_perfil], references: [Id])
+  fk_perfil        String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt   
 }
