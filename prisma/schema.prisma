@@ -20,6 +20,7 @@ model User {
   sobrenome String
   username String @unique
   password String
+  img    String @default("user.png")
   perfil            Perfil?      @relation(fields: [fk_perfil], references: [Id])
   fk_perfil        String
   createdAt  DateTime @default(now())
