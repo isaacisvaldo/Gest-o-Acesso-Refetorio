@@ -6,7 +6,7 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-model Perfil {
+ model Perfil {
   Id  String   @id @default(uuid())
   designacao String   @unique
   createdAt  DateTime @default(now())

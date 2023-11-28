@@ -1,6 +1,6 @@
 export const perfil = [
-  { perfilID: 1, designacao: "Admin" },
-  { perfilID: 2, designacao: "Super Admin" },
-  { perfilID: 3, designacao: "Técnico" },
-  { perfilID: 4, designacao: "Gestor" },
+    {  designacao: "Admin" },
+    {  designacao: "Super Admin" },
+    { designacao: "Técnico" },
+    {  designacao: "Gestor" },
 ];
