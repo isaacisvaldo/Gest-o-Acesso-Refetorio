@@ -3,54 +3,170 @@
 <head>
   <meta charset="UTF-8">
   <title>Upload de Arquivo em um Quadrado Estilizado</title>
-  <style>body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+<style>
+/* Variáveis */
+:root {
+  --skin: #4db6ac;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(to top, #4F6072, #8699AA);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload {
+  position: relative;
+  width: 400px;
+  min-height: 445px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .2);
+  padding-bottom: 20px;
+  background: #fff;
+  animation: fadeup .5s .5s ease both;
+  transform: translateY(20px);
+  opacity: 0;
+}
+
+.upload-files header {
+  background: var(--skin);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  text-align: center;
+}
+
+.upload-files header p {
+  color: #fff;
+  font-size: 40px;
+  margin: 0;
+  padding: 50px 0;
+}
+
+/* ... (restante do código convertido) */
+
+/* @media (max-width: 400px) */
+@media (max-width: 400px) {
+  .upload {
+    width: 100%;
+    height: 100%;
   }
-  
-  .file-upload {
-    text-align: center;
-  }
-  
-  .custom-file-upload {
-    border: 2px solid #3498db;
-    color: #3498db;
-    background-color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    padding: 20px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-  }
-  
-  .custom-file-upload:hover {
-    background-color: #3498db;
-    color: #fff;
-  }
-  
-  .custom-file-upload i {
-    margin-right: 5px;
-  }
-  
-  #nomeArquivo {
-    text-align: center;
-    margin-top: 10px;
-    font-style: italic;
-  }
-  </style>
+}
+
+</style>
 </head>
 <body>
-  <div class="file-upload">
-    <label for="file-input" class="custom-file-upload">
-      <i class="fas fa-cloud-upload-alt"></i> Escolha um arquivo
-    </label>
-    <input id="file-input" type="file" accept="image/*" onchange="mostrarNomeArquivo(this)" />
-  </div>
-  <div id="nomeArquivo"></div>
+  <div class="upload">
+    <div class="upload-files">
+     <header>
+      <p>
+       <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+       <span class="up">up</span>
+       <span class="load">load</span>
+      </p>
+     </header>
+     <div class="body" id="drop">
+      <i class="fa fa-file-text-o pointer-none" aria-hidden="true"></i>
+      <p class="pointer-none"><b>Drag and drop</b> files here <br /> or <a href="" id="triggerFile">browse</a> to begin the upload</p>
+         <input type="file" multiple="multiple" />
+     </div>
+     <footer>
+      <div class="divider">
+       <span><AR>FILES</AR></span>
+      </div>
+      <div class="list-files">
+       <!--   template   -->
+      </div>
+         <button class="importar">UPDATE FILES</button>
+     </footer>
+    </div>
+   </div>
+   <script>
+//DOM
+const $ = document.querySelector.bind(document);
+
+//APP
+let App = {};
+App.init = (function() {
+	//Init
+	function handleFileSelect(evt) {
+		const files = evt.target.files; // FileList object
+
+		//files template
+		let template = `${Object.keys(files)
+			.map(file => `<div class="file file--${file}">
+     <div class="name"><span>${files[file].name}</span></div>
+     <div class="progress active"></div>
+     <div class="done">
+	<a href="" target="_blank">
+      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 1000 1000">
+		<g><path id="path" d="M500,10C229.4,10,10,229.4,10,500c0,270.6,219.4,490,490,490c270.6,0,490-219.4,490-490C990,229.4,770.6,10,500,10z M500,967.7C241.7,967.7,32.3,758.3,32.3,500C32.3,241.7,241.7,32.3,500,32.3c258.3,0,467.7,209.4,467.7,467.7C967.7,758.3,758.3,967.7,500,967.7z M748.4,325L448,623.1L301.6,477.9c-4.4-4.3-11.4-4.3-15.8,0c-4.4,4.3-4.4,11.3,0,15.6l151.2,150c0.5,1.3,1.4,2.6,2.5,3.7c4.4,4.3,11.4,4.3,15.8,0l308.9-306.5c4.4-4.3,4.4-11.3,0-15.6C759.8,320.7,752.7,320.7,748.4,325z"</g>
+		</svg>
+						</a>
+     </div>
+    </div>`)
+			.join("")}`;
+
+		$("#drop").classList.add("hidden");
+		$("footer").classList.add("hasFiles");
+		$(".importar").classList.add("active");
+		setTimeout(() => {
+			$(".list-files").innerHTML = template;
+		}, 1000);
+
+		Object.keys(files).forEach(file => {
+			let load = 2000 + (file * 2000); // fake load
+			setTimeout(() => {
+				$(`.file--${file}`).querySelector(".progress").classList.remove("active");
+				$(`.file--${file}`).querySelector(".done").classList.add("anim");
+			}, load);
+		});
+	}
+
+	// trigger input
+	$("#triggerFile").addEventListener("click", evt => {
+		evt.preventDefault();
+		$("input[type=file]").click();
+	});
+
+	// drop events
+	$("#drop").ondragleave = evt => {
+		$("#drop").classList.remove("active");
+		evt.preventDefault();
+	};
+	$("#drop").ondragover = $("#drop").ondragenter = evt => {
+		$("#drop").classList.add("active");
+		evt.preventDefault();
+	};
+	$("#drop").ondrop = evt => {
+		$("input[type=file]").files = evt.dataTransfer.files;
+		$("footer").classList.add("hasFiles");
+		$("#drop").classList.remove("active");
+		evt.preventDefault();
+	};
+
+	//upload more
+	$(".importar").addEventListener("click", () => {
+		$(".list-files").innerHTML = "";
+		$("footer").classList.remove("hasFiles");
+		$(".importar").classList.remove("active");
+		setTimeout(() => {
+			$("#drop").classList.remove("hidden");
+		}, 500);
+	});
+
+	// input change
+	$("input[type=file]").addEventListener("change", handleFileSelect);
+})();
+
+
+   </script>
+   
 </body>
 </html>

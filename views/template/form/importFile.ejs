@@ -120,32 +120,17 @@
             
               <div class="card mb-3">
                 <div class="card-header bg-body-tertiary">
-                  <h6 class="mb-0">Add file</h6>
+              
                 </div>
                 <div class="card-body">
-                  <form class="dropzone dropzone-multiple p-0" id="dropzoneMultipleFileUpload" data-dropzone="data-dropzone" action="#!" data-options='{"acceptedFiles":"image/*"}'>
-                    <div class="fallback">
-                        <input  type="file" id="fileId"/></div>
-                    <div class="dz-message" data-dz-message="data-dz-message"> <img class="me-2" src="../../../assets/img/icons/cloud-upload.svg" width="25" alt="" /><span class="d-none d-lg-inline">Drag your image here<br/>or, </span><span class="btn btn-link p-0 fs--1">Browse</span></div>
-                    <div class="dz-preview dz-preview-multiple m-0 d-flex flex-column">
-                      <div class="d-flex media align-items-center mb-3 pb-3 border-bottom btn-reveal-trigger"><img class="dz-image" src="../../../assets/img/icons/cloud-upload.svg" alt="..." data-dz-thumbnail="data-dz-thumbnail" />
-                        <div class="flex-1 d-flex flex-between-center">
-                          <div>
-                            <h6 data-dz-name="data-dz-name"></h6>
-                            <div class="d-flex align-items-center">
-                              <p class="mb-0 fs--1 text-400 lh-1" data-dz-size="data-dz-size"></p>
-                              <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress=""></span></div>
-                            </div>
-                          </div>
-                          <div class="dropdown font-sans-serif"><button class="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal dropdown-caret-none" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h"></span></button>
-                            <div class="dropdown-menu dropdown-menu-end border py-2"><a class="dropdown-item" href="#!" data-dz-remove="data-dz-remove">Remove File</a></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <br>
-                    <button class="btn btn-outline-success me-1 mb-1" type="button" onclick="getData()">Success</button>
-                </form>
+                
+                  <div>
+                    <label for="customFile" class="form-label">Adicionar o ficheiro</label>
+                    <input required class="form-control form-control-lg" id="customFile" type="file" onchange= "ValidarExt()" >
+                  </div>
+              <br>
+              <button  class="btn btn-outline-success me-1 mb-1" type="button" id="btnupload" onclick="enviar()" >Success</button>
+            
                 </div>
               </div>
            
@@ -172,11 +157,32 @@
     <script src="../../../vendors/list.js/list.min.js"></script>
     <script src="../../../assets/js/theme.js"></script>
     <script>
-        function getData(){
-            const file=document.getElementById('fileId');
-            console.log(file)
+      function ValidarExt() {
+          var customFile = document.getElementById('customFile');
+          var btn =window.document.getElementById("btnupload")
+          var customRuta = customFile.value;
+          var customPermitidas = /(.XLSX|.xlsx)$/i;
+          if (!customPermitidas.exec(customRuta)) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Extensão não permitido!',
+    
+            })
+            customFile.value = '';
+            return false
+          }else{
+            btn.style.display = "block"
+            console.log("Esta dentro")
+           
+          }
         }
-    </script>
+      
+      function enviar(){
+        alert("Click....")
+      }
+      
+      </script>
   
   </body>
 

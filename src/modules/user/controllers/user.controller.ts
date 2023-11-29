@@ -129,7 +129,7 @@ export async function uploadFile(req: Request, res: Response) {
 export async function InsertDataFile(req: Request, res: Response) {
   try {
     const {name}=req.params
-    const nomeDoArquivo: string = `public/uploads/${name}`;
+    const nomeDoArquivo = `public/uploads/${name}`;
     const data = await  lerArquivoExcel(nomeDoArquivo)
     if(!data.error) {
       console.log(data);
