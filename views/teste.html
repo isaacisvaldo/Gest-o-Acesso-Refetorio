@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Upload de Arquivo em um Quadrado Estilizado</title>
+  <style>body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .file-upload {
+    text-align: center;
+  }
+  
+  .custom-file-upload {
+    border: 2px solid #3498db;
+    color: #3498db;
+    background-color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    padding: 20px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+  
+  .custom-file-upload:hover {
+    background-color: #3498db;
+    color: #fff;
+  }
+  
+  .custom-file-upload i {
+    margin-right: 5px;
+  }
+  
+  #nomeArquivo {
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+  }
+  </style>
+</head>
+<body>
+  <div class="file-upload">
+    <label for="file-input" class="custom-file-upload">
+      <i class="fas fa-cloud-upload-alt"></i> Escolha um arquivo
+    </label>
+    <input id="file-input" type="file" accept="image/*" onchange="mostrarNomeArquivo(this)" />
+  </div>
+  <div id="nomeArquivo"></div>
+</body>
+</html>

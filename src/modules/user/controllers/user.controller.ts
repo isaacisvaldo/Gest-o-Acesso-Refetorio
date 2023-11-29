@@ -106,6 +106,17 @@ export async function logout(req: Request, res: Response) {
       return res.status(500).json({ error: "Failed to create user." });
     }
   }
+  export async function ImportFile(req: Request, res: Response) {
+    try {
+        const user = req.session.user;
+        console.log(user)
+        res.render("template/form/importFile",{user}) 
+     
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Failed to create user." });
+    }
+  }
 export async function uploadFile(req: Request, res: Response) {
     try {
       const file = req.file
@@ -130,6 +141,7 @@ export async function InsertDataFile(req: Request, res: Response) {
           return;
         }
         console.log('Arquivo removido com sucesso!');
+        return res.status(200).json({ succes: "Arquivo removido com sucesso!" });
       });
     }else{
       return res.status(500).json({ error: "Error interno !" });
