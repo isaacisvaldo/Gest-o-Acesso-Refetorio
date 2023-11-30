@@ -1,6 +1,6 @@
 
 import cron from 'node-cron';
-import { lerArquivoExcel } from '../utils/readFile';
+import { lerArquivoExcel } from '../modules/util/readFile';
 
 const nomeArquivo = 'exemplo.xlsx';
 const iniciarCron = () => {

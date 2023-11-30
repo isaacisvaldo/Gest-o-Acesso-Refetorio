@@ -6,7 +6,7 @@ import { UsuarioDTO } from "../dto/user.dto";
 import { userValidate } from "../../util/validation/user.service.validate";
 import { hash } from 'bcryptjs';
 import fs from 'fs';
-import { lerArquivoExcel } from "../../../utils/readFile";
+import { lerArquivoExcel } from "../../util/readFile";
 interface UserSessionData {
   id: string;
   nome: string;
