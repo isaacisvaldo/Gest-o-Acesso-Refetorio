@@ -6,7 +6,7 @@ import { UsuarioDTO } from "../dto/user.dto";
 import { userValidate } from "../../util/validation/user.service.validate";
 import { hash } from 'bcryptjs';
 import fs from 'fs';
-import { lerArquivoExcel } from "../../util/readFile";
+import { lerArquivoExcel } from "../../../utils/readFile";
 interface UserSessionData {
   id: string;
   nome: string;
@@ -96,6 +96,15 @@ export async function dashboard(req:Request, res:Response){
       console.log(error);
     }
   }
+  export async function profile(req:Request, res:Response){
+    try {
+      const user = req.session.user;
+      console.log(user)
+      res.render("template/profile",{user})
+    } catch (error) {
+      console.log(error);
+    }
+  }
 export async function logout(req: Request, res: Response) {
     try {
       req.session.destroy;
@@ -134,6 +143,7 @@ export async function uploadFile(req: Request, res: Response) {
 export async function InsertDataFile(req: Request, res: Response) {
   try {
     const {name}=req.params
+    console.log(name)
     const nomeDoArquivo = `public/uploads/${name}`;
     const data = await  lerArquivoExcel(nomeDoArquivo)
     if(!data.error) {
@@ -143,9 +153,9 @@ export async function InsertDataFile(req: Request, res: Response) {
       fs.unlink(nomeDoArquivo, (err: NodeJS.ErrnoException | null) => {
         if (err) {
           console.error('Ocorreu um erro ao excluir o arquivo:', err);
-          return;
+          return res.status(500).json({ error: "Error interno !" });
         }
-        console.log('Arquivo removido com sucesso!');
+        req.flash("sucess", "Adicionado com sucesso!");
         return res.status(200).json({ succes: "Arquivo removido com sucesso!" });
       });
     }else{

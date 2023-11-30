@@ -11,19 +11,21 @@ import session, { SessionOptions } from 'express-session';
 import {createClient} from "redis"
 import flash from "express-flash"
 import cors from 'cors';
-// const redisClient = createClient()
-// redisClient.connect().catch(console.error)
-// const redisStore = new RedisStore({
-//   client: redisClient,
-//   prefix: "Ref:",
-// })
+import iniciarCron from './node-cron/insert.file.excel'
+const redisClient = createClient()
+redisClient.connect().catch(console.error)
+const redisStore = new RedisStore({
+  client: redisClient,
+  prefix: "Ref:",
+})
 config();
 const main = async () => {
+ // iniciarCron(); esta função esta ser chamado para executar um script automatico para add data
   const app = express();
   app.use(flash());
   app.use(
     session({
-    //   store: redisStore,
+      store: redisStore,
       secret: process.env.SESSION_PASSWORD || "Testando@##123",
       resave: false,
       saveUninitialized: false,
@@ -55,4 +57,5 @@ const main = async () => {
   app.listen(port, () => console.log(`http://localhost:${port}`));
 };
 main();
+
 
