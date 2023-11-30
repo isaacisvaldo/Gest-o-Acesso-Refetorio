@@ -1,0 +1,63 @@
+
+<script src="../../../assets/sweetalert/sweetalert2.all.min.js"></script>
+<% if(error.length>0){%>
+    <script>
+      var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      Toast.fire({
+        icon: 'error',
+        title: '<%=error %>'
+      })
+    </script>
+    <% }else if(warning.length>0) {%>
+        <script>
+    
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+    
+          Toast.fire({
+            icon: 'info',
+            title: '<%=warning %>'
+          })
+    
+        </script>
+        <% } else if(sucess.length >0) {%>
+            <script>
+      
+    const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+    })
+    
+    Toast.fire({
+    icon: 'success',
+    title: `<%= sucess %>`
+    })
+              
+            </script>
+            <% }%>

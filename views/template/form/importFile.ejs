@@ -122,20 +122,34 @@
                 <div class="card-header bg-body-tertiary">
               
                 </div>
-                <div class="card-body">
-                
+                <div class="card-body" id="card1">
+                  <form enctype="multipart/form-data" id="formUpload">
                   <div>
                     <label for="customFile" class="form-label">Adicionar o ficheiro</label>
-                    <input required class="form-control form-control-lg" id="customFile" type="file" onchange= "ValidarExt()" >
+                    <input required class="form-control form-control-lg" id="customFile" name="file" type="file" onchange= "ValidarExt()" >
                   </div>
               <br>
-              <button  class="btn btn-outline-success me-1 mb-1" type="button" id="btnupload" onclick="enviar()" >Success</button>
-            
+              <button  class="btn btn-outline-success me-1 mb-1" type="button" id="btnupload" onclick="enviar()"  hidden>Success</button>
+                  </form>
+                </div>
+                <div class="card-body bg-body-tertiary" hidden id="card2">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-8 col-xxl-6">
+                      <div class="card shadow-none mb-3"><img class="card-img-top" src="../../assets/img/icons/spot-illustrations/international-women-s-day-2.png" alt="" />
+                        <div class="card-body">
+                          <h3 class="fw-semi-bold">Adicionar os dados do ficheiro <p id="info"></p></h3>
+                          <div class="text-center"><button class="btn btn-success btn-lg my-3" type="button" onclick="adicionar()">Inserir os dados </button><small class="d-block">Os dados presente no arquivo serão adicionados na Base de dados !</small></div>
+                        </div>
+                      </div>
+                     
+                    </div>
+                  </div>
                 </div>
               </div>
            
           </div>
           <%-include("../partials/footer")  %>
+          <%-include("../alerts/alerts")  %>
         </div>
     
       </div>
@@ -157,11 +171,13 @@
     <script src="../../../vendors/list.js/list.min.js"></script>
     <script src="../../../assets/js/theme.js"></script>
     <script>
+
+      var resposta = null
       function ValidarExt() {
           var customFile = document.getElementById('customFile');
-          var btn =window.document.getElementById("btnupload")
           var customRuta = customFile.value;
           var customPermitidas = /(.XLSX|.xlsx)$/i;
+          var btn = document.getElementById('btnupload');
           if (!customPermitidas.exec(customRuta)) {
             Swal.fire({
               icon: 'error',
@@ -170,18 +186,65 @@
     
             })
             customFile.value = '';
+            btn.setAttribute('hidden', true);
             return false
           }else{
-            btn.style.display = "block"
-            console.log("Esta dentro")
-           
+            btn.removeAttribute('hidden');
           }
         }
       
-      function enviar(){
-        alert("Click....")
-      }
-      
+     function enviar() {
+      var card1 = document.getElementById('card1');
+      var card2 = document.getElementById('card2');
+      var info = document.getElementById('info');
+    const form = document.getElementById('formUpload');
+    const formData = new FormData(form);
+    console.log(formData);
+
+    fetch('http://localhost:8000/uploadFile', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Ocorreu um erro ao enviar a imagem.');
+        }
+        return response.json();
+    })
+    .then(data => {
+      card1.setAttribute('hidden', true);
+      card2.removeAttribute('hidden');
+      info.innerHTML=data.filename
+      resposta =data.filename
+        console.log('Resposta do servidor:', data);
+    })
+    .catch(error => {
+        // Lidar com erros
+        console.error('Erro:', error);
+    });
+}
+     
+
+function adicionar(){
+   console.log(resposta)
+  fetch(`http://localhost:8000/InsertDataFile/${resposta}`, {
+        method: 'GET'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Ocorreu um erro.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Resposta do servidor:', data);
+        window.location ="/ImportFile"
+    })
+    .catch(error => {
+        // Lidar com erros
+        console.error('Erro:', error);
+    });
+}
       </script>
   
   </body>
