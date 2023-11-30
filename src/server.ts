@@ -11,7 +11,7 @@ import session, { SessionOptions } from 'express-session';
 import {createClient} from "redis"
 import flash from "express-flash"
 import cors from 'cors';
-import iniciarCron from './node-cron/insert.file.excel'
+import initCron from './node-cron/insert.file.excel'
 const redisClient = createClient()
 redisClient.connect().catch(console.error)
 const redisStore = new RedisStore({
@@ -20,7 +20,7 @@ const redisStore = new RedisStore({
 })
 config();
 const main = async () => {
-  iniciarCron(); 
+  //initCron(); 
   //esta função esta ser chamado para executar um script automatico para add data
   const app = express();
   app.use(flash());

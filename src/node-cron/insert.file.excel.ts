@@ -3,7 +3,7 @@ import cron from 'node-cron';
 import { readFileExcel } from '../modules/util/readFile';
 
 const nomeArquivo = 'exemplo.xlsx';
-const iniciarCron = () => {
+const initCron = () => {
     cron.schedule('* * * * * *', async () => { // 0 20 * * * este serve para executar todos os dias as 20h
         try {
             const data = await readFileExcel(nomeArquivo); 
@@ -19,4 +19,4 @@ const iniciarCron = () => {
     });
 };
 
-export default iniciarCron;
+export default initCron;
