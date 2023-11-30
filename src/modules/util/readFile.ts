@@ -1,6 +1,6 @@
 import * as XLSX from 'xlsx';
 
-export const lerArquivoExcel = async (nomeArquivo: string): Promise<any> => {
+export const readFileExcel = async (nomeArquivo: string): Promise<any> => {
     return new Promise((resolve, reject) => {
       try {
         const arquivo = XLSX.readFile(nomeArquivo);

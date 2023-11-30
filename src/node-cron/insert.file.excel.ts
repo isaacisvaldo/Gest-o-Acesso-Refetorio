@@ -1,12 +1,12 @@
 
 import cron from 'node-cron';
-import { lerArquivoExcel } from '../modules/util/readFile';
+import { readFileExcel } from '../modules/util/readFile';
 
 const nomeArquivo = 'exemplo.xlsx';
 const iniciarCron = () => {
     cron.schedule('* * * * * *', async () => { // 0 20 * * * este serve para executar todos os dias as 20h
         try {
-            const data = await lerArquivoExcel(nomeArquivo); 
+            const data = await readFileExcel(nomeArquivo); 
             if(!data.error) {
                 console.log('Arquivo Encontrado', data);
             }else{

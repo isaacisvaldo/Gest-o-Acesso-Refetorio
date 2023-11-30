@@ -20,7 +20,7 @@ const redisStore = new RedisStore({
 })
 config();
 const main = async () => {
-  //iniciarCron(); 
+  iniciarCron(); 
   //esta função esta ser chamado para executar um script automatico para add data
   const app = express();
   app.use(flash());

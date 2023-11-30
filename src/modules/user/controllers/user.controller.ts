@@ -2,11 +2,11 @@
 import { Request, Response, NextFunction } from "express";
 import { autenticationService } from "../../util/authentication/authentication";
 import { userRepository } from "../repository/user.repository";
-import { UsuarioDTO } from "../dto/user.dto";
+import { UserDTO } from "../dto/user.dto";
 import { userValidate } from "../../util/validation/user.service.validate";
 import { hash } from 'bcryptjs';
 import fs from 'fs';
-import { lerArquivoExcel } from "../../util/readFile";
+import { readFileExcel } from "../../util/readFile";
 interface UserSessionData {
   id: string;
   nome: string;
@@ -28,7 +28,7 @@ export  async function create(req: Request, res: Response){
     const saltOrRounds = 10;
     const password = await hash('DTTI@123', saltOrRounds);
     console.log(req.body);
-    const data:UsuarioDTO={
+    const data:UserDTO={
       nome: nome,
       sobrenome: sobrenome,
       username: username,
@@ -145,7 +145,7 @@ export async function InsertDataFile(req: Request, res: Response) {
     const {name}=req.params
     console.log(name)
     const nomeDoArquivo = `public/uploads/${name}`;
-    const data = await  lerArquivoExcel(nomeDoArquivo)
+    const data = await  readFileExcel(nomeDoArquivo)
     if(!data.error) {
       console.log(data);
       // Vou inserir na Bd os dados lidos
