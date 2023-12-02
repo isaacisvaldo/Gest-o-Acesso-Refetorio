@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr">
+
+  
+<!-- Mirrored from prium.github.io/falcon/v3.18.0/dashboard/support-desk.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Nov 2023 21:59:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ===============================================--><!--    Document Title--><!-- ===============================================-->
+    <title>Bio | Access &amp; Minint</title>
+ 
+
+    <!-- ===============================================--><!--    Favicons--><!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="../assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="../assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <script src="../assets/js/config.js"></script>
+    <script src="../vendors/simplebar/simplebar.min.js"></script>
+
+    <!-- ===============================================--><!--    Stylesheets--><!-- ===============================================-->
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
+    <link href="../vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link href="../assets/css/theme-rtl.min.css" rel="stylesheet" id="style-rtl">
+    <link href="../assets/css/theme.min.css" rel="stylesheet" id="style-default">
+    <link href="../assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
+    <link href="../assets/css/user.min.css" rel="stylesheet" id="user-style-default">
+    <script>
+      var isRTL = JSON.parse(localStorage.getItem('isRTL'));
+      if (isRTL) {
+        var linkDefault = document.getElementById('style-default');
+        var userLinkDefault = document.getElementById('user-style-default');
+        linkDefault.setAttribute('disabled', true);
+        userLinkDefault.setAttribute('disabled', true);
+        document.querySelector('html').setAttribute('dir', 'rtl');
+      } else {
+        var linkRTL = document.getElementById('style-rtl');
+        var userLinkRTL = document.getElementById('user-style-rtl');
+        linkRTL.setAttribute('disabled', true);
+        userLinkRTL.setAttribute('disabled', true);
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- ===============================================--><!--    Main Content--><!-- ===============================================-->
+    <main class="main" id="top">
+      <div class="container" data-layout="container">
+        <script>
+          var isFluid = JSON.parse(localStorage.getItem('isFluid'));
+          if (isFluid) {
+            var container = document.querySelector('[data-layout]');
+            container.classList.remove('container');
+            container.classList.add('container-fluid');
+          }
+        </script>
+        
+     <%-include("../partials/sidebar") %>
+     <%-include("../partials/navbar") %>
+    
+        <div class="content">
+            <%-include("../partials/complementNav") %>
+          <script>
+            var navbarPosition = localStorage.getItem('navbarPosition');
+            var navbarVertical = document.querySelector('.navbar-vertical');
+            var navbarTopVertical = document.querySelector('.content .navbar-top');
+            var navbarTop = document.querySelector('[data-layout] .navbar-top:not([data-double-top-nav');
+            var navbarDoubleTop = document.querySelector('[data-double-top-nav]');
+            var navbarTopCombo = document.querySelector('.content [data-navbar-top="combo"]');
+
+            if (localStorage.getItem('navbarPosition') === 'double-top') {
+              document.documentElement.classList.toggle('double-top-nav-layout');
+            }
+
+            if (navbarPosition === 'top') {
+              navbarTop.removeAttribute('style');
+              navbarTopVertical.remove(navbarTopVertical);
+              navbarVertical.remove(navbarVertical);
+              navbarTopCombo.remove(navbarTopCombo);
+              navbarDoubleTop.remove(navbarDoubleTop);
+            } else if (navbarPosition === 'combo') {
+              navbarVertical.removeAttribute('style');
+              navbarTopCombo.removeAttribute('style');
+              navbarTop.remove(navbarTop);
+              navbarTopVertical.remove(navbarTopVertical);
+              navbarDoubleTop.remove(navbarDoubleTop);
+            } else if (navbarPosition === 'double-top') {
+              navbarDoubleTop.removeAttribute('style');
+              navbarTopVertical.remove(navbarTopVertical);
+              navbarVertical.remove(navbarVertical);
+              navbarTop.remove(navbarTop);
+              navbarTopCombo.remove(navbarTopCombo);
+            } else {
+              navbarVertical.removeAttribute('style');
+              navbarTopVertical.removeAttribute('style');
+              navbarTop.remove(navbarTop);
+              navbarDoubleTop.remove(navbarDoubleTop);
+              navbarTopCombo.remove(navbarTopCombo);
+            }
+          </script>
+          <div class="card mb-3">
+            <div class="card-body">
+              <div class="row flex-between-center">
+                <div class="col-md">
+                  <h5 class="mb-2 mb-md-0">Importar Registos de Entrada</h5>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          <div class="row g-0">
+            <div class="col-lg-12 pe-lg-2">
+            
+              <div class="card mb-3">
+                <div class="card-header bg-body-tertiary">
+              
+                </div>
+                <div class="card-body" id="card1">
+                  <form enctype="multipart/form-data" id="formUpload">
+                  <div>
+                    <label for="customFile" class="form-label">Adicionar o ficheiro</label>
+                    <input required class="form-control form-control-lg" id="customFile" name="file" type="file" onchange= "ValidarExt()" >
+                  </div>
+              <br>
+              <button  class="btn btn-outline-primary me-1 mb-1" type="button" id="btnupload" onclick="enviar()"  hidden>Enviar Ficheiro</button>
+                  </form>
+                </div>
+                <div class="card-body bg-body-tertiary" hidden id="card2">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-8 col-xxl-6">
+                      <div class="card shadow-none mb-3"><img class="card-img-top" src="/assets/img/4170004.jpg" alt="" />
+                        <div class="card-body">
+                          <h3 class="fw-semi-bold">Adicionar os dados do ficheiro <p id="info"></p></h3>
+                          <div class="text-center"><button class="btn btn-primary btn-lg my-3" type="button" onclick="adicionar()">Inserir os dados </button><small class="d-block">Os dados presente no arquivo serão adicionados na Base de dados !</small></div>
+                        </div>
+                      </div>
+                     
+                    </div>
+                  </div>
+                </div>
+              </div>
+           
+          </div>
+          <%-include("../partials/footer")  %>
+          <%-include("../alerts/alerts")  %>
+        </div>
+    
+      </div>
+    </main>
+    <input type="hidden" id="domainID" value="<%= domain%>" />
+
+    <script src="../../../vendors/popper/popper.min.js"></script>
+    <script src="../../../vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="../../../vendors/anchorjs/anchor.min.js"></script>
+    <script src="../../../vendors/is/is.min.js"></script>
+    <script src="../../../vendors/tinymce/tinymce.min.js"></script>
+    <script src="../../../vendors/choices/choices.min.js"></script>
+    <script src="../../../assets/js/flatpickr.js"></script>
+    <script src="../../../vendors/dropzone/dropzone.min.js"></script>
+    <script src="../../../vendors/fontawesome/all.min.js"></script>
+    <script src="../../../vendors/lodash/lodash.min.js"></script>
+    <script src="../../../../../../polyfill.io/v3/polyfill.min58be.js?features=window.scroll"></script>
+    <script src="../../../vendors/list.js/list.min.js"></script>
+    <script src="../../../assets/js/theme.js"></script>
+    <script>
+  const domain = document.getElementById("domainID").value;
+      var resposta = null
+      function ValidarExt() {
+          var customFile = document.getElementById('customFile');
+          var customRuta = customFile.value;
+          var customPermitidas = /(.XLSX|.xlsx)$/i;
+          var btn = document.getElementById('btnupload');
+          if (!customPermitidas.exec(customRuta)) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Extensão não permitido!',
+    
+            })
+            customFile.value = '';
+            btn.setAttribute('hidden', true);
+            return false
+          }else{
+            btn.removeAttribute('hidden');
+          }
+        }
+      
+     function enviar() {
+      var card1 = document.getElementById('card1');
+      var card2 = document.getElementById('card2');
+      var info = document.getElementById('info');
+    const form = document.getElementById('formUpload');
+    const formData = new FormData(form);
+    console.log(formData);
+
+    fetch(`${domain}/uploadFile`, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Ocorreu um erro ao enviar a imagem.');
+        }
+        return response.json();
+    })
+    .then(data => {
+      card1.setAttribute('hidden', true);
+      card2.removeAttribute('hidden');
+      info.innerHTML=data.filename
+      resposta =data.filename
+        console.log('Resposta do servidor:', data);
+    })
+    .catch(error => {
+        // Lidar com erros
+        console.error('Erro:', error);
+    });
+}
+     
+
+function adicionar(){
+   console.log(resposta)
+  fetch(`${domain}/InsertDataFile/${resposta}/RG`, {
+        method: 'GET'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Ocorreu um erro.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Resposta do servidor:', data);
+        window.location ="/ImportFileRegisterEnter"
+    })
+    .catch(error => {
+        // Lidar com erros
+        console.error('Erro:', error);
+    });
+}
+      </script>
+  
+  </body>
+
+
+
+</html>

@@ -2,6 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import { config } from "dotenv";
 import {financeRouter} from "./modules/finance/routes/finance.routes";
+import {employeeRouter} from "./modules/employee/routers/employee.routes";
 import {userRouter} from "./modules/user/routers/user.routes";
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
@@ -47,6 +48,7 @@ const main = async () => {
   app.use(express.json());
   app.use(financeRouter);
   app.use(userRouter)
+  app.use(employeeRouter)
   app.get('/', (req, res) => {
     res.render("template/form/sign")
   });

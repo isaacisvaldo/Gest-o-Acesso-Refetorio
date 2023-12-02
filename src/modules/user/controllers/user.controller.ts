@@ -7,6 +7,9 @@ import { userValidate } from "../../util/validation/user.service.validate";
 import { hash } from 'bcryptjs';
 import fs from 'fs';
 import { readFileExcel } from "../../util/readFile";
+import { domain } from "../../../config/domain/domain.url";
+import { employeeRepository } from "../../employee/repository/employee.repository";
+import { formatte } from "../../employee/util/formatte";
 interface UserSessionData {
   id: string;
   nome: string;
@@ -115,56 +118,3 @@ export async function logout(req: Request, res: Response) {
       return res.status(500).json({ error: "Failed to create user." });
     }
   }
-  export async function ImportFile(req: Request, res: Response) {
-    try {
-        const user = req.session.user;
-        console.log(user)
-        res.render("template/form/importFile",{
-          user,
-          error: req.flash("error"),
-          warning: req.flash("warning"),
-          sucess: req.flash("sucess"),
-        }) 
-     
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: "Failed to create user." });
-    }
-  }
-export async function uploadFile(req: Request, res: Response) {
-    try {
-      const file = req.file
-      return res.status(200).json({ filename: file?.filename});
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: "Failed to create user." });
-    }
-}
-export async function InsertDataFile(req: Request, res: Response) {
-  try {
-    const {name}=req.params
-    console.log(name)
-    const nomeDoArquivo = `public/uploads/${name}`;
-    const data = await  readFileExcel(nomeDoArquivo)
-    if(!data.error) {
-      console.log(data);
-      // Vou inserir na Bd os dados lidos
-      // Depois vou deletar
-      fs.unlink(nomeDoArquivo, (err: NodeJS.ErrnoException | null) => {
-        if (err) {
-          console.error('Ocorreu um erro ao excluir o arquivo:', err);
-          return res.status(500).json({ error: "Error interno !" });
-        }
-        req.flash("sucess", "Adicionado com sucesso!");
-        return res.status(200).json({ succes: "Arquivo removido com sucesso!" });
-      });
-    }else{
-      return res.status(500).json({ error: "Error interno !" });
-    }
-   
-  } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: "Failed to create user." });
-  }
-}
-  

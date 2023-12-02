@@ -6,8 +6,9 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
- model Perfil {
-  Id  String   @id @default(uuid())
+
+model Perfil {
+  Id         String   @id @default(uuid())
   designacao String   @unique
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
@@ -15,14 +16,61 @@ datasource db {
 }
 
 model User {
-  Id    String   @id @default(uuid())
-  nome String   
+  Id        String   @id @default(uuid())
+  nome      String
   sobrenome String
-  username String @unique
-  password String
-  img    String @default("user.png")
-  perfil            Perfil?      @relation(fields: [fk_perfil], references: [Id])
-  fk_perfil        String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt   
+  username  String   @unique
+  password  String
+  img       String   @default("user.png")
+  perfil    Perfil?  @relation(fields: [fk_perfil], references: [Id])
+  fk_perfil String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
+
+model AreaCategoria {
+  Id         String   @id @default(uuid())
+  designacao String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  Area       Area[]
+}
+
+model Area {
+  Id                String         @id @default(uuid())
+  nome              String         @unique
+  sigla             String         @unique
+  categoria_area    AreaCategoria? @relation(fields: [fk_categoria], references: [Id])
+  fk_categoria      String
+  // Relacionamento unário para áreas superiores
+  areaSuperior      Area?          @relation("Subordinada", fields: [areaSuperiorId], references: [Id])
+  areaSuperiorId    String?
+  // Relacionamento unário para áreas subordinadas
+  areasSubordinadas Area[]         @relation("Subordinada")
+  //Employee          Employee[]
+}
+
+model Employee {
+  cod                       Int      @id // Define 'id' como chave primária
+  nome                      String
+  email                     String
+  sexo                      String
+  // area                      Area?    @relation(fields: [fk_area], references: [Id])
+  // fk_area                   String?
+  id_departamento String
+  title                     String?
+  NumIdentificacao          Int
+  telefone                  String
+  morada                    String
+  referencia                String
+  posto                     String
+  salario_hora              String
+  ativo                     Boolean
+  completeName              String
+  Usar_horario              Boolean
+  Cartao                    String
+  total_impressoes_digitais Int
+  face                      String
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime @updatedAt
+} 
