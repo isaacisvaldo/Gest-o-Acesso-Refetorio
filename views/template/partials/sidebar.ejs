@@ -31,11 +31,7 @@
               <div class="col ps-0">
                 <hr class="mb-0 navbar-vertical-divider" />
               </div>
-            </div><!-- parent pages--><a class="nav-link" href="../app/calendar.html" role="button">
-              <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-calendar-alt"></span></span><span class="nav-link-text ps-1">Calendar</span></div>
-            </a><!-- parent pages--><a class="nav-link" href="../app/chat.html" role="button">
-              <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-comments"></span></span><span class="nav-link-text ps-1">Chat</span></div>
-            </a><!-- parent pages--><a class="nav-link dropdown-indicator" href="#email" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="email">
+            </div><a class="nav-link dropdown-indicator" href="#email" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="email">
               <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-envelope-open"></span></span><span class="nav-link-text ps-1">Email</span></div>
             </a>
             <ul class="nav collapse" id="email">
@@ -79,16 +75,14 @@
               <div class="col ps-0">
                 <hr class="mb-0 navbar-vertical-divider" />
               </div>
-            </div><!-- parent pages--><a class="nav-link" href="../pages/starter.html" role="button">
-              <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-flag"></span></span><span class="nav-link-text ps-1">Starter</span></div>
-            </a><!-- parent pages--><a class="nav-link" href="../pages/landing.html" role="button">
+            </div><a class="nav-link" href="../pages/landing.html" role="button">
               <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Landing</span></div>
             </a><!-- parent pages--><a class="nav-link dropdown-indicator" href="#user" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="user">
               <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-user"></span></span><span class="nav-link-text ps-1">Usuarios</span></div>
             </a>
             <ul class="nav collapse" id="user">
-              <li class="nav-item"><a class="nav-link" href="#">
-                  <div class="d-flex align-items-center"><span class="nav-link-text ps-1">List</span></div>
+              <li class="nav-item"><a class="nav-link" href="/listUser">
+                  <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Listar</span></div>
                 </a></li>
               <li class="nav-item"><a class="nav-link" href="../pages/user/settings.html">
                   <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Settings</span></div>
@@ -116,16 +110,34 @@
               <hr class="mb-0 navbar-vertical-divider" />
             </div>
           </div><a class="nav-link dropdown-indicator" href="#registos" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="user">
-            <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-user"></span></span><span class="nav-link-text ps-1">Registos</span></div>
+            <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-user"></span></span><span class="nav-link-text ps-1">Registros</span></div>
           </a>
           <ul class="nav collapse" id="registos">
-            <li class="nav-item"><a class="nav-link" href="/controlRegisterEmployee">
-                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Ident. Registo</span></div>
+            <li class="nav-item"><a class="nav-link" href="#">
+                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Registro de Presença</span></div>
               </a></li>
-            <li class="nav-item"><a class="nav-link" href="../pages/user/settings.html">
-                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Settings</span></div>
+              <li class="nav-item"><a class="nav-link" href="/controlRegisterEmployee">
+                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Ident. R Cobrança</span></div>
+              </a></li>
+            <li class="nav-item"><a class="nav-link" href="#">
+                <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Definições</span></div>
               </a></li>
           </ul>
+
+        </li>
+        <li class="nav-item"><!-- label-->
+          <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+            <div class="col-auto navbar-vertical-label">Relatório</div>
+            <div class="col ps-0">
+              <hr class="mb-0 navbar-vertical-divider" />
+            </div>
+          </div>
+          <a class="nav-link" href="../pages/landing.html" role="button">
+            <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-list-alt"></span></span><span class="nav-link-text ps-1">Finanças</span></div>
+          </a>
+          <a class="nav-link" href="../pages/landing.html" role="button">
+            <div class="d-flex align-items-center"><span class="nav-link-icon"><span class="fas fa-globe"></span></span><span class="nav-link-text ps-1">Landing</span></div>
+          </a><!-- parent pages-->
 
         </li>
       </div>

@@ -105,144 +105,55 @@
               navbarTopCombo.remove(navbarTopCombo);
             }
           </script>
-         <div class="card mb-3">
-          <div class="card-body">
-            <div class="row flex-between-center">
-              <div class="col-md">
-                <h5 class="mb-2 mb-md-0">Controle de Registos Refetório</h5>
-              </div>
-              <div class="col-auto"><button class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#error-modal">Novo Registro </button></div>
-            </div>
-          </div>
-        </div>
-       
-    
-
-
-
-      </div>
-      <div class="modal fade" id="error-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 500px">
-          <div class="modal-content position-relative">
-            <div class="position-absolute top-0 end-0 mt-2 me-2 z-1">
-              <button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body p-0">
-              <div class="rounded-top-3 py-3 ps-4 pe-6 bg-body-tertiary">
-                <h4 class="mb-1" id="modalExampleDemoLabel">Localizar Funcionário </h4>
-              </div>
-              <div class="p-4 pb-0">
-                <form>
-                  <div class="mb-3">
-                    <label class="col-form-label" for="recipient-name">Dados Único</label>
-                    <input class="form-control" id="recipient-name" type="text" />
+          
+            <div class="row g-0">
+              <div class="col-lg-12 pe-lg-2">
+                <div class="card mb-3">
+                  <div class="card-header">
+                    <h5 class="mb-0">Perfil Localizado</h5>
                   </div>
- 
-                </form>
+                  <div class="card-body bg-body-tertiary">
+                    <form class="row g-3">
+                      <div class="col-lg-6"> <label class="form-label" for="first-name">Nome</label><input class="form-control" id="first-name" type="text" disabled value="<%=employee.nome  %>" /></div>
+                      <div class="col-lg-6"> <label class="form-label" for="last-name">Código</label><input class="form-control" id="last-name" type="text" disabled value="<%=employee.cod  %>" /></div>
+                      <div class="col-lg-6"> <label class="form-label" for="email1">Email</label><input class="form-control" id="email1" type="text"disabled value="<%=employee.email  %>" /></div>
+                      <div class="col-lg-6"> <label class="form-label" for="email2">Phone</label><input class="form-control" id="email2" type="text" disabled value="<%=employee.telefone  %>" /></div>
+                      <div class="col-lg-12"><label class="form-label" for="email3">completeName</label><input class="form-control" id="email3" type="text" disabled value="<%=employee.completeName  %>" /></div>
+                    <br>
+                      <h6 class="fw-bold">Forma de Pagamento<span class="fs--2 ms-1 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Selecione A forma de Liquidação da presente data"><span class="fas fa-question-circle"></span></span></h6>
+                      <div class="ps-2">
+                        <div class="form-check mb-0 lh-1"><input class="form-check-input" type="radio" value="" id="everyone" name="view-settings" /><label class="form-check-label mb-0" for="everyone">Pago </label></div>
+                       <br>
+                        <div class="form-check mb-0 lh-1"><input class="form-check-input" type="radio" value="" id="my-followers" checked="checked" name="view-settings" /><label class="form-check-label mb-0" for="my-followers">Crédito</label></div>
+
+                      </div>
+                     <div class="col-12 d-flex justify-content-end"><button class="btn btn-primary" type="submit">Adicionar Registo </button></div>
+                    </form>
+                  </div>
+                </div>
+
               </div>
-            </div>
-            <div class="modal-footer">
-              <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">fechar</button>
-              <button class="btn btn-primary" type="button">Localizar </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-    <input type="hidden" id="domainID" value="<%= domain%>" />
 
-    <script src="../../../vendors/popper/popper.min.js"></script>
-    <script src="../../../vendors/bootstrap/bootstrap.min.js"></script>
-    <script src="../../../vendors/anchorjs/anchor.min.js"></script>
-    <script src="../../../vendors/is/is.min.js"></script>
-    <script src="../../../vendors/tinymce/tinymce.min.js"></script>
-    <script src="../../../vendors/choices/choices.min.js"></script>
-    <script src="../../../assets/js/flatpickr.js"></script>
-    <script src="../../../vendors/dropzone/dropzone.min.js"></script>
-    <script src="../../../vendors/fontawesome/all.min.js"></script>
-    <script src="../../../vendors/lodash/lodash.min.js"></script>
-    <script src="../../../../../../polyfill.io/v3/polyfill.min58be.js?features=window.scroll"></script>
-    <script src="../../../vendors/list.js/list.min.js"></script>
-    <script src="../../../assets/js/theme.js"></script>
-    <script>
-  const domain = document.getElementById("domainID").value;
-      var resposta = null
-      function ValidarExt() {
-          var customFile = document.getElementById('customFile');
-          var customRuta = customFile.value;
-          var customPermitidas = /(.XLSX|.xlsx)$/i;
-          var btn = document.getElementById('btnupload');
-          if (!customPermitidas.exec(customRuta)) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Extensão não permitido!',
+              <%-include("../partials/footer")  %>
+            </div>
     
-            })
-            customFile.value = '';
-            btn.setAttribute('hidden', true);
-            return false
-          }else{
-            btn.removeAttribute('hidden');
-          }
-        }
-      
-     function enviar() {
-      var card1 = document.getElementById('card1');
-      var card2 = document.getElementById('card2');
-      var info = document.getElementById('info');
-    const form = document.getElementById('formUpload');
-    const formData = new FormData(form);
-    console.log(formData);
+      </div>
+    </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->
 
-    fetch(`${domain}/uploadFile`, {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Ocorreu um erro ao enviar a imagem.');
-        }
-        return response.json();
-    })
-    .then(data => {
-      card1.setAttribute('hidden', true);
-      card2.removeAttribute('hidden');
-      info.innerHTML=data.filename
-      resposta =data.filename
-        console.log('Resposta do servidor:', data);
-    })
-    .catch(error => {
-        // Lidar com erros
-        console.error('Erro:', error);
-    });
-}
-     
-
-function adicionar(){
-   console.log(resposta)
-  fetch(`${domain}/InsertDataFile/${resposta}/EM`, {
-        method: 'GET'
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Ocorreu um erro.');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Resposta do servidor:', data);
-        window.location ="/ImportFileEmployee"
-    })
-    .catch(error => {
-        // Lidar com erros
-        console.error('Erro:', error);
-    });
-}
-      </script>
   
+
+    <script src="../../vendors/popper/popper.min.js"></script>
+    <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="../../vendors/anchorjs/anchor.min.js"></script>
+    <script src="../../vendors/is/is.min.js"></script>
+    <script src="../../vendors/echarts/echarts.min.js"></script>
+    <script src="../../vendors/fontawesome/all.min.js"></script>
+    <script src="../../vendors/lodash/lodash.min.js"></script>
+    <script src="../../../../../polyfill.io/v3/polyfill.min58be.js?features=window.scroll"></script>
+    <script src="../../vendors/list.js/list.min.js"></script>
+    <script src="../../assets/js/theme.js"></script>
   </body>
 
 
-
+<!-- Mirrored from prium.github.io/falcon/v3.18.0/dashboard/support-desk.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Nov 2023 21:59:41 GMT -->
 </html>

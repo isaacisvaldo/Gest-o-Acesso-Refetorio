@@ -85,6 +85,7 @@ model EstadoPagamento {
 model RegistoPagamento {
   Id        String   @id @default(uuid())
   data      String
+  valor      String?
   employee    Employee?  @relation(fields: [cod_fk], references: [cod])
   cod_fk Int
   estadoPagamento    EstadoPagamento?  @relation(fields: [fk_pagamento], references: [Id])

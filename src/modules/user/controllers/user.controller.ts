@@ -118,3 +118,22 @@ export async function logout(req: Request, res: Response) {
       return res.status(500).json({ error: "Failed to create user." });
     }
   }
+  export async function listUser(req: Request, res: Response) {
+    try {
+        const user = req.session.user;
+        const users = await userRepository.findAll()
+        console.log(users)
+        res.render("template/listUser",{
+          user,
+          domain,
+          users,
+          error: req.flash("error"),
+          warning: req.flash("warning"),
+          sucess: req.flash("sucess"),
+        }) 
+     
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Failed to create user." });
+    }
+  }

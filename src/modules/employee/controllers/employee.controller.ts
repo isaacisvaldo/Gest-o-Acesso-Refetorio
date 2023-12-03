@@ -8,6 +8,7 @@ import { readFileExcel } from "../../util/readFile";
 import { domain } from "../../../config/domain/domain.url";
 import { employeeRepository } from "../../employee/repository/employee.repository";
 import { formatte } from "../../employee/util/formatte";
+import { registoPagamentoRepository } from "../repository/payment.repository";
 
 
 export async function ImportFileRegister(req: Request, res: Response) {
@@ -112,10 +113,12 @@ export async function uploadFile(req: Request, res: Response) {
 export async function listEmployee(req: Request, res: Response) {
   try {
       const user = req.session.user;
+      const employeer = await employeeRepository.findAll()
       console.log(user)
       res.render("template/listEmployee",{
         user,
         domain,
+        employeer,
         error: req.flash("error"),
         warning: req.flash("warning"),
         sucess: req.flash("sucess"),
@@ -129,10 +132,12 @@ export async function listEmployee(req: Request, res: Response) {
 export async function controlRegisterEmployee(req: Request, res: Response) {
   try {
       const user = req.session.user;
-      console.log(user)
-      res.render("template/form/controlemployee",{
+      const historyPayment = await registoPagamentoRepository.findAll()
+      console.log(historyPayment)
+      res.render("template/controlemployee",{
         user,
         domain,
+        historyPayment,
         error: req.flash("error"),
         warning: req.flash("warning"),
         sucess: req.flash("sucess"),
@@ -143,5 +148,52 @@ export async function controlRegisterEmployee(req: Request, res: Response) {
     return res.status(500).json({ error: "Failed to create user." });
   }
 }
+export async function employeePayment(req: Request, res: Response) {
+  try {
+    const {cod}=req.params
+    const user = req.session.user;
+    const formatte =parseInt(cod)
+    console.log(formatte)
+  
+   const employee = await employeeRepository.findBycod(formatte)
+   console.log(employee)
+   if(employee){
+    res.render("template/form/employeePayment",{
+      user,
+      employee,
+      domain,
+      error: req.flash("error"),
+      warning: req.flash("warning"),
+      sucess: req.flash("sucess"),
+    }) 
+   }else{
+    return res.status(500).json({ error: "Estes dados não Existem !" });
+   }
 
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Failed to create user." });
+  }
+}
+export async function findEmployee(req:Request,res:Response){
+  try {
+    const {cod}=req.params
+    const formatte =parseInt(cod)
+    console.log(formatte)
+  
+   const employee = await employeeRepository.findBycod(formatte)
+   console.log(employee)
+   if(employee){
+    return res.status(200).json({ employee}); 
+   }else{
+    return res.status(200).json({ error: "Funcionario Não correspondente !" }); 
+   }
+  
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Failed to create user." }); 
+  }
+}
   

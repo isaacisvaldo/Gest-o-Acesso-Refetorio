@@ -21,5 +21,14 @@ export const employeeRepository = {
          throw new Error(`Erro ao adicionar : ${error}`);
       }
  
+     },
+     async findAll(){
+      try {
+         const employeer = await conexao.employee.findMany()
+         return employeer
+         
+      } catch (error) {
+         throw new Error(`Erro ao adicionar : ${error}`);  
+      }
      }
 }

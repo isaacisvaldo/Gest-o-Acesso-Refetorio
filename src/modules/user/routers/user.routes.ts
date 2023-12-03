@@ -9,7 +9,8 @@ const userRouter = Router()
 
 userRouter.post('/login',userController.login)
 userRouter.get('/logout',userController.logout)
-userRouter.get('/profile',userController.profile)
+userRouter.get('/profile',userAuth,userController.profile)
+userRouter.get('/listUser',userAuth,userController.listUser)
 
 userRouter.get('/dashboard',userAuth,userController.dashboard)
 userRouter.post('/user',userController.create)

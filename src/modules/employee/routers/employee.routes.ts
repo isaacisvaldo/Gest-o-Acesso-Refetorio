@@ -8,6 +8,8 @@ const upload = multer(configureMulter());
 const employeeRouter = Router()
 employeeRouter.get('/ImportFileRegisterEnter',userAuth,employeeController.ImportFileRegister)
 employeeRouter.get('/controlRegisterEmployee',userAuth,employeeController.controlRegisterEmployee)
+employeeRouter.get('/employeePayment/:cod',userAuth,employeeController.employeePayment)
+employeeRouter.get('/findEmployee/:cod',userAuth,employeeController.findEmployee)
 employeeRouter.get('/ImportFileEmployee',userAuth,employeeController.ImportFileEmployee)
 employeeRouter.get('/InsertDataFile/:name/:cod',employeeController.InsertDataFile)
 employeeRouter.post('/uploadFile',upload.single('file'),employeeController.uploadFile)

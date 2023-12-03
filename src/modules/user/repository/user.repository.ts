@@ -23,6 +23,20 @@ export const userRepository = {
             throw new Error(`Erro ao Cadastrar : ${error}`);
         }
 
+    },
+    async findAll(){
+        try {
+            const users = await conexao.user.findMany({
+                include:{
+                    perfil:true,
+                }
+            })
+            return users
+            
+        } catch (error) {
+            throw new Error(`Erro ao pesquisar : ${error}`);
+         
+        }
     }
 
 }
