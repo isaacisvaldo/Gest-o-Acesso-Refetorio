@@ -109,4 +109,39 @@ export async function uploadFile(req: Request, res: Response) {
     return res.status(500).json({ error: "Failed to create user." });
   }
 }
+export async function listEmployee(req: Request, res: Response) {
+  try {
+      const user = req.session.user;
+      console.log(user)
+      res.render("template/listEmployee",{
+        user,
+        domain,
+        error: req.flash("error"),
+        warning: req.flash("warning"),
+        sucess: req.flash("sucess"),
+      }) 
+   
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Failed to create user." });
+  }
+}
+export async function controlRegisterEmployee(req: Request, res: Response) {
+  try {
+      const user = req.session.user;
+      console.log(user)
+      res.render("template/form/controlemployee",{
+        user,
+        domain,
+        error: req.flash("error"),
+        warning: req.flash("warning"),
+        sucess: req.flash("sucess"),
+      }) 
+   
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Failed to create user." });
+  }
+}
+
   

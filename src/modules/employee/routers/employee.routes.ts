@@ -7,8 +7,10 @@ const upload = multer(configureMulter());
 
 const employeeRouter = Router()
 employeeRouter.get('/ImportFileRegisterEnter',userAuth,employeeController.ImportFileRegister)
+employeeRouter.get('/controlRegisterEmployee',userAuth,employeeController.controlRegisterEmployee)
 employeeRouter.get('/ImportFileEmployee',userAuth,employeeController.ImportFileEmployee)
 employeeRouter.get('/InsertDataFile/:name/:cod',employeeController.InsertDataFile)
 employeeRouter.post('/uploadFile',upload.single('file'),employeeController.uploadFile)
+employeeRouter.get('/listEmployee',userAuth,employeeController.listEmployee)
 
 export {employeeRouter}; 
