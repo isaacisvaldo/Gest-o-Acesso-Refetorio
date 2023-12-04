@@ -29,12 +29,31 @@ export const registoPagamentoRepository = {
      },
      async create(data:any){
       try {
-         const status = await conexao.registoPagamento.createMany({data })
+         const status = await conexao.registoPagamento.create({data })
          return status
          
       } catch (error) {
          throw new Error(`Erro ao adicionar : ${error}`);  
       }
-     }
+     },
+     async createAcessCode(data:any){
+      try {
+         const status = await conexao.registroCodAcesso.create({data })
+         return status
+         
+      } catch (error) {
+         throw new Error(`Erro ao adicionar : ${error}`);  
+      }
+     },
+     async findAllAcessCode(){
+      try {
+         const registoPagamento = await conexao.registroCodAcesso.findMany({
+         })
+         return registoPagamento
+         
+      } catch (error) {
+         throw new Error(`Erro ao adicionar : ${error}`);  
+      }
+     },
 
 }

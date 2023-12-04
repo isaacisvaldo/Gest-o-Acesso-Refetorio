@@ -10,6 +10,7 @@ import { employeeRepository } from "../../employee/repository/employee.repositor
 import { formatte } from "../../employee/util/formatte";
 import { registoPagamentoRepository } from "../repository/payment.repository";
 import{employeePayment} from "../../employee/dto/employeePayment.dto"
+import { generateUniqueCode } from "../../util/randomChar";
 
 
 export async function ImportFileRegister(req: Request, res: Response) {
@@ -134,10 +135,12 @@ export async function controlRegisterEmployee(req: Request, res: Response) {
   try {
       const user = req.session.user;
       const historyPayment = await registoPagamentoRepository.findAll()
-      console.log(historyPayment)
+      const allCodeAcess = await registoPagamentoRepository.findAllAcessCode()
+      console.log(allCodeAcess)
       res.render("template/controlemployee",{
         user,
         domain,
+        allCodeAcess,
         historyPayment,
         error: req.flash("error"),
         warning: req.flash("warning"),
@@ -213,8 +216,14 @@ export async function employeePaymentRegister(req:Request,res:Response){
     fk_pagamento:statusPayment
   }
   console.log(data)
-  const create = await registoPagamentoRepository.create(data)
-  if(create){
+  const insert = await registoPagamentoRepository.create(data)
+  if(insert){
+    const codeAcess = await generateUniqueCode()
+   const data1 ={
+    designacao:codeAcess,
+    registroPagamento_fk:insert?.Id 
+    }
+    const create = await registoPagamentoRepository.createAcessCode(data1)
     req.flash("sucess", "Adicionado com sucesso!");
     return res.status(200).json({ success: "Cadastrado Com sucesso" });
   }else{

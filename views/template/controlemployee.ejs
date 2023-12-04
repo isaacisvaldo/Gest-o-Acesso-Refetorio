@@ -191,8 +191,11 @@
                             <h6 class="mb-0 text-700">Urgent</h6>
                           </div>
                         </td>
-                        <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false">#FFF</small></td>
-                       
+                        <% allCodeAcess.forEach(e => { %>
+                        <% if(element.Id==e.registroPagamento_fk){ %>
+                        <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"><%= e.designacao %></small></td>
+                        <% }%>
+                        <% }) %>
                       </tr>
                      <% }) %>
                     
