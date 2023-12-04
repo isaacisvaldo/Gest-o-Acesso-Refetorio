@@ -135,12 +135,10 @@ export async function controlRegisterEmployee(req: Request, res: Response) {
   try {
       const user = req.session.user;
       const historyPayment = await registoPagamentoRepository.findAll()
-      const allCodeAcess = await registoPagamentoRepository.findAllAcessCode()
-      console.log(allCodeAcess)
+      console.log(historyPayment)
       res.render("template/controlemployee",{
         user,
         domain,
-        allCodeAcess,
         historyPayment,
         error: req.flash("error"),
         warning: req.flash("warning"),
