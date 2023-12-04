@@ -256,5 +256,22 @@ export async function employeePaymentRegister(req:Request,res:Response){
     return res.status(500).json({ error: "Failed to create user." }); 
   }
 }
+export async function printFicha(req: Request, res: Response) {
+  try {
+   const {cod}=req.params
+   const data = await employeeRepository.findBycodAcess(cod)
+   console.log(data)
+   if(data){
+    res.render("template/files/ficha",{
+     data,
+     cod
+    }) 
+   }
+ 
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Failed to create user." });
+  }
+}
 
   

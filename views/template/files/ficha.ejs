@@ -42,30 +42,30 @@
 </head>
 <body>
   <div class="ficha-banco">
-    <h2>23344-Isaac Isvaldo Bunga</h2>
+    <h2><%=data.registro.employee.cod  %> - <%= data.registro.employee.nome %></h2>
     <div id="qrcode-container">
       <div id="qrcode"></div>
     </div>
     <p class="label">Código de Acesso:</p>
-    <p class="codigo">123456</p>
+    <p class="codigo"><%=data.designacao  %></p>
     <p>Escaneie o QR Code para acessar.</p>
   </div>
 
   <script>
-    // Gera o QR Code usando a biblioteca QRCode.js
+    var cod = `<%=cod %>`
     var qrCode = new QRCode(document.getElementById("qrcode"), {
       width: 200,
       height: 200
     });
-    
-    // Texto ou link que você deseja codificar no QR Code
-    var textoParaQRCode = "https://www.seubancodigital.com/acesso";
-
-    // Define o texto para o QR Code
+    var textoParaQRCode = `http://localhost:3000/validar-ficha/${cod}`;
     qrCode.makeCode(textoParaQRCode);
 
     window.print();
-   // window.location="https://www.seubancodigital.com/acesso"
+     // Quando a janela de impressão é fechada
+     window.onafterprint = function() {
+      // Redireciona para a rota após a impressão
+      window.location = "/controlRegisterEmployee";
+    };
   </script>
 </body>
 </html>

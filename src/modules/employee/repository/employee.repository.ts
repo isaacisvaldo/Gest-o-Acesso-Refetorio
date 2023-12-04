@@ -30,5 +30,25 @@ export const employeeRepository = {
       } catch (error) {
          throw new Error(`Erro ao adicionar : ${error}`);  
       }
-     }
+     },
+     async findBycodAcess(cod:any) {
+      try {
+         const data = await conexao.registroCodAcesso.findFirst({
+            where:{
+              designacao:cod
+            },
+            include:{
+               registro:{
+                  include:{
+                     employee:true
+                  }
+               }
+            }
+         })
+         return data
+      } catch (error) {
+         throw new Error(`Erro ao adicionar : ${error}`);
+      }
+ 
+     },
 }
