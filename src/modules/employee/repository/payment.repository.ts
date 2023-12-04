@@ -8,6 +8,7 @@ export const registoPagamentoRepository = {
             include:{
                employee:true,
                registroCodAcesso:true,
+               estadoPagamento:true,
             }
          })
          return registoPagamento
@@ -28,7 +29,7 @@ export const registoPagamentoRepository = {
      },
      async create(data:any){
       try {
-         const status = await conexao.estadoPagamento.createMany({data })
+         const status = await conexao.registoPagamento.createMany({data })
          return status
          
       } catch (error) {

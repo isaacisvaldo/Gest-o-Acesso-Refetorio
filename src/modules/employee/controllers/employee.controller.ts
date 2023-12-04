@@ -209,7 +209,7 @@ export async function employeePaymentRegister(req:Request,res:Response){
   const {statusPayment,employeeCod}= req.body
   const data:employeePayment ={
     data: getDataAtual(),
-    cod_fk:employeeCod,
+    cod_fk:parseInt(employeeCod),
     fk_pagamento:statusPayment
   }
   console.log(data)
