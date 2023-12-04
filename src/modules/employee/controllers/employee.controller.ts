@@ -213,7 +213,13 @@ export async function employeePaymentRegister(req:Request,res:Response){
     fk_pagamento:statusPayment
   }
   console.log(data)
-    
+  const create = await registoPagamentoRepository.create(data)
+  if(create){
+    req.flash("sucess", "Adicionado com sucesso!");
+    return res.status(200).json({ success: "Cadastrado Com sucesso" });
+  }else{
+    return res.status(200).json({ error: "Erro ao cadastrar !" });
+  }
   } catch (error) {
     console.log(error);
     return res.status(500).json({ error: "Failed to create user." }); 

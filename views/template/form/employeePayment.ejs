@@ -187,7 +187,9 @@ if (checkedRadioButton) {
         return response.json();
     })
     .then(data => {
-        console.log('Resposta do servidor:', data);
+        if(!data.error){
+          
+        }
     })
     .catch(error => {
         // Lidar com erros
