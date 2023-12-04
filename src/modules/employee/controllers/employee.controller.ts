@@ -29,7 +29,7 @@ export async function ImportFileRegister(req: Request, res: Response) {
       console.log(error);
       return res.status(500).json({ error: "Failed to create user." });
     }
-  }
+}
   export async function ImportFileEmployee(req: Request, res: Response) {
     try {
         const user = req.session.user;
@@ -78,6 +78,7 @@ export async function uploadFile(req: Request, res: Response) {
                 }
           
             })
+
           fs.unlink(nomeDoArquivo, (err: NodeJS.ErrnoException | null) => {
             if (err) {
               console.error('Ocorreu um erro ao excluir o arquivo:', err);
@@ -98,14 +99,20 @@ export async function uploadFile(req: Request, res: Response) {
                 console.log(data)
                 const verify= await  employeeRepository.findBycod(data.cod_fk)
                 if(verify){
-                    console.log(verify) 
-                    const insert = await registoPagamentoRepository.create(data)
+                const verify2=await  registoPagamentoRepository.findByDate(data.data,data.cod_fk)
+                console.log("......................................"+verify2)
+                if(!verify2){
+                  const insert = await registoPagamentoRepository.create(data)
+                }else{
+                  console.log(data.cod,"Ja Registrado")
+                }
+                  
                 }else{
                  console.log(data.cod,"Não encontrai  !")
                 }
           
             })
-            console.log("Registos de entrada ",dataFormatterRegistro)
+
             fs.unlink(nomeDoArquivo, (err: NodeJS.ErrnoException | null) => {
               if (err) {
                 console.error('Ocorreu um erro ao excluir o arquivo:', err);
@@ -114,6 +121,8 @@ export async function uploadFile(req: Request, res: Response) {
               req.flash("sucess", "Adicionado com sucesso!");
               return res.status(200).json({ succes: "Arquivo removido com sucesso!" });
             });
+        }else{
+          return res.status(500).json({ error: "Error interno !" });
         }
       
       }

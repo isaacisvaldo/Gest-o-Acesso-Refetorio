@@ -2,58 +2,57 @@ import conexao from "../../../config/index";
 
 export const registoPagamentoRepository = {
 
-     async findAll(){
+   async findAll() {
       try {
          const registoPagamento = await conexao.registro.findMany({
-            include:{
-               employee:true,
-               registroCodAcesso:true,
+            include: {
+               employee: true,
+               registroCodAcesso: true,
             }
          })
          return registoPagamento
-         
+
       } catch (error) {
-         throw new Error(`Erro ao adicionar : ${error}`);  
+         throw new Error(`Erro ao adicionar : ${error}`);
       }
-     },
-  
-     async create(data:any){
+   },
+
+   async create(data: any) {
       try {
-         const status = await conexao.registro.create({data })
+         const status = await conexao.registro.create({ data })
          return status
-         
+
       } catch (error) {
-         throw new Error(`Erro ao adicionar : ${error}`);  
+         throw new Error(`Erro ao adicionar : ${error}`);
       }
-     },
-      
-     async create2(data:any){
-        try {
-           const status = await conexao.registro.createMany({data })
-           return status
-           
-        } catch (error) {
-           throw new Error(`Erro ao adicionar : ${error}`);  
-        }
-       },
-     async createAcessCode(data:any){
+   },
+   async createAcessCode(data: any) {
       try {
-         const status = await conexao.registroCodAcesso.create({data })
+         const status = await conexao.registroCodAcesso.create({ data })
          return status
-         
+
       } catch (error) {
-         throw new Error(`Erro ao adicionar : ${error}`);  
+         throw new Error(`Erro ao adicionar : ${error}`);
       }
-     },
-     async findAllAcessCode(){
+   },
+   async findByDate(date: any, cod_fk: any) {
       try {
-         const registoPagamento = await conexao.registroCodAcesso.findMany({
+         const registro = await conexao.registro.findFirst({
+            where: {
+               cod_fk: {
+                  equals: cod_fk
+               },
+               data: {
+                  equals: date
+               },
+
+            }
          })
-         return registoPagamento
-         
+         return registro
+
       } catch (error) {
-         throw new Error(`Erro ao adicionar : ${error}`);  
+         throw new Error(`Erro ao adicionar : ${error}`);
       }
-     },
+   },
 
 }

@@ -165,7 +165,7 @@
                         <th class="text-800 sort align-middle" data-sort="subject" style="min-width:15.625rem">Data Registro</th>
                         <th class="text-800 sort align-middle" data-sort="status">Status</th>
                         <th class="text-800 sort align-middle" data-sort="priority">Priority</th>
-                        <th class="text-800 sort align-middle text-end" data-sort="agent">Code</th>
+                        <th class="text-800 sort align-middle" data-sort="agent">Code</th>
                       </tr>
                     </thead>
                     <tbody class="list" id="table-ticket-body">
@@ -193,9 +193,10 @@
                         </td>
                         <% element.registroCodAcesso.forEach(e => { %>
                         <% if(element.Id==e.registroPagamento_fk){ %>
-                        <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"><%= e.designacao %></small></td>
+                        <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"><%= e.designacao %></small>
                         <% }%>
                         <% }) %>
+                      </td>
                       </tr>
                      <% }) %>
                     

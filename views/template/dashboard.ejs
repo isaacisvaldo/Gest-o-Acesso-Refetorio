@@ -255,11 +255,12 @@
                           <th class="py-2 fs-0 pe-2" style="width: 28px;">
                             <div class="form-check d-flex align-items-center"><input class="form-check-input" id="checkbox-bulk-table-tickets-select" type="checkbox" data-bulk-select='{"body":"table-ticket-body","actions":"table-ticket-actions","replacedElement":"table-ticket-replace-element"}' /></div>
                           </th>
+                          <th class="text-800 sort align-middle ps-2" data-sort="client">Código</th>
                           <th class="text-800 sort align-middle ps-2" data-sort="client">Funcionario</th>
                           <th class="text-800 sort align-middle" data-sort="subject" style="min-width:15.625rem">Data Registro</th>
-                          <th class="text-800 sort align-middle" data-sort="status">Status</th>
+                          <th class="text-800 sort align-middle" data-sort="status">Status pagamento</th>
                           <th class="text-800 sort align-middle" data-sort="priority">Priority</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="agent">Code</th>
+                          <th class="text-800 sort align-middle ">Code Acess</th>
                         </tr>
                       </thead>
                       <tbody class="list" id="table-ticket-body">
@@ -271,8 +272,10 @@
                           <td class="align-middle client white-space-nowrap pe-3 pe-xxl-4 ps-2">
                             <div class="d-flex align-items-center gap-2 position-relative">
                              
-                              <h6 class="mb-0"><a class="stretched-link text-900" href="contact-details.html"><%= element.employee.nome %></a></h6>
+                              <h6 class="mb-0"><a class="stretched-link text-900" href="contact-details.html"><%= element.cod_fk %></a></h6>
+
                             </div>
+                            <td>   <h6 class="mb-0"><%= element.employee.nome %></h6></td>
                           </td>
                           <td class="align-middle subject py-2 pe-4"><a class="fw-semi-bold" href="tickets-preview.html"><%= element.data %></a></td>
                           <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"><%= element.estado %></small></td>
@@ -287,9 +290,10 @@
                           </td>
                           <% element.registroCodAcesso.forEach(e => { %>
                           <% if(element.Id==e.registroPagamento_fk){ %>
-                          <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"><%= e.designacao %></small></td>
+                          <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"><%= e.designacao %></small>
                           <% }%>
                           <% }) %>
+                        </td>
                         </tr>
                        <% }) %>
                       

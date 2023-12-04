@@ -28,9 +28,10 @@ declare module "express-session" {
 
 export  async function create(req: Request, res: Response){
   try {
+    const sugest="admin"
     const {nome,sobrenome,username,fk_perfil}= req.body
     const saltOrRounds = 10;
-    const password = await hash('DTTI@123', saltOrRounds);
+    const password = await hash(sugest, saltOrRounds);
     console.log(req.body);
     const data:UserDTO={
       nome: nome,
