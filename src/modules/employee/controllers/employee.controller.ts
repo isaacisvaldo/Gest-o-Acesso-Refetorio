@@ -9,6 +9,7 @@ import { domain } from "../../../config/domain/domain.url";
 import { employeeRepository } from "../../employee/repository/employee.repository";
 import { formatte } from "../../employee/util/formatte";
 import { registoPagamentoRepository } from "../repository/payment.repository";
+import{employeePayment} from "../../employee/dto/employeePayment.dto"
 
 
 export async function ImportFileRegister(req: Request, res: Response) {
@@ -153,14 +154,14 @@ export async function employeePayment(req: Request, res: Response) {
     const {cod}=req.params
     const user = req.session.user;
     const formatte =parseInt(cod)
-    console.log(formatte)
-  
    const employee = await employeeRepository.findBycod(formatte)
+   const status = await registoPagamentoRepository.findAllStatusPayment()
    console.log(employee)
    if(employee){
     res.render("template/form/employeePayment",{
       user,
       employee,
+      status,
       domain,
       error: req.flash("error"),
       warning: req.flash("warning"),
@@ -196,4 +197,27 @@ export async function findEmployee(req:Request,res:Response){
     return res.status(500).json({ error: "Failed to create user." }); 
   }
 }
+export async function employeePaymentRegister(req:Request,res:Response){
+  function getDataAtual() {
+    const dataAtual = new Date();
+    const ano = dataAtual.getFullYear();
+    const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
+    const dia = String(dataAtual.getDate()).padStart(2, '0');
+    return `${ano}-${mes}-${dia}`;
+  }
+  try {
+  const {statusPayment,employeeCod}= req.body
+  const data:employeePayment ={
+    data: getDataAtual(),
+    cod_fk:employeeCod,
+    fk_pagamento:statusPayment
+  }
+  console.log(data)
+    
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Failed to create user." }); 
+  }
+}
+
   

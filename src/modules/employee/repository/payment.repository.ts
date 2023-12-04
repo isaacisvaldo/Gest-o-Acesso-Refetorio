@@ -15,5 +15,25 @@ export const registoPagamentoRepository = {
       } catch (error) {
          throw new Error(`Erro ao adicionar : ${error}`);  
       }
+     },
+     async findAllStatusPayment(){
+      try {
+         const status = await conexao.estadoPagamento.findMany({
+         })
+         return status
+         
+      } catch (error) {
+         throw new Error(`Erro ao adicionar : ${error}`);  
+      }
+     },
+     async create(data:any){
+      try {
+         const status = await conexao.estadoPagamento.createMany({data })
+         return status
+         
+      } catch (error) {
+         throw new Error(`Erro ao adicionar : ${error}`);  
+      }
      }
+
 }

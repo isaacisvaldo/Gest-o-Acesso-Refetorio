@@ -13,6 +13,7 @@ employeeRouter.get('/findEmployee/:cod',userAuth,employeeController.findEmployee
 employeeRouter.get('/ImportFileEmployee',userAuth,employeeController.ImportFileEmployee)
 employeeRouter.get('/InsertDataFile/:name/:cod',employeeController.InsertDataFile)
 employeeRouter.post('/uploadFile',upload.single('file'),employeeController.uploadFile)
+employeeRouter.post('/employeePaymentRegister',userAuth,employeeController.employeePaymentRegister)
 employeeRouter.get('/listEmployee',userAuth,employeeController.listEmployee)
 
 export {employeeRouter}; 

@@ -251,6 +251,7 @@
                       <div class="flex-1">
                         <h5 class="mb-2 fs-0">Resultado da Pesquisa</h5>
                         <p class="text-break fs--1" id="result"> </p>
+                          <p id="codId"></p>
                           <p id="nameId"></p>
                        
                        
@@ -306,8 +307,9 @@
      document.getElementById("btn1").setAttribute('hidden', true);
      document.getElementById("btn2").setAttribute('hidden', true);
      document.getElementById("btn3").removeAttribute('hidden');
-     document.getElementById("nameId").innerHTML="Isaac Bunga"
-     resposta=data.employee.cod
+     document.getElementById("codId").innerHTML=data.employee.cod
+     document.getElementById("nameId").innerHTML=data.employee.nome
+        resposta=data.employee.cod
         console.log('Resposta do servidor:', data);
       }else{
         document.getElementById('result').innerHTML =data.error; 
@@ -328,28 +330,7 @@
     
 }
      
-
-function adicionar(){
-   console.log(resposta)
-  fetch(`${domain}/InsertDataFile/${resposta}/EM`, {
-        method: 'GET'
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Ocorreu um erro.');
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Resposta do servidor:', data);
-        window.location ="/ImportFileEmployee"
-    })
-    .catch(error => {
-        // Lidar com erros
-        console.error('Erro:', error);
-    });
-}
-      </script>
+   </script>
   
   </body>
 

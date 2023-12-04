@@ -113,22 +113,27 @@
                     <h5 class="mb-0">Perfil Localizado</h5>
                   </div>
                   <div class="card-body bg-body-tertiary">
-                    <form class="row g-3">
+                    <div class="row g-3">
                       <div class="col-lg-6"> <label class="form-label" for="first-name">Nome</label><input class="form-control" id="first-name" type="text" disabled value="<%=employee.nome  %>" /></div>
-                      <div class="col-lg-6"> <label class="form-label" for="last-name">Código</label><input class="form-control" id="last-name" type="text" disabled value="<%=employee.cod  %>" /></div>
+                      <div class="col-lg-6"> <label class="form-label" for="last-name">Código</label><input class="form-control"  type="text" disabled value="<%=employee.cod  %>" id="employeeCod" /></div>
                       <div class="col-lg-6"> <label class="form-label" for="email1">Email</label><input class="form-control" id="email1" type="text"disabled value="<%=employee.email  %>" /></div>
                       <div class="col-lg-6"> <label class="form-label" for="email2">Phone</label><input class="form-control" id="email2" type="text" disabled value="<%=employee.telefone  %>" /></div>
                       <div class="col-lg-12"><label class="form-label" for="email3">completeName</label><input class="form-control" id="email3" type="text" disabled value="<%=employee.completeName  %>" /></div>
                     <br>
                       <h6 class="fw-bold">Forma de Pagamento<span class="fs--2 ms-1 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Selecione A forma de Liquidação da presente data"><span class="fas fa-question-circle"></span></span></h6>
                       <div class="ps-2">
-                        <div class="form-check mb-0 lh-1"><input class="form-check-input" type="radio" value="" id="everyone" name="view-settings" /><label class="form-check-label mb-0" for="everyone">Pago </label></div>
-                       <br>
-                        <div class="form-check mb-0 lh-1"><input class="form-check-input" type="radio" value="" id="my-followers" checked="checked" name="view-settings" /><label class="form-check-label mb-0" for="my-followers">Crédito</label></div>
-
+                        <% status.forEach((element, index)=> { %>
+                          <% if (index==0) { %>
+                            <div class="form-check mb-0 lh-1"><input class="form-check-input" type="radio" value="<%= element.Id %>" checked id="everyone" name="statusPayment" /><label class="form-check-label mb-0" for="everyone"><%= element.designacao %> </label></div>
+                            <br>
+                            <% }else{%>
+                              <div class="form-check mb-0 lh-1"><input class="form-check-input" type="radio" value="<%= element.Id %>"  id="everyone" name="statusPayment" /><label class="form-check-label mb-0" for="everyone"><%= element.designacao %> </label></div>
+                              <% } %>
+                          <% }) %>
+                      
                       </div>
-                     <div class="col-12 d-flex justify-content-end"><button class="btn btn-primary" type="submit">Adicionar Registo </button></div>
-                    </form>
+                     <div class="col-12 d-flex justify-content-end"><button class="btn btn-primary"  onclick="update()">Adicionar Registo </button></div>
+                    </div>
                   </div>
                 </div>
 
@@ -139,7 +144,7 @@
     
       </div>
     </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->
-
+    <input type="hidden" id="domainID" value="<%=domain%>" />
   
 
     <script src="../../vendors/popper/popper.min.js"></script>
@@ -153,6 +158,47 @@
     <script src="../../vendors/list.js/list.min.js"></script>
     <script src="../../assets/js/theme.js"></script>
   </body>
+
+  <script>
+    const domain = document.getElementById("domainID").value;
+    function update(){
+      const employeeCod= document.getElementById("employeeCod").value
+const checkedRadioButton = document.querySelector('input[name="statusPayment"]:checked');
+if (checkedRadioButton) {
+  const statusPayment = checkedRadioButton.value;
+ 
+    console.log(statusPayment);
+    data={
+      statusPayment:statusPayment,
+      employeeCod:employeeCod
+    }
+
+    fetch(`${domain}/employeePaymentRegister`, {
+        method: 'POST',
+        headers: {
+        "Content-Type": "application/json", // Tipo de conteúdo do corpo da requisição
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Ocorreu um erro .');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Resposta do servidor:', data);
+    })
+    .catch(error => {
+        // Lidar com erros
+        console.error('Erro:', error);
+    });
+} else {
+  console.log('Nenhum radio button está marcado.');
+}
+
+    }
+    </script>
 
 
 <!-- Mirrored from prium.github.io/falcon/v3.18.0/dashboard/support-desk.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Nov 2023 21:59:41 GMT -->
