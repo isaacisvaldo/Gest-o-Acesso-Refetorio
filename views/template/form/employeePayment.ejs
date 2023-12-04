@@ -122,14 +122,8 @@
                     <br>
                       <h6 class="fw-bold">Forma de Pagamento<span class="fs--2 ms-1 text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Selecione A forma de Liquidação da presente data"><span class="fas fa-question-circle"></span></span></h6>
                       <div class="ps-2">
-                        <% status.forEach((element, index)=> { %>
-                          <% if (index==0) { %>
-                            <div class="form-check mb-0 lh-1"><input class="form-check-input" type="radio" value="<%= element.Id %>" checked id="everyone" name="statusPayment" /><label class="form-check-label mb-0" for="everyone"><%= element.designacao %> </label></div>
-                            <br>
-                            <% }else{%>
-                              <div class="form-check mb-0 lh-1"><input class="form-check-input" type="radio" value="<%= element.Id %>"  id="everyone" name="statusPayment" /><label class="form-check-label mb-0" for="everyone"><%= element.designacao %> </label></div>
-                              <% } %>
-                          <% }) %>
+                        <div class="form-check mb-0 lh-1"><input class="form-check-input" type="radio" value="1" checked id="everyone" name="statusPayment" /><label class="form-check-label mb-0" for="everyone">Pago</label></div>
+                        <div class="form-check mb-0 lh-1"><input class="form-check-input" type="radio" value="0" checked id="everyone" name="statusPayment" /><label class="form-check-label mb-0" for="everyone"> Não Pago</label></div>
                       
                       </div>
                      <div class="col-12 d-flex justify-content-end"><button class="btn btn-primary"  onclick="update()">Adicionar Registo </button></div>

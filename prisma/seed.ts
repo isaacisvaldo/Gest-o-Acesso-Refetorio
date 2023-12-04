@@ -6,10 +6,9 @@ import { statusPayment } from './seeds/statusPayment';
 const prisma = new PrismaClient();
 async function main() {
 
-  //await prisma.perfil.deleteMany(); 
-  //await prisma.perfil.createMany({ data: perfil })
-  await prisma.estadoPagamento.deleteMany()
-  await prisma.estadoPagamento.createMany({data:statusPayment})
+  await prisma.perfil.deleteMany(); 
+  await prisma.perfil.createMany({ data: perfil })
+
 }
 main()
   .then(async () => {

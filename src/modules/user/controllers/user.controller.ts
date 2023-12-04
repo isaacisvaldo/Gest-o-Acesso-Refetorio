@@ -10,6 +10,7 @@ import { readFileExcel } from "../../util/readFile";
 import { domain } from "../../../config/domain/domain.url";
 import { employeeRepository } from "../../employee/repository/employee.repository";
 import { formatte } from "../../employee/util/formatte";
+import { registoPagamentoRepository } from "../../employee/repository/payment.repository";
 interface UserSessionData {
   id: string;
   nome: string;
@@ -94,7 +95,9 @@ export async function dashboard(req:Request, res:Response){
     try {
       const user = req.session.user;
       console.log(user)
-      res.render("template/dashboard",{user})
+      const historyPayment = await registoPagamentoRepository.findAll()
+      console.log(historyPayment)
+      res.render("template/dashboard",{user,historyPayment})
     } catch (error) {
       console.log(error);
     }

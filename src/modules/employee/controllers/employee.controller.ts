@@ -7,7 +7,7 @@ import fs from 'fs';
 import { readFileExcel } from "../../util/readFile";
 import { domain } from "../../../config/domain/domain.url";
 import { employeeRepository } from "../../employee/repository/employee.repository";
-import { formatte } from "../../employee/util/formatte";
+import { formatte, formatteRegistro } from "../../employee/util/formatte";
 import { registoPagamentoRepository } from "../repository/payment.repository";
 import{employeePayment} from "../../employee/dto/employeePayment.dto"
 import { generateUniqueCode } from "../../util/randomChar";
@@ -46,7 +46,7 @@ export async function ImportFileRegister(req: Request, res: Response) {
       console.log(error);
       return res.status(500).json({ error: "Failed to create user." });
     }
-  }
+}
 export async function uploadFile(req: Request, res: Response) {
     try {
       const file = req.file
@@ -91,15 +91,31 @@ export async function uploadFile(req: Request, res: Response) {
         }
         
       }else if(cod == "RG"){
-        console.log("Registos de entrada ")
-        fs.unlink(nomeDoArquivo, (err: NodeJS.ErrnoException | null) => {
-          if (err) {
-            console.error('Ocorreu um erro ao excluir o arquivo:', err);
-            return res.status(500).json({ error: "Error interno !" });
-          }
-          req.flash("sucess", "Adicionado com sucesso!");
-          return res.status(200).json({ succes: "Arquivo removido com sucesso!" });
-        });
+        const dataFormatterRegistro = await formatteRegistro(data)
+       
+        if(dataFormatterRegistro){
+            dataFormatterRegistro.map(async (data:any)=>{
+                console.log(data)
+                const verify= await  employeeRepository.findBycod(data.cod_fk)
+                if(verify){
+                    console.log(verify) 
+                    const insert = await registoPagamentoRepository.create(data)
+                }else{
+                 console.log(data.cod,"Não encontrai  !")
+                }
+          
+            })
+            console.log("Registos de entrada ",dataFormatterRegistro)
+            fs.unlink(nomeDoArquivo, (err: NodeJS.ErrnoException | null) => {
+              if (err) {
+                console.error('Ocorreu um erro ao excluir o arquivo:', err);
+                return res.status(500).json({ error: "Error interno !" });
+              }
+              req.flash("sucess", "Adicionado com sucesso!");
+              return res.status(200).json({ succes: "Arquivo removido com sucesso!" });
+            });
+        }
+      
       }
    
 
@@ -156,13 +172,11 @@ export async function employeePayment(req: Request, res: Response) {
     const user = req.session.user;
     const formatte =parseInt(cod)
    const employee = await employeeRepository.findBycod(formatte)
-   const status = await registoPagamentoRepository.findAllStatusPayment()
    console.log(employee)
    if(employee){
     res.render("template/form/employeePayment",{
       user,
       employee,
-      status,
       domain,
       error: req.flash("error"),
       warning: req.flash("warning"),
@@ -207,11 +221,12 @@ export async function employeePaymentRegister(req:Request,res:Response){
     return `${ano}-${mes}-${dia}`;
   }
   try {
-  const {statusPayment,employeeCod}= req.body
+  const {statusPayment,employeeCod}= req.body;
+  
   const data:employeePayment ={
     data: getDataAtual(),
     cod_fk:parseInt(employeeCod),
-    fk_pagamento:statusPayment
+    estado:parseInt(statusPayment),
   }
   console.log(data)
   const insert = await registoPagamentoRepository.create(data)

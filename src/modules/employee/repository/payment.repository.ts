@@ -4,11 +4,10 @@ export const registoPagamentoRepository = {
 
      async findAll(){
       try {
-         const registoPagamento = await conexao.registoPagamento.findMany({
+         const registoPagamento = await conexao.registro.findMany({
             include:{
                employee:true,
                registroCodAcesso:true,
-               estadoPagamento:true,
             }
          })
          return registoPagamento
@@ -17,25 +16,26 @@ export const registoPagamentoRepository = {
          throw new Error(`Erro ao adicionar : ${error}`);  
       }
      },
-     async findAllStatusPayment(){
-      try {
-         const status = await conexao.estadoPagamento.findMany({
-         })
-         return status
-         
-      } catch (error) {
-         throw new Error(`Erro ao adicionar : ${error}`);  
-      }
-     },
+  
      async create(data:any){
       try {
-         const status = await conexao.registoPagamento.create({data })
+         const status = await conexao.registro.create({data })
          return status
          
       } catch (error) {
          throw new Error(`Erro ao adicionar : ${error}`);  
       }
      },
+      
+     async create2(data:any){
+        try {
+           const status = await conexao.registro.createMany({data })
+           return status
+           
+        } catch (error) {
+           throw new Error(`Erro ao adicionar : ${error}`);  
+        }
+       },
      async createAcessCode(data:any){
       try {
          const status = await conexao.registroCodAcesso.create({data })

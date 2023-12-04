@@ -210,14 +210,15 @@
               </div>
             </div>
           </div>
-          <div class="row gx-3">
+         
+        <div class="row gx-3">
             <div class="col-xxl-12 col-xl-12">
               <div class="card" id="ticketsTable" data-list='{"valueNames":["client","subject","status","priority","agent"],"page":11,"pagination":true,"fallback":"tickets-table-fallback"}'>
                 <div class="card-header border-bottom border-200 px-0">
                   <div class="d-lg-flex justify-content-between">
                     <div class="row flex-between-center gy-2 px-x1">
                       <div class="col-auto pe-0">
-                        <h6 class="mb-0">All tickets</h6>
+                        <h6 class="mb-0">Todos Registros</h6>
                       </div>
                       <div class="col-auto">
                         <form>
@@ -254,28 +255,27 @@
                           <th class="py-2 fs-0 pe-2" style="width: 28px;">
                             <div class="form-check d-flex align-items-center"><input class="form-check-input" id="checkbox-bulk-table-tickets-select" type="checkbox" data-bulk-select='{"body":"table-ticket-body","actions":"table-ticket-actions","replacedElement":"table-ticket-replace-element"}' /></div>
                           </th>
-                          <th class="text-800 sort align-middle ps-2" data-sort="client">Client</th>
-                          <th class="text-800 sort align-middle" data-sort="subject" style="min-width:15.625rem">Subject</th>
+                          <th class="text-800 sort align-middle ps-2" data-sort="client">Funcionario</th>
+                          <th class="text-800 sort align-middle" data-sort="subject" style="min-width:15.625rem">Data Registro</th>
                           <th class="text-800 sort align-middle" data-sort="status">Status</th>
                           <th class="text-800 sort align-middle" data-sort="priority">Priority</th>
-                          <th class="text-800 sort align-middle text-end" data-sort="agent">Agent</th>
+                          <th class="text-800 sort align-middle text-end" data-sort="agent">Code</th>
                         </tr>
                       </thead>
                       <tbody class="list" id="table-ticket-body">
+                       <% historyPayment.forEach(element => { %>
                         <tr>
                           <td class="align-middle fs-0 py-3">
                             <div class="form-check mb-0"><input class="form-check-input" type="checkbox" id="table-view-tickets-0" data-bulk-select-row="data-bulk-select-row" /></div>
                           </td>
                           <td class="align-middle client white-space-nowrap pe-3 pe-xxl-4 ps-2">
                             <div class="d-flex align-items-center gap-2 position-relative">
-                              <div class="avatar avatar-xl">
-                                <div class="avatar-name rounded-circle"><span>EW</span></div>
-                              </div>
-                              <h6 class="mb-0"><a class="stretched-link text-900" href="contact-details.html">Emma Watson</a></h6>
+                             
+                              <h6 class="mb-0"><a class="stretched-link text-900" href="contact-details.html"><%= element.employee.nome %></a></h6>
                             </div>
                           </td>
-                          <td class="align-middle subject py-2 pe-4"><a class="fw-semi-bold" href="tickets-preview.html">Synapse Design #1125</a></td>
-                          <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false">Recent</small></td>
+                          <td class="align-middle subject py-2 pe-4"><a class="fw-semi-bold" href="tickets-preview.html"><%= element.data %></a></td>
+                          <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"><%= element.estadoPagamento.designacao %></small></td>
                           <td class="align-middle priority pe-4">
                             <div class="d-flex align-items-center gap-2">
                               <div style="--falcon-circle-progress-bar:100"><svg class="circle-progress-svg" width="26" height="26" viewBox="0 0 120 120">
@@ -285,43 +285,15 @@
                               <h6 class="mb-0 text-700">Urgent</h6>
                             </div>
                           </td>
-                          <td class="align-middle agent"><select class="form-select form-select-sm w-auto ms-auto" aria-label="agents actions">
-                              <option>Select Agent</option>
-                              <option selected="selected">Anindya</option>
-                              <option>Nowrin</option>
-                              <option>Khalid</option>
-                            </select></td>
+                          <% element.registroCodAcesso.forEach(e => { %>
+                          <% if(element.Id==e.registroPagamento_fk){ %>
+                          <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"><%= e.designacao %></small></td>
+                          <% }%>
+                          <% }) %>
                         </tr>
-                        <tr>
-                          <td class="align-middle fs-0 py-3">
-                            <div class="form-check mb-0"><input class="form-check-input" type="checkbox" id="table-view-tickets-1" data-bulk-select-row="data-bulk-select-row" /></div>
-                          </td>
-                          <td class="align-middle client white-space-nowrap pe-3 pe-xxl-4 ps-2">
-                            <div class="d-flex align-items-center gap-2 position-relative">
-                              <div class="avatar avatar-xl">
-                                <div class="avatar-name rounded-circle"><span>L</span></div>
-                              </div>
-                              <h6 class="mb-0"><a class="stretched-link text-900" href="contact-details.html">Luke</a></h6>
-                            </div>
-                          </td>
-                          <td class="align-middle subject py-2 pe-4"><a class="fw-semi-bold" href="tickets-preview.html">Change of refund my last buy | Order #125631</a></td>
-                          <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-danger false">Overdue</small></td>
-                          <td class="align-middle priority pe-4">
-                            <div class="d-flex align-items-center gap-2">
-                              <div style="--falcon-circle-progress-bar:75"><svg class="circle-progress-svg" width="26" height="26" viewBox="0 0 120 120">
-                                  <circle class="progress-bar-rail" cx="60" cy="60" r="54" fill="none" stroke-linecap="round" stroke-width="12"></circle>
-                                  <circle class="progress-bar-top" cx="60" cy="60" r="54" fill="none" stroke-linecap="round" stroke="#F68F57" stroke-width="12"></circle>
-                                </svg></div>
-                              <h6 class="mb-0 text-700">High</h6>
-                            </div>
-                          </td>
-                          <td class="align-middle agent"><select class="form-select form-select-sm w-auto ms-auto" aria-label="agents actions">
-                              <option>Select Agent</option>
-                              <option selected="selected">Anindya</option>
-                              <option>Nowrin</option>
-                              <option>Khalid</option>
-                            </select></td>
-                        </tr>
+                       <% }) %>
+                      
+                      
                       </tbody>
                     </table>
                     <div class="text-center d-none" id="tickets-table-fallback">
@@ -338,6 +310,7 @@
             </div>
        
           </div>
+  
          <%-include("partials/footer")  %>
         </div>
     

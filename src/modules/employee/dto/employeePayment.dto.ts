@@ -1,7 +1,7 @@
 export interface  employeePayment {
-    data: string;
+  data: string;
    valor?: string;
    cod_fk: number;
-   fk_pagamento:string
+   estado:number
   }
   

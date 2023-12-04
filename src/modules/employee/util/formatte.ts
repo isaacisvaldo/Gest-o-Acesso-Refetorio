@@ -26,6 +26,21 @@ export async function formatte(data:any) {
     
 }
 
+export async function formatteRegistro(data:any){
+    const resultado = data.map((item:any) => {
+        const dataCriacao = item['Data Criação'].split(' ')[0]; // Obtém apenas a parte da data
+ 
+        return {
+          data:dataCriacao,
+          cod_fk: item['Código'],
+          estado: 0
+        };
+      });
+
+      return resultado
+      
+}
+
 
   
  

@@ -73,23 +73,15 @@ model Employee {
   face                      String
   createdAt                 DateTime @default(now())
   updatedAt                 DateTime @updatedAt
-  registoPagamentos  RegistoPagamento[]
+  registro  Registro[]
 } 
-model EstadoPagamento {
-  Id         String   @id @default(uuid())
-  designacao String   @unique
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  registoPagamento       RegistoPagamento[]
-}
-model RegistoPagamento {
+
+model Registro {
   Id        String   @id @default(uuid())
   data      String
-  valor      String?
   employee    Employee?  @relation(fields: [cod_fk], references: [cod])
   cod_fk Int
-  estadoPagamento    EstadoPagamento?  @relation(fields: [fk_pagamento], references: [Id])
-  fk_pagamento String
+  estado  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   registroCodAcesso RegistroCodAcesso[]
@@ -97,9 +89,10 @@ model RegistoPagamento {
 model RegistroCodAcesso {
   Id         String   @id @default(uuid())
   designacao String   @unique
-  registoPagamento    RegistoPagamento?  @relation(fields: [registroPagamento_fk], references: [Id])
+  registro    Registro?  @relation(fields: [registroPagamento_fk], references: [Id])
   registroPagamento_fk String
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   
 }
+

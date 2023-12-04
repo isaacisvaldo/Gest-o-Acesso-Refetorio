@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr">
+
+  
+<!-- Mirrored from prium.github.io/falcon/v3.18.0/modules/tables/advance-tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Nov 2023 22:01:44 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ===============================================--><!--    Document Title--><!-- ===============================================-->
+    <title>Bio | Access &amp; Minint</title>
+
+    <!-- ===============================================--><!--    Favicons--><!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="../../assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="../../assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <script src="../../assets/js/config.js"></script>
+    <script src="../../vendors/simplebar/simplebar.min.js"></script>
+
+    <!-- ===============================================--><!--    Stylesheets--><!-- ===============================================-->
+    <link href="../../vendors/prism/prism-okaidia.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
+    <link href="../../vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link href="../../assets/css/theme-rtl.min.css" rel="stylesheet" id="style-rtl">
+    <link href="../../assets/css/theme.min.css" rel="stylesheet" id="style-default">
+    <link href="../../assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
+    <link href="../../assets/css/user.min.css" rel="stylesheet" id="user-style-default">
+    <script>
+      var isRTL = JSON.parse(localStorage.getItem('isRTL'));
+      if (isRTL) {
+        var linkDefault = document.getElementById('style-default');
+        var userLinkDefault = document.getElementById('user-style-default');
+        linkDefault.setAttribute('disabled', true);
+        userLinkDefault.setAttribute('disabled', true);
+        document.querySelector('html').setAttribute('dir', 'rtl');
+      } else {
+        var linkRTL = document.getElementById('style-rtl');
+        var userLinkRTL = document.getElementById('user-style-rtl');
+        linkRTL.setAttribute('disabled', true);
+        userLinkRTL.setAttribute('disabled', true);
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- ===============================================--><!--    Main Content--><!-- ===============================================-->
+    <main class="main" id="top">
+      <div class="container" data-layout="container">
+        <script>
+          var isFluid = JSON.parse(localStorage.getItem('isFluid'));
+          if (isFluid) {
+            var container = document.querySelector('[data-layout]');
+            container.classList.remove('container');
+            container.classList.add('container-fluid');
+          }
+        </script>
+          
+          <%-include("partials/sidebar") %>
+          <%-include("partials/navbar") %>
+        <div class="content">
+          <%-include("partials/complementNav") %>
+
+          <script>
+            var navbarPosition = localStorage.getItem('navbarPosition');
+            var navbarVertical = document.querySelector('.navbar-vertical');
+            var navbarTopVertical = document.querySelector('.content .navbar-top');
+            var navbarTop = document.querySelector('[data-layout] .navbar-top:not([data-double-top-nav');
+            var navbarDoubleTop = document.querySelector('[data-double-top-nav]');
+            var navbarTopCombo = document.querySelector('.content [data-navbar-top="combo"]');
+
+            if (localStorage.getItem('navbarPosition') === 'double-top') {
+              document.documentElement.classList.toggle('double-top-nav-layout');
+            }
+
+            if (navbarPosition === 'top') {
+              navbarTop.removeAttribute('style');
+              navbarTopVertical.remove(navbarTopVertical);
+              navbarVertical.remove(navbarVertical);
+              navbarTopCombo.remove(navbarTopCombo);
+              navbarDoubleTop.remove(navbarDoubleTop);
+            } else if (navbarPosition === 'combo') {
+              navbarVertical.removeAttribute('style');
+              navbarTopCombo.removeAttribute('style');
+              navbarTop.remove(navbarTop);
+              navbarTopVertical.remove(navbarTopVertical);
+              navbarDoubleTop.remove(navbarDoubleTop);
+            } else if (navbarPosition === 'double-top') {
+              navbarDoubleTop.removeAttribute('style');
+              navbarTopVertical.remove(navbarTopVertical);
+              navbarVertical.remove(navbarVertical);
+              navbarTop.remove(navbarTop);
+              navbarTopCombo.remove(navbarTopCombo);
+            } else {
+              navbarVertical.removeAttribute('style');
+              navbarTopVertical.removeAttribute('style');
+              navbarTop.remove(navbarTop);
+              navbarDoubleTop.remove(navbarDoubleTop);
+              navbarTopCombo.remove(navbarTopCombo);
+            }
+          </script>
+         <div class="card mb-3">
+          <div class="card-body">
+            <div class="row flex-between-center">
+              <div class="col-md">
+              
+                <input type="month" class="form-control-sm" name="" id="">
+              </div>
+              <div class="col-auto"><button class="btn btn-primary" role="button" >Exportar </button></div>
+            </div>
+          </div>
+        </div>
+         
+          <div class="card mb-3">
+            <div class="card-header">
+              <div class="row flex-between-end">
+                <div class="col-auto align-self-center">
+                  <h5 class="mb-0" data-anchor="data-anchor">...</h5>
+                </div>
+                <div class="col-auto ms-auto">
+                </div>
+              </div>
+            </div>
+            <div class="card-body pt-0">
+              <div class="tab-content">
+                <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-192e75b3-c1ce-4d4d-81da-2bbe4857a478" id="dom-192e75b3-c1ce-4d4d-81da-2bbe4857a478">
+                  <div id="tableExample3" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":true}'>
+                    <div class="row justify-content-end g-0">
+                      <div class="col-auto col-sm-5 mb-3">
+                        <form>
+                          <div class="input-group"><input class="form-control form-control-sm shadow-none search" type="search" placeholder="Search..." aria-label="search" />
+                            <div class="input-group-text bg-transparent"><span class="fa fa-search fs--1 text-600"></span></div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="table-responsive scrollbar">
+                      <table class="table table-bordered table-striped fs--1 mb-0">
+                        <thead class="bg-200">
+                          <tr>
+                            <th class="text-900 sort" data-sort="cod">UUId Cod</th>
+                            <th class="text-900 sort" data-sort="name">Nome</th>
+                            <th class="text-900 sort" data-sort="name">Sobrenome</th>
+                            <th class="text-900 sort" data-sort="name">Perfil</th>
+                          
+                          </tr>
+                        </thead>
+                        <tbody class="list">
+                          <% finacial.forEach(element => { %>
+                            <tr>
+                              <td class="name"><%=element.Id  %></td>
+                            <td class="name"><a href=""><%=element.nome  %></a> </td> 
+                              <td class="email"><%=element.sobrenome  %></td>
+                              <td class="email"><%=element.perfil.designacao  %></td>
+                             
+                            </tr>
+                          <% }) %>
+                         
+                        
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3"><button class="btn btn-sm btn-falcon-default me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
+                      <ul class="pagination mb-0"></ul><button class="btn btn-sm btn-falcon-default ms-1" type="button" title="Next" data-list-pagination="next"><span class="fas fa-chevron-right"> </span></button>
+                    </div>
+                  </div>
+                </div>
+              
+                </div>
+              </div>
+            </div>
+          </div>
+        
+          <%-include("partials/footer")  %>
+        </div>
+      
+      </div>
+      <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg mt-6" role="document">
+          <div class="modal-content border-0">
+            <div class="position-absolute top-0 end-0 mt-3 me-3 z-1"><button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button></div>
+            <div class="modal-body p-0">
+              <div class="rounded-top-3 bg-body-tertiary py-3 ps-4 pe-6">
+                <h4 class="mb-1" id="staticBackdropLabel">Registrar novo Usuário</h4>
+              </div>
+              <div class="p-4">
+                <div class="row">
+                  <div class="col-lg-9">
+                    <div class="d-flex"><span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-tag" data-fa-transform="shrink-2"></i></span>
+                      <div class="flex-1">
+                        <h5 class="mb-2 fs-0">Labels</h5>
+                        <div class="d-flex"><span class="badge me-1 py-2 badge-subtle-success">New</span><span class="badge me-1 py-2 badge-subtle-primary">Goal</span><span class="badge me-1 py-2 badge-subtle-info">Enhancement</span>
+                          <div class="dropdown dropend"><button class="btn btn-sm btn-secondary px-2 fsp-75 bg-400 border-400 dropdown-toggle dropdown-caret-none" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus"></span></button>
+                            <div class="dropdown-menu">
+                              <h6 class="dropdown-header py-0 px-3 mb-0">Select Label</h6>
+                              <div class="dropdown-divider"></div>
+                              <div class="px-3"><button class="badge-subtle-danger dropdown-item rounded-1 mb-2" type="button">New</button><button class="badge-subtle-primary dropdown-item rounded-1 mb-2" type="button">Goal</button><button class="badge-subtle-info dropdown-item rounded-1 mb-2" type="button">Enhancement</button></div>
+                              <div class="dropdown-divider"></div>
+                              <div class="px-3"><button class="btn btn-sm d-block w-100 btn-outline-secondary border-400">Create Label</button></div>
+                            </div>
+                          </div>
+                        </div>
+                        <hr class="my-4" />
+                      </div>
+                    </div>
+                    <div class="d-flex"><span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-align-left" data-fa-transform="shrink-2"></i></span>
+                      <div class="flex-1">
+                        <h5 class="mb-2 fs-0">Description</h5>
+                        <p class="text-break fs--1">The illustration must match to the contrast of the theme. The illustraion must described the concept of the design. To know more about the theme visit the page. </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-3">
+                    <h6 class="mt-5 mt-lg-0">Add To Card</h6>
+                    <ul class="nav flex-lg-column fs--1">
+                      <li class="nav-item me-2 me-lg-0"><a class="nav-link nav-link-card-details" href="#!"><span class="fas fa-user me-2"></span>Members</a></li>
+                      <li class="nav-item me-2 me-lg-0"><a class="nav-link nav-link-card-details" href="#!"><span class="fas fa-tag me-2"></span>Label</a></li>
+                      <li class="nav-item me-2 me-lg-0"><a class="nav-link nav-link-card-details" href="#!"><span class="fas fa-paperclip me-2"></span>Attachments</a></li>
+                      <li class="nav-item me-2 me-lg-0"><a class="nav-link nav-link-card-details" href="#!"><span class="fa fa-align-left me-2"></span>Description </a></li>
+                    </ul>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" type="button">Understood </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->
+
+  
+    <!-- ===============================================--><!--    JavaScripts--><!-- ===============================================-->
+    <script src="../../vendors/popper/popper.min.js"></script>
+    <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="../../vendors/anchorjs/anchor.min.js"></script>
+    <script src="../../vendors/is/is.min.js"></script>
+    <script src="../../vendors/prism/prism.js"></script>
+    <script src="../../vendors/fontawesome/all.min.js"></script>
+    <script src="../../vendors/lodash/lodash.min.js"></script>
+    <script src="../../../../../polyfill.io/v3/polyfill.min58be.js?features=window.scroll"></script>
+    <script src="../../vendors/list.js/list.min.js"></script>
+    <script src="../../assets/js/theme.js"></script>
+  </body>
+
+
+<!-- Mirrored from prium.github.io/falcon/v3.18.0/modules/tables/advance-tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Nov 2023 22:01:45 GMT -->
+</html>
