@@ -188,11 +188,11 @@ if (checkedRadioButton) {
     })
     .then(data => {
         if(!data.error){
-          
+          window.location ="/controlRegisterEmployee"
         }
     })
     .catch(error => {
-        // Lidar com erros
+        // Lidar com erros 
         console.error('Erro:', error);
     });
 } else {
