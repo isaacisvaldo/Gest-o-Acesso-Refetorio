@@ -227,7 +227,7 @@ export async function employeePaymentRegister(req:Request,res:Response){
     const ano = dataAtual.getFullYear();
     const mes = String(dataAtual.getMonth() + 1).padStart(2, '0');
     const dia = String(dataAtual.getDate()).padStart(2, '0');
-    return `${ano}-${mes}-${dia}`;
+    return `${dia}-${mes}-${ano}`;
   }
   try {
   const {statusPayment,employeeCod}= req.body;
@@ -273,5 +273,21 @@ export async function printFicha(req: Request, res: Response) {
     return res.status(500).json({ error: "Failed to create user." });
   }
 }
+export async function dataOfFinancial(req: Request, res: Response) {
+    try {
+        const {dateStart,dateEnd,status} =req.body
+        if(status=="all" || status!="1" || status !="0"){
+            const data = await employeeRepository.findByRangeData(dateStart,dateEnd)
+            return res.status(200).json({ data});
+        }else{
+            const formatteStatus = parseInt(status)
+            const data =await employeeRepository.findByRangeDataEstado(dateStart,dateEnd,formatteStatus)
+            return res.status(200).json({ data});
+        }
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Failed to create user." });
+    }
+  }
 
   

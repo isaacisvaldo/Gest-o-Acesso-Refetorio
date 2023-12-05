@@ -51,4 +51,46 @@ export const employeeRepository = {
       }
  
      },
+     async findByRangeData(dateStart:any,dateEnd:any){
+        try {
+            const registro = await conexao.registro.findMany({
+                where: {
+                    data: {
+                        gte: dateStart,
+                        lte: dateEnd
+                    }
+                  },
+                  include:{
+                    employee:true,
+                    registroCodAcesso:true,
+                  }
+            })
+            return registro
+            
+         } catch (error) {
+            throw new Error(`Erro ao adicionar : ${error}`);  
+         }  
+     },
+     async findByRangeDataEstado(dateStart:any,dateEnd:any,status:any){
+        try {
+            const registro = await conexao.registro.findMany({
+                where: {
+                    data: {
+                        gte: dateStart,
+                        lte: dateEnd
+                    },
+                    estado:status
+                  },
+                  
+                  include:{
+                    employee:true,
+                    registroCodAcesso:true,
+                  }
+            })
+            return registro
+            
+         } catch (error) {
+            throw new Error(`Erro ao adicionar : ${error}`);  
+         }  
+     }
 }
