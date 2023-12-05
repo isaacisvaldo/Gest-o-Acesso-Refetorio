@@ -259,7 +259,7 @@
                           <th class="text-800 sort align-middle ps-2" data-sort="client">Funcionario</th>
                           <th class="text-800 sort align-middle" data-sort="subject" style="min-width:15.625rem">Data Registro</th>
                           <th class="text-800 sort align-middle" data-sort="status">Status pagamento</th>
-                          <th class="text-800 sort align-middle" data-sort="priority">Priority</th>
+                        
                           <th class="text-800 sort align-middle ">Code Acess</th>
                         </tr>
                       </thead>
@@ -279,24 +279,16 @@
                           </td>
                           <td class="align-middle subject py-2 pe-4"><a class="fw-semi-bold" href="tickets-preview.html"><%= element.data %></a></td>
                           <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"><%= element.estado %></small></td>
-                          <td class="align-middle priority pe-4">
-                            <div class="d-flex align-items-center gap-2">
-                              <div style="--falcon-circle-progress-bar:100"><svg class="circle-progress-svg" width="26" height="26" viewBox="0 0 120 120">
-                                  <circle class="progress-bar-rail" cx="60" cy="60" r="54" fill="none" stroke-linecap="round" stroke-width="12"></circle>
-                                  <circle class="progress-bar-top" cx="60" cy="60" r="54" fill="none" stroke-linecap="round" stroke="#e63757" stroke-width="12"></circle>
-                                </svg></div>
-                              <h6 class="mb-0 text-700">Urgent</h6>
-                            </div>
-                          </td>
+                          <td class="align-middle status fs-0 pe-4">
                           <% element.registroCodAcesso.forEach(e => { %>
                           <% if(element.Id==e.registroPagamento_fk){ %>
-                          <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"><%= e.designacao %></small>
+                         <small class="badge rounded badge-subtle-success false"><%= e.designacao %></small>
                           <% }%>
                           <% }) %>
                         </td>
                         </tr>
                        <% }) %>
-                      
+                     
                       
                       </tbody>
                     </table>
