@@ -12,6 +12,7 @@ import session, { SessionOptions } from 'express-session';
 import {createClient} from "redis"
 import flash from "express-flash"
 import cors from 'cors';
+import PDFDocument from 'pdfkit';
 import initCron from './node-cron/insert.file.excel'
 // const redisClient = createClient()
 // redisClient.connect().catch(console.error)
@@ -50,7 +51,20 @@ const main = async () => {
   app.use(userRouter)
   app.use(employeeRouter)
   app.get('/', (req, res) => {
-    res.render("template/form/sign")
+    // res.writeHead(200, {
+    //   'Content-Type': 'application/pdf',
+    //   'Content-Disposition': 'attachment; filename=exemplo.pdf'
+    // });
+  
+    // const doc = new PDFDocument();
+  
+    // // Escrever no documento PDF
+    // doc.fontSize(20).text('Exemplo de PDF criado com Node.js e pdfkit!', 100, 100);
+  
+    // // Salvar o PDF no stream da resposta
+    // doc.pipe(res);
+    // doc.end();
+   res.render("template/form/sign")
   });
   app.use(function  (req,res,next){
     res.render("template/error/404")
