@@ -71,6 +71,7 @@ model Employee {
   Cartao                    String
   total_impressoes_digitais Int
   face                      String
+  img                      String?  @default("user.png")
   createdAt                 DateTime @default(now())
   updatedAt                 DateTime @updatedAt
   registro  Registro[]
