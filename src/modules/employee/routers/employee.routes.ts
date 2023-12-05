@@ -16,6 +16,5 @@ employeeRouter.post('/uploadFile',upload.single('file'),employeeController.uploa
 employeeRouter.post('/employeePaymentRegister',userAuth,employeeController.employeePaymentRegister)
 employeeRouter.get('/listEmployee',userAuth,employeeController.listEmployee)
 employeeRouter.get('/printFicha/:cod',userAuth,employeeController.printFicha)
-employeeRouter.post('/dataOfFinancial',employeeController.dataOfFinancial)
 
 export {employeeRouter}; 

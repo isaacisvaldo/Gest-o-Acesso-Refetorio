@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+<head>
+  <title>Preencher Tabela com Fetch</title>
+  
+
+</head>
+<body>
+    <button onclick="exportarParaExcel()">Exportar para Excel</button>
+
+  <table id="tabela">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody id="tabela-corpo">
+      <!-- Os dados serão preenchidos aqui -->
+    </tbody>
+  </table>
+
+  <script>
+    // Suponha que você faça uma requisição usando fetch
+    // Neste exemplo, vamos criar dados fictícios apenas para demonstração
+    const dadosDaRequisicao = [
+      { id: 1, nome: 'Exemplo 1', email: 'exemplo1@email.com' },
+      { id: 2, nome: 'Exemplo 2', email: 'exemplo2@email.com' }
+      // Adicione aqui os dados obtidos pela sua requisição fetch
+    ];
+
+    // Função para preencher a tabela com os dados obtidos
+    function preencherTabela() {
+      const tabelaCorpo = document.getElementById('tabela-corpo');
+
+      dadosDaRequisicao.forEach(item => {
+        const row = document.createElement('tr');
+
+        const idCell = document.createElement('td');
+        idCell.textContent = item.id;
+        row.appendChild(idCell);
+
+        const nomeCell = document.createElement('td');
+        nomeCell.textContent = item.nome;
+        row.appendChild(nomeCell);
+
+        const emailCell = document.createElement('td');
+        emailCell.textContent = item.email;
+        row.appendChild(emailCell);
+
+        tabelaCorpo.appendChild(row);
+      });
+    }
+
+    // Chame a função para preencher a tabela
+    preencherTabela();
+  </script>
+
+  <script>
+    function exportarParaExcel() {
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet('Planilha 1');
+
+  const tabela = document.getElementById('tabela');
+
+  const tableRows = tabela.querySelectorAll('tr');
+  tableRows.forEach((row) => {
+    const rowData = [];
+    row.querySelectorAll('th, td').forEach((cell) => {
+      rowData.push(cell.textContent);
+    });
+    worksheet.addRow(rowData);
+  });
+
+  workbook.xlsx.writeBuffer().then((data) => {
+    const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'tabela.xlsx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  });
+}
+
+  </script>
+</body>
+</html>

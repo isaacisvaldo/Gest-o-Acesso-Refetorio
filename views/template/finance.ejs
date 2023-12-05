@@ -47,6 +47,7 @@
         userLinkRTL.setAttribute('disabled', true);
       }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
   </head>
 
   <body>
@@ -110,16 +111,18 @@
             <div class="row flex-between-center">
               <div class="col-md">
               
-               De <input type="date" class="form-control-sm" name="" id=""> Até
-                <input type="date" class="form-control-sm" name="" id=""> 
-                <select name="" id="" class="form-control-sm">
-                    <option value="">Pago</option>
-                    <option value="">Não Pago</option>
-                    <option value="">Todos</option>
+               De <input type="date" class="form-control-sm" name="" id="init"> Até
+                <input type="date" class="form-control-sm" name="" id="last"> 
+                <select name="type" id="type" class="form-control-sm">
+                    <option value="1">Pago</option>
+                    <option value="0">Não Pago</option>
+                    <option value="all">Todos</option>
                 </select>
                 
               </div>
-              <div class="col-auto"><button class="btn btn-primary" role="button" >Exportar </button></div>
+              <div class="col-auto"><button class="btn btn-primary" role="button" id="btn-find" onclick="getDataFinancial()">Buscar </button>  </div>
+              <br>
+              <p id="result"></p>
             </div>
           </div>
         </div>
@@ -128,7 +131,7 @@
             <div class="card-header">
               <div class="row flex-between-end">
                 <div class="col-auto align-self-center">
-                  <h5 class="mb-0" data-anchor="data-anchor">...</h5>
+                  <div class="col-auto"><button class="btn btn-primary" hidden role="button" id="btn-export" onclick="exportarParaExcel()">Export </button>  </div>
                 </div>
                 <div class="col-auto ms-auto">
                 </div>
@@ -148,26 +151,18 @@
                       </div>
                     </div>
                     <div class="table-responsive scrollbar">
-                      <table class="table table-bordered table-striped fs--1 mb-0">
+                      <table class="table table-bordered table-striped fs--1 mb-0" id="tabela">
                         <thead class="bg-200">
                           <tr>
-                            <th class="text-900 sort" data-sort="cod">UUId Cod</th>
+                            <th class="text-900 sort" data-sort="cod">Código</th>
                             <th class="text-900 sort" data-sort="name">Nome</th>
-                            <th class="text-900 sort" data-sort="name">Sobrenome</th>
-                            <th class="text-900 sort" data-sort="name">Perfil</th>
+                            <th class="text-900 sort" data-sort="name">Data</th>
+                            <th class="text-900 sort" data-sort="name">Estado do Pagamento</th>
                           
                           </tr>
                         </thead>
-                        <tbody class="list">
-                          <% finacial.forEach(element => { %>
-                            <tr>
-                              <td class="name"><%=element.Id  %></td>
-                            <td class="name"><a href=""><%=element.nome  %></a> </td> 
-                              <td class="email"><%=element.sobrenome  %></td>
-                              <td class="email"><%=element.perfil.designacao  %></td>
-                             
-                            </tr>
-                          <% }) %>
+                        <tbody class="list" id="tabela-corpo">
+                        
                          
                         
                         </tbody>
@@ -188,64 +183,140 @@
         </div>
       
       </div>
-      <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg mt-6" role="document">
-          <div class="modal-content border-0">
-            <div class="position-absolute top-0 end-0 mt-3 me-3 z-1"><button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button></div>
-            <div class="modal-body p-0">
-              <div class="rounded-top-3 bg-body-tertiary py-3 ps-4 pe-6">
-                <h4 class="mb-1" id="staticBackdropLabel">Registrar novo Usuário</h4>
-              </div>
-              <div class="p-4">
-                <div class="row">
-                  <div class="col-lg-9">
-                    <div class="d-flex"><span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-tag" data-fa-transform="shrink-2"></i></span>
-                      <div class="flex-1">
-                        <h5 class="mb-2 fs-0">Labels</h5>
-                        <div class="d-flex"><span class="badge me-1 py-2 badge-subtle-success">New</span><span class="badge me-1 py-2 badge-subtle-primary">Goal</span><span class="badge me-1 py-2 badge-subtle-info">Enhancement</span>
-                          <div class="dropdown dropend"><button class="btn btn-sm btn-secondary px-2 fsp-75 bg-400 border-400 dropdown-toggle dropdown-caret-none" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="fas fa-plus"></span></button>
-                            <div class="dropdown-menu">
-                              <h6 class="dropdown-header py-0 px-3 mb-0">Select Label</h6>
-                              <div class="dropdown-divider"></div>
-                              <div class="px-3"><button class="badge-subtle-danger dropdown-item rounded-1 mb-2" type="button">New</button><button class="badge-subtle-primary dropdown-item rounded-1 mb-2" type="button">Goal</button><button class="badge-subtle-info dropdown-item rounded-1 mb-2" type="button">Enhancement</button></div>
-                              <div class="dropdown-divider"></div>
-                              <div class="px-3"><button class="btn btn-sm d-block w-100 btn-outline-secondary border-400">Create Label</button></div>
-                            </div>
-                          </div>
-                        </div>
-                        <hr class="my-4" />
-                      </div>
-                    </div>
-                    <div class="d-flex"><span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-align-left" data-fa-transform="shrink-2"></i></span>
-                      <div class="flex-1">
-                        <h5 class="mb-2 fs-0">Description</h5>
-                        <p class="text-break fs--1">The illustration must match to the contrast of the theme. The illustraion must described the concept of the design. To know more about the theme visit the page. </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-3">
-                    <h6 class="mt-5 mt-lg-0">Add To Card</h6>
-                    <ul class="nav flex-lg-column fs--1">
-                      <li class="nav-item me-2 me-lg-0"><a class="nav-link nav-link-card-details" href="#!"><span class="fas fa-user me-2"></span>Members</a></li>
-                      <li class="nav-item me-2 me-lg-0"><a class="nav-link nav-link-card-details" href="#!"><span class="fas fa-tag me-2"></span>Label</a></li>
-                      <li class="nav-item me-2 me-lg-0"><a class="nav-link nav-link-card-details" href="#!"><span class="fas fa-paperclip me-2"></span>Attachments</a></li>
-                      <li class="nav-item me-2 me-lg-0"><a class="nav-link nav-link-card-details" href="#!"><span class="fa fa-align-left me-2"></span>Description </a></li>
-                    </ul>
-                  </div>
-                  <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="button">Understood </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->
+      <input type="hidden" id="domainID" value="<%= domain%>" />
+    </main> 
+    
+    
+    
+    <script>
 
+function preencherTabela(dados) {
+  const tabelaCorpo = document.getElementById('tabela-corpo');
+
+  dados.forEach(item => {
+    const row = document.createElement('tr');
+
+    const codCell = document.createElement('td');
+    codCell.textContent = item.employee.cod; // Supondo que o campo seja 'uuidCod'
+    row.appendChild(codCell);
+
+    const nomeCell = document.createElement('td');
+    nomeCell.textContent = item.employee.nome; // Supondo que o campo seja 'nome'
+    row.appendChild(nomeCell);
+
+    const sobrenomeCell = document.createElement('td');
+    sobrenomeCell.textContent = item.data; // Supondo que o campo seja 'sobrenome'
+    row.appendChild(sobrenomeCell);
+
+    const estadoCell = document.createElement('td');
+   // estadoCell.textContent = item.estado; 
+    if(item.estado===0){
+      estadoCell.textContent = "Não Pago"; 
+    }else{
+      estadoCell.textContent = "Pago"; 
+    }
+   
+    row.appendChild(estadoCell);
+
+    tabelaCorpo.appendChild(row);
+  });
+}
+      const domain = document.getElementById("domainID").value;
+      function getDataFinancial(){
+        const tabelaCorpo = document.getElementById('tabela-corpo');
+        tabelaCorpo.innerHTML = '';
+      const init =document.getElementById("init").value
+      const last =document.getElementById("last").value
+      const type =document.getElementById("type").value
+      var btnExport = document.getElementById('btn-export');
+      var btnfind = document.getElementById('btn-find');
+
+      if(init===""){
+        document.getElementById('result').innerHTML = "Data de Inicio não pode estar  vazio";
+        document.getElementById('result').setAttribute('class', 'text-danger')
+
+      }else if(last===""){
+        document.getElementById('result').innerHTML = "Data do fim da pesquisanão pode estar  vazio";
+        document.getElementById('result').setAttribute('class', 'text-danger')
+      }else{
+        const partesD1 = init.split('-');
+      const partesD2 = last.split('-');
+      const dataInit = partesD1[2] + '-' + partesD1[1] + '-' + partesD1[0];
+      const dataLast = partesD2[2] + '-' + partesD2[1] + '-' + partesD2[0];
+                    const data ={
+                      dateStart: dataInit,
+                      dateEnd: dataLast,
+                      status: type
+                  }
+                const options = {
+                  method: 'POST',
+                  headers: {
+                    "Content-Type": "application/json", 
+                  },
+                  body: JSON.stringify(data),
+                };
+                fetch(`${domain}/dataOfFinancial`, options)
+                  .then((response) => response.json())
+                  .then((data) => {
+                    if (!data.error) {
+                       console.log(data.data)
+                       preencherTabela(data.data)
+                       if(data.length==0){
+                        btnExport.setAttribute('hidden', true);
+                       // btnfind.removeAttribute('hidden');
+                       }else{
+                      //  btnfind.setAttribute('hidden', true);
+                        btnExport.removeAttribute('hidden');
+                       }
+                       //prencher a tabela !
+                      
+      
+                    } else {
+                      document.getElementById('result').innerHTML = data.error;
+                      document.getElementById('result').setAttribute('class', 'text-danger')
+                     
+                    }
+                  }).catch((error) => {
+                      document.getElementById('result').innerHTML = "Server error: " + error;
+                      document.getElementById('result').setAttribute('class', 'text-danger')
+                    console.log(error)
+                  });
+      }
   
-    <!-- ===============================================--><!--    JavaScripts--><!-- ===============================================-->
+      
+      }
+    
+    
+      function exportarParaExcel() {
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet('Planilha 1');
+
+  const tabela = document.getElementById('tabela');
+
+  const tableRows = tabela.querySelectorAll('tr');
+  tableRows.forEach((row) => {
+    const rowData = [];
+    row.querySelectorAll('th, td').forEach((cell) => {
+      rowData.push(cell.textContent);
+    });
+    worksheet.addRow(rowData);
+  });
+
+  workbook.xlsx.writeBuffer().then((data) => {
+    const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'tabela.xlsx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  });
+}
+
+    </script>
+    
     <script src="../../vendors/popper/popper.min.js"></script>
     <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
     <script src="../../vendors/anchorjs/anchor.min.js"></script>
@@ -255,9 +326,11 @@
     <script src="../../vendors/lodash/lodash.min.js"></script>
     <script src="../../../../../polyfill.io/v3/polyfill.min58be.js?features=window.scroll"></script>
     <script src="../../vendors/list.js/list.min.js"></script>
-    <script src="../../assets/js/theme.js"></script>
+   <script src="../../assets/js/theme.js"></script>
+
+
+
   </body>
 
 
-<!-- Mirrored from prium.github.io/falcon/v3.18.0/modules/tables/advance-tables.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Nov 2023 22:01:45 GMT -->
 </html>
