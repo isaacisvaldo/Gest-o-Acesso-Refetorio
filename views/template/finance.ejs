@@ -239,6 +239,7 @@ function preencherTabela(dados) {
         document.getElementById('result').innerHTML = "Data do fim da pesquisanão pode estar  vazio";
         document.getElementById('result').setAttribute('class', 'text-danger')
       }else{
+        document.getElementById('result').innerHTML = "";
         const partesD1 = init.split('-');
       const partesD2 = last.split('-');
       const dataInit = partesD1[2] + '-' + partesD1[1] + '-' + partesD1[0];
