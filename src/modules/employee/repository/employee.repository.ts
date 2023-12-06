@@ -31,12 +31,12 @@ export const employeeRepository = {
          throw new Error(`Erro ao adicionar : ${error}`);  
       }
      },
-     async findBycodAcess(cod:any) {
+     async findBycodAcess(cod:any,estado:any) {
       try {
          const data = await conexao.registroCodAcesso.findFirst({
             where:{
               designacao:cod,
-              estado:0
+              estado:estado
             },
             include:{
                registro:{

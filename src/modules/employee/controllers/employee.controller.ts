@@ -259,10 +259,10 @@ export async function employeePaymentRegister(req:Request,res:Response){
 export async function printFicha(req: Request, res: Response) {
   try {
    const {cod}=req.params
-   const data = await employeeRepository.findBycodAcess(cod)
+   const data = await employeeRepository.findBycodAcess(cod,0)
    console.log(data)
    if(data){
-    // atulizar para o estado 1
+    // atulizar para o estado 2
     const update = await registoPagamentoRepository.updateAcessCode(cod,2)
     res.render("template/files/ficha",{
      data,
@@ -295,9 +295,10 @@ export async function getQrcodeScanner(req: Request, res: Response) {
 export async function scannerQrCodeValidate(req: Request, res: Response) {
   try {
    const {cod}=req.params
-   const data = await employeeRepository.findBycodAcess(cod)
+   const data = await employeeRepository.findBycodAcess(cod,2)
    console.log(data)
    const user = req.session.user;
+   // Analizar Verificar a data
    if(data){
     const update = await registoPagamentoRepository.updateAcessCode(cod,1)
     res.render("template/dataEmployeeAcess",{
@@ -305,6 +306,9 @@ export async function scannerQrCodeValidate(req: Request, res: Response) {
      data,
      cod
     }) 
+   }else{
+    const info=" Codigo ja foi Usado !"
+   res.render("template/error/invalidCod",{info})
    }
  
   } catch (error) {
