@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leitor de Código QR</title>
+</head>
+<body>
+  <button onclick="iniciarLeitura()">Abrir Câmera para QR Code</button>
+  <video id="video" style="display: none;"></video>
+  <canvas id="canvas" style="display: none;"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
+  <script>
+    function iniciarLeitura() {
+      const video = document.getElementById('video');
+      const canvasElement = document.getElementById('canvas');
+      const canvas = canvasElement.getContext('2d');
+
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+        .then((stream) => {
+          video.srcObject = stream;
+          video.setAttribute('playsinline', true);
+          video.play();
+          video.style.display = 'block';
+          video.onloadedmetadata = () => {
+            canvasElement.width = video.videoWidth;
+            canvasElement.height = video.videoHeight;
+            canvasElement.style.display = 'block';
+            requestAnimationFrame(tick);
+          };
+        })
+        .catch((error) => {
+          console.error('Erro ao acessar a câmera:', error);
+        });
+
+      function tick() {
+        canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+        const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height, {
+          inversionAttempts: 'dontInvert',
+        });
+        if (code && code.data) {
+          alert('QR code lido: ' + code.data);
+          // Aqui você pode adicionar o código para lidar com o conteúdo lido do QR code
+          // Por exemplo, redirecionar para uma URL ou executar alguma ação com base no conteúdo.
+        }
+        requestAnimationFrame(tick);
+      }
+    }
+  </script>
+</body>
+</html>

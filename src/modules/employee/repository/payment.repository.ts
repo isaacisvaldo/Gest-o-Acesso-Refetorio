@@ -54,5 +54,21 @@ export const registoPagamentoRepository = {
          throw new Error(`Erro ao adicionar : ${error}`);
       }
    },
+   async updateAcessCode(cod: any,status:any) {
+      try {
+         const codeAcess = await conexao.registroCodAcesso.update({ 
+            where:{
+            designacao: cod
+            },
+            data:{
+               estado:status
+            }
+          })
+         return codeAcess
+
+      } catch (error) {
+         throw new Error(`Erro ao adicionar : ${error}`);
+      }
+   },
 
 }

@@ -193,7 +193,10 @@
                         </td>
                         <% element.registroCodAcesso.forEach(e => { %>
                         <% if(element.Id==e.registroPagamento_fk){ %>
-                        <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"> <%= e.designacao %> <a href="/printFicha/<%= e.designacao %>">   <i class="fas fa-download"></i></a></small>
+                          <% if(e.estado==0){ %>
+                          <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"> <%= e.designacao %> <a href="/printFicha/<%= e.designacao %>">   <i class="fas fa-download"></i></a></small>
+                                                
+                            <% }%>
                         <% }%>
                         <% }) %>
                       </td>

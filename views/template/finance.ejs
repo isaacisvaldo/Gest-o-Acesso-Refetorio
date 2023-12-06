@@ -286,14 +286,33 @@ function preencherTabela(dados) {
   
       
       }
-    
-    
       function exportarParaExcel() {
   const workbook = new ExcelJS.Workbook();
-  const worksheet = workbook.addWorksheet('Planilha 1');
+  const worksheet = workbook.addWorksheet('Acessos ao Refetório');
 
+  // Estilo para o cabeçalho
+  worksheet.addRow(['Acessos ao Refetório']).eachCell((cell) => {
+    cell.font = { bold: true, color: { argb: 'FFFFFF' }, size: 18 };
+    cell.alignment = { horizontal: 'center', vertical: 'middle' };
+    cell.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: 'FF4CAF50' } // Cor de fundo verde
+    };
+  });
+
+  // Estilo para as células de dados
+  worksheet.getRow(1).eachCell((cell) => {
+    cell.border = {
+      top: { style: 'thin' },
+      left: { style: 'thin' },
+      bottom: { style: 'thin' },
+      right: { style: 'thin' }
+    };
+  });
+
+  // Adiciona dados da tabela ao arquivo Excel
   const tabela = document.getElementById('tabela');
-
   const tableRows = tabela.querySelectorAll('tr');
   tableRows.forEach((row) => {
     const rowData = [];
@@ -303,12 +322,17 @@ function preencherTabela(dados) {
     worksheet.addRow(rowData);
   });
 
+  // Aplica alguns estilos adicionais
+  worksheet.getRow(1).font = { bold: true };
+  worksheet.getColumn('A').width = 20;
+
+  // Gera o arquivo Excel
   workbook.xlsx.writeBuffer().then((data) => {
     const blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'tabela.xlsx';
+    a.download = 'Relatorio.xlsx';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

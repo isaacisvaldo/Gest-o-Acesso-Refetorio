@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html data-bs-theme="light" lang="en-US" dir="ltr">
+
+  
+<!-- Mirrored from prium.github.io/falcon/v3.18.0/dashboard/support-desk.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 26 Nov 2023 21:59:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ===============================================--><!--    Document Title--><!-- ===============================================-->
+    <title>Bio | Access &amp; Minint</title>
+ 
+
+    <!-- ===============================================--><!--    Favicons--><!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="../assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="../assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <script src="../assets/js/config.js"></script>
+    <script src="../vendors/simplebar/simplebar.min.js"></script>
+
+    <!-- ===============================================--><!--    Stylesheets--><!-- ===============================================-->
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
+    <link href="../vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link href="../assets/css/theme-rtl.min.css" rel="stylesheet" id="style-rtl">
+    <link href="../assets/css/theme.min.css" rel="stylesheet" id="style-default">
+    <link href="../assets/css/user-rtl.min.css" rel="stylesheet" id="user-style-rtl">
+    <link href="../assets/css/user.min.css" rel="stylesheet" id="user-style-default">
+    <script>
+      var isRTL = JSON.parse(localStorage.getItem('isRTL'));
+      if (isRTL) {
+        var linkDefault = document.getElementById('style-default');
+        var userLinkDefault = document.getElementById('user-style-default');
+        linkDefault.setAttribute('disabled', true);
+        userLinkDefault.setAttribute('disabled', true);
+        document.querySelector('html').setAttribute('dir', 'rtl');
+      } else {
+        var linkRTL = document.getElementById('style-rtl');
+        var userLinkRTL = document.getElementById('user-style-rtl');
+        linkRTL.setAttribute('disabled', true);
+        userLinkRTL.setAttribute('disabled', true);
+      }
+    </script>
+  </head>
+
+  <body>
+    <!-- ===============================================--><!--    Main Content--><!-- ===============================================-->
+    <main class="main" id="top">
+      <div class="container" data-layout="container">
+        <script>
+          var isFluid = JSON.parse(localStorage.getItem('isFluid'));
+          if (isFluid) {
+            var container = document.querySelector('[data-layout]');
+            container.classList.remove('container');
+            container.classList.add('container-fluid');
+          }
+        </script>
+        
+     <%-include("partials/sidebar") %>
+     <%-include("partials/navbar") %>
+    
+        <div class="content">
+            <%-include("partials/complementNav") %>
+          <script>
+            var navbarPosition = localStorage.getItem('navbarPosition');
+            var navbarVertical = document.querySelector('.navbar-vertical');
+            var navbarTopVertical = document.querySelector('.content .navbar-top');
+            var navbarTop = document.querySelector('[data-layout] .navbar-top:not([data-double-top-nav');
+            var navbarDoubleTop = document.querySelector('[data-double-top-nav]');
+            var navbarTopCombo = document.querySelector('.content [data-navbar-top="combo"]');
+
+            if (localStorage.getItem('navbarPosition') === 'double-top') {
+              document.documentElement.classList.toggle('double-top-nav-layout');
+            }
+
+            if (navbarPosition === 'top') {
+              navbarTop.removeAttribute('style');
+              navbarTopVertical.remove(navbarTopVertical);
+              navbarVertical.remove(navbarVertical);
+              navbarTopCombo.remove(navbarTopCombo);
+              navbarDoubleTop.remove(navbarDoubleTop);
+            } else if (navbarPosition === 'combo') {
+              navbarVertical.removeAttribute('style');
+              navbarTopCombo.removeAttribute('style');
+              navbarTop.remove(navbarTop);
+              navbarTopVertical.remove(navbarTopVertical);
+              navbarDoubleTop.remove(navbarDoubleTop);
+            } else if (navbarPosition === 'double-top') {
+              navbarDoubleTop.removeAttribute('style');
+              navbarTopVertical.remove(navbarTopVertical);
+              navbarVertical.remove(navbarVertical);
+              navbarTop.remove(navbarTop);
+              navbarTopCombo.remove(navbarTopCombo);
+            } else {
+              navbarVertical.removeAttribute('style');
+              navbarTopVertical.removeAttribute('style');
+              navbarTop.remove(navbarTop);
+              navbarDoubleTop.remove(navbarDoubleTop);
+              navbarTopCombo.remove(navbarTopCombo);
+            }
+          </script>
+             <div class="card mb-3">
+              <div class="bg-holder d-none d-lg-block bg-card" style="background-image:url(../../../assets/img/icons/spot-illustrations/corner-4.png);"></div><!--/.bg-holder-->
+              <div class="card-body position-relative">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <h3>Qrcode Scanner </h3>
+                    <p class="mt-2">Ler um QR code = Obter informações escondidas, como links, texto ou ações, como abrir um site ou salvar contatos.</p>
+                    <div class="col-auto"><button class="btn btn-primary" role="button"  onclick="iniciarLeitura()">Scanner </button></div>
+           
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row g-0">
+            <div class="col-lg-6 pe-lg-2">
+              <div class="card mb-3">
+                <div class="card-header">
+                  <div class="row flex-between-end">
+                    <div class="col-auto align-self-center">
+                      <h5 class="mb-0" data-anchor="data-anchor">Visualização</h5>
+                    </div>
+                    <div class="col-auto ms-auto">
+                   </div>
+                  </div>
+                </div>
+                <div class="card-body bg-body-tertiary overflow-hidden">
+                  <div class="tab-content">
+                    <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-94bf961e-24f4-44e9-bd27-e8be48e03e84" id="dom-94bf961e-24f4-44e9-bd27-e8be48e03e84">
+                      <div class="hoverbox rounded-3 text-center">
+                        <video id="video" style="display: none;"></video> <div class="hoverbox-content bg-dark p-5 flex-center" data-bs-theme="light">
+                         
+                        </div>
+                      </div>
+                    </div>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 pe-lg-2">
+              <div class="card mb-3">
+                <div class="card-header">
+                  <div class="row flex-between-end">
+                    <div class="col-auto align-self-center">
+                      <h5 class="mb-0" data-anchor="data-anchor">Captura</h5>
+                    </div>
+                    <div class="col-auto ms-auto">
+                  </div>
+                  </div>
+                </div>
+                <div class="card-body bg-body-tertiary overflow-hidden">
+                  <div class="tab-content">
+                    <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-440709d2-430f-4aff-8caa-b508e1c65b61" id="dom-440709d2-430f-4aff-8caa-b508e1c65b61"><a class="color-white" href="#!">
+                        <div class="hoverbox rounded-3">
+                          <canvas id="canvas" style="display: none;"></canvas>
+                        </div>
+                      </a></div>
+                  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+       
+  
+         <%-include("partials/footer")  %>
+        </div>
+    
+      </div>
+    </main>
+
+    <script src="../../vendors/popper/popper.min.js"></script>
+    <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="../../vendors/anchorjs/anchor.min.js"></script>
+    <script src="../../vendors/is/is.min.js"></script>
+    <script src="../../vendors/echarts/echarts.min.js"></script>
+    <script src="../../vendors/fontawesome/all.min.js"></script>
+    <script src="../../vendors/lodash/lodash.min.js"></script>
+    <script src="../../../../../polyfill.io/v3/polyfill.min58be.js?features=window.scroll"></script>
+    <script src="../../vendors/list.js/list.min.js"></script>
+    <script src="../../assets/js/theme.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
+    <script>
+      function iniciarLeitura() {
+        const video = document.getElementById('video');
+        const canvasElement = document.getElementById('canvas');
+        const canvas = canvasElement.getContext('2d');
+  
+        navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+          .then((stream) => {
+            video.srcObject = stream;
+            video.setAttribute('playsinline', true);
+            video.play();
+            video.style.display = 'block';
+            video.onloadedmetadata = () => {
+              canvasElement.width = video.videoWidth;
+              canvasElement.height = video.videoHeight;
+              canvasElement.style.display = 'block';
+              requestAnimationFrame(tick);
+            };
+          })
+          .catch((error) => {
+            console.error('Erro ao acessar a câmera:', error);
+          });
+  
+        function tick() {
+          canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+          const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+          const code = jsQR(imageData.data, imageData.width, imageData.height, {
+            inversionAttempts: 'dontInvert',
+          });
+          if (code && code.data) {
+            window.location=code.data
+            }
+          requestAnimationFrame(tick);
+        }
+      }
+    </script>
+  </body>
+
+</html>

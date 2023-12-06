@@ -50,14 +50,15 @@
     <p class="codigo"><%=data.designacao  %></p>
     <p>Escaneie o QR Code para acessar.</p>
   </div>
-
+ 
   <script>
     var cod = `<%=cod %>`
+    var domain = `<%=domain%>`
     var qrCode = new QRCode(document.getElementById("qrcode"), {
       width: 200,
       height: 200
     });
-    var textoParaQRCode = `http://localhost:3000/validar-ficha/${cod}`;
+    var textoParaQRCode = `${domain}/scannerQrCodeValidate/${cod}`;
     qrCode.makeCode(textoParaQRCode);
 
     window.print();

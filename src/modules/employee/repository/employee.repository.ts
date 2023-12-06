@@ -35,7 +35,8 @@ export const employeeRepository = {
       try {
          const data = await conexao.registroCodAcesso.findFirst({
             where:{
-              designacao:cod
+              designacao:cod,
+              estado:0
             },
             include:{
                registro:{

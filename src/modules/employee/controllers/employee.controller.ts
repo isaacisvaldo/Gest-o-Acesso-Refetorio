@@ -262,7 +262,46 @@ export async function printFicha(req: Request, res: Response) {
    const data = await employeeRepository.findBycodAcess(cod)
    console.log(data)
    if(data){
+    // atulizar para o estado 1
+    const update = await registoPagamentoRepository.updateAcessCode(cod,2)
     res.render("template/files/ficha",{
+     data,
+     cod,
+     domain
+    }) 
+   }else{
+    return res.status(500).json({ error: "Ficha ja Foi Utilizado" });
+   }
+ 
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Failed to create user." });
+  }
+}
+export async function getQrcodeScanner(req: Request, res: Response) {
+  try {
+    const user = req.session.user;
+
+    res.render("template/pageScanner",{
+     user,
+    }) 
+
+ 
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Failed to create user." });
+  }
+}
+export async function scannerQrCodeValidate(req: Request, res: Response) {
+  try {
+   const {cod}=req.params
+   const data = await employeeRepository.findBycodAcess(cod)
+   console.log(data)
+   const user = req.session.user;
+   if(data){
+    const update = await registoPagamentoRepository.updateAcessCode(cod,1)
+    res.render("template/dataEmployeeAcess",{
+      user,
      data,
      cod
     }) 
