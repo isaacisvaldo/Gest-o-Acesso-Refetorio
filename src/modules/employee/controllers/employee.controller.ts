@@ -296,16 +296,26 @@ export async function scannerQrCodeValidate(req: Request, res: Response) {
   try {
    const {cod}=req.params
    const data = await employeeRepository.findBycodAcess(cod,2)
-   console.log(data)
    const user = req.session.user;
+   console.log("Localizar",data)
+   
    // Analizar Verificar a data
    if(data){
-    const update = await registoPagamentoRepository.updateAcessCode(cod,1)
     res.render("template/dataEmployeeAcess",{
-      user,
-     data,
-     cod
-    }) 
+        user,
+       data,
+       cod
+      }) 
+      setTimeout(async () => {
+       try {
+        const update = await registoPagamentoRepository.updateAcessCode(cod, 1);
+        // Você pode fazer algo com o resultado da atualização, se necessário
+      } catch (updateError) {
+        // Lidar com erros na atualização, se houver
+        console.error(updateError);
+      }
+      
+    }, 5000); // 5000 milissegundos = 5 segundos
    }else{
     const info=" Codigo ja foi Usado !"
    res.render("template/error/invalidCod",{info})

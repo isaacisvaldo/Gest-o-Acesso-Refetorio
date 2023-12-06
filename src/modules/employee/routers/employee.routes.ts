@@ -17,6 +17,6 @@ employeeRouter.post('/employeePaymentRegister',userAuth,employeeController.emplo
 employeeRouter.get('/listEmployee',userAuth,employeeController.listEmployee)
 employeeRouter.get('/printFicha/:cod',userAuth,employeeController.printFicha)
 employeeRouter.get('/getQrcodeScanner',userAuth,employeeController.getQrcodeScanner)
-employeeRouter.get('/scannerQrCodeValidate/:cod',employeeController.scannerQrCodeValidate)
+employeeRouter.get('/scannerQrCodeValidate/:cod',userAuth,employeeController.scannerQrCodeValidate)
 
 export {employeeRouter}; 
