@@ -181,7 +181,14 @@
                           </div>
                         </td>
                         <td class="align-middle subject py-2 pe-4"><a class="fw-semi-bold" href="tickets-preview.html"><%= element.data %></a></td>
-                        <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"><%= element.estado %></small></td>
+                        <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false">
+                        <% if(element.estado ==0){%>
+                             Não Pago
+                          <%   }else{%>
+                               Pago 
+                            <%  } %>
+                        
+                        </small></td>
                         <td class="align-middle priority pe-4">
                           <div class="d-flex align-items-center gap-2">
                             <div style="--falcon-circle-progress-bar:100"><svg class="circle-progress-svg" width="26" height="26" viewBox="0 0 120 120">

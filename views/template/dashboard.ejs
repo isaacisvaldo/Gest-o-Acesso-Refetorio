@@ -278,7 +278,14 @@
                             <td>   <h6 class="mb-0"><%= element.employee.nome %></h6></td>
                           </td>
                           <td class="align-middle subject py-2 pe-4"><a class="fw-semi-bold" href="tickets-preview.html"><%= element.data %></a></td>
-                          <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false"><%= element.estado %></small></td>
+                          <td class="align-middle status fs-0 pe-4"><small class="badge rounded badge-subtle-success false">
+
+                            <% if(element.estado ==0){%>
+                              Não Pago
+                           <%   }else{%>
+                                Pago 
+                             <%  } %>
+                          </small></td>
                           <td class="align-middle status fs-0 pe-4">
                           <% element.registroCodAcesso.forEach(e => { %>
                           <% if(element.Id==e.registroPagamento_fk){ %>
