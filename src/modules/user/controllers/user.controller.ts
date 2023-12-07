@@ -11,6 +11,7 @@ import { domain } from "../../../config/domain/domain.url";
 import { employeeRepository } from "../../employee/repository/employee.repository";
 import { formatte } from "../../employee/util/formatte";
 import { registoPagamentoRepository } from "../../employee/repository/payment.repository";
+import { perfilRepository } from "../repository/perfil.repository";
 interface UserSessionData {
   id: string;
   nome: string;
@@ -44,8 +45,10 @@ export  async function create(req: Request, res: Response){
     if(!validate.error){
       const user = await userRepository.create(data)
       if(user){
+        req.flash("sucess", "Cadastrado com sucesso!");
         return res.status(200).json({ success: "Cadastrado Com sucesso" });
       }else{
+        req.flash("error", "Erro ao tentar Cadastrar");
         return res.status(500).json({ error: "Erro ao cadastrar !" });
       }
     }else{
@@ -125,11 +128,13 @@ export async function logout(req: Request, res: Response) {
   export async function listUser(req: Request, res: Response) {
     try {
         const user = req.session.user;
+        const perfil= await perfilRepository.findAll()
         const users = await userRepository.findAll()
         console.log(users)
         res.render("template/listUser",{
           user,
           domain,
+          perfil,
           users,
           error: req.flash("error"),
           warning: req.flash("warning"),

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Leitor de Código QR</title>
+</head>
+<body>
+  <button onclick="startScan()">Abrir Câmera para QR Code</button>
+  <video id="preview" style="width:300px;height:300px;"></video>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+  <script>
+    let scanner;
+
+    function startScan() {
+      const video = document.getElementById('preview');
+
+      scanner = new Instascan.Scanner({ video: video });
+
+      Instascan.Camera.getCameras().then(cameras => {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+          scanner.addListener('scan', function(content) {
+            alert('QR code lido: ' + content);
+            // Aqui você pode adicionar o código para lidar com o conteúdo lido do QR code
+            // Por exemplo, redirecionar para uma URL ou executar alguma ação com base no conteúdo.
+          });
+        } else {
+          console.error('Nenhuma câmera encontrada.');
+        }
+      }).catch(err => {
+        console.error('Erro ao acessar as câmeras: ', err);
+      });
+    }
+  </script>
+</body>
+</html>
