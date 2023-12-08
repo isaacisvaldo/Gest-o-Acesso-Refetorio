@@ -26,7 +26,7 @@ export const registoPagamentoRepository = {
          return registo
 
       } catch (error) {
-         throw new Error(`Erro ao adicionar : ${error}`);
+         throw new Error(`Erro Inesperado`);
       }
    },
    async create(data: any) {

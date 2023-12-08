@@ -108,7 +108,7 @@ export const employeeRepository = {
           return registro
           
        } catch (error) {
-          throw new Error(`Erro ao adicionar : ${error}`);  
+          throw new Error(`Erro Inesperado `);  
        }  
    },
    async findByRangeEmployeeIdEstado(cod_fk:any,status:any){
