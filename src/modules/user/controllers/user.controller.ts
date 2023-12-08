@@ -2,8 +2,7 @@
 import { Request, Response, NextFunction } from "express";
 import { autenticationService } from "../../util/authentication/authentication";
 import { userRepository } from "../repository/user.repository";
-import { UserDTO } from "../dto/user.dto";
-import { userValidate } from "../../util/validation/user.service.validate";
+import { UserDTO, UserLogDTO } from "../dto/user.dto";
 import { hash } from 'bcryptjs';
 import fs from 'fs';
 import { readFileExcel } from "../../util/readFile";
@@ -12,6 +11,8 @@ import { employeeRepository } from "../../employee/repository/employee.repositor
 import { formatte } from "../../employee/util/formatte";
 import { registoPagamentoRepository } from "../../employee/repository/payment.repository";
 import { perfilRepository } from "../repository/perfil.repository";
+import { logsRepository } from "../repository/log.repository";
+import { UserService } from "../user.service";
 interface UserSessionData {
   id: string;
   nome: string;
@@ -42,7 +43,7 @@ export  async function create(req: Request, res: Response){
       password: password,
       fk_perfil:fk_perfil,
     }
-    const validate = await userValidate.valiadeUser(data)
+    const validate = await UserService.validationUser(data)
     if(!validate.error){
       const user = await userRepository.create(data)
       if(user){
@@ -78,7 +79,12 @@ export async function login(req: Request, res: Response) {
             perfil:find.perfil?.designacao
           
         };
-
+        const data :UserLogDTO ={
+          titulo: "Início de sessão",
+          designacao: "Acabou de efectuar um início de sessão na sua Conta !",
+          user_fk: find.Id,
+        }
+        const logs = await logsRepository.createlogsUser(data)
         res.redirect("/dashboard")
       }else{
         //erro ao autenticar
@@ -111,8 +117,8 @@ export async function dashboard(req:Request, res:Response){
   export async function profile(req:Request, res:Response){
     try {
       const user = req.session.user;
-      console.log(user)
-      res.render("template/profile",{user})
+      const logs = await logsRepository.findLogsUserBYIdUser(user?.id)
+      res.render("template/profile",{user,logs})
     } catch (error) {
       console.log(error);
     }

@@ -26,6 +26,17 @@ model User {
   fk_perfil String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+   userlogs      UserLogs[]
+}
+model UserLogs {
+  Id         String   @id @default(uuid())
+  titulo String?   
+  designacao String?  
+  user    User?  @relation(fields: [user_fk], references: [Id])
+  user_fk String 
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+ 
 }
 
 model AreaCategoria {
@@ -75,7 +86,19 @@ model Employee {
   createdAt                 DateTime @default(now())
   updatedAt                 DateTime @updatedAt
   registro  Registro[]
+   employeeLogs      EmployeeLogs[]
 } 
+
+model EmployeeLogs {
+  Id         String   @id @default(uuid())
+  titulo String?   
+  designacao String?  
+  Employee    Employee?  @relation(fields: [employee_fk], references: [cod])
+  employee_fk Int 
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+ 
+}
 
 model Registro {
   Id        String   @id @default(uuid())

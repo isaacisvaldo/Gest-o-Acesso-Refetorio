@@ -1,8 +1,6 @@
 
 import { Request, Response, NextFunction } from "express";
 import { autenticationService } from "../../util/authentication/authentication";
-import { userValidate } from "../../util/validation/user.service.validate";
-import { hash } from 'bcryptjs';
 import fs from 'fs';
 import { readFileExcel } from "../../util/readFile";
 import { domain } from "../../../config/domain/domain.url";
@@ -11,6 +9,8 @@ import { formatte, formatteRegistro } from "../../employee/util/formatte";
 import { registoPagamentoRepository } from "../repository/payment.repository";
 import{employeePayment} from "../../employee/dto/employeePayment.dto"
 import { generateUniqueCode } from "../../util/randomChar";
+import { logsRepository } from "../../user/repository/log.repository";
+import { EmployeeLogDTO } from "../../user/dto/user.dto";
 
 
 export async function ImportFileRegister(req: Request, res: Response) {
@@ -166,10 +166,12 @@ export async function perfilEmployee(req: Request, res: Response) {
    const employee = await employeeRepository.findBycod(formatte)
    const registerpay = await employeeRepository.findByRangeEmployeeIdEstado(formatte,1)
    const registernopay = await employeeRepository.findByRangeEmployeeIdEstado(formatte,0)
+   const logs = await logsRepository.findLogsEmployeeById(formatte)
    if(employee){
     res.render("template/perfilemployee",{
         user,
         domain,
+        logs,
         registerpay,
         employee,
         registernopay,
@@ -277,6 +279,12 @@ export async function employeePaymentRegister(req:Request,res:Response){
     registroPagamento_fk:insert?.Id 
     }
     const create = await registoPagamentoRepository.createAcessCode(data1)
+    const data3:EmployeeLogDTO ={
+      titulo: "Registro",
+      designacao: "Deu entrada a um registro",
+      employee_fk: parseInt(employeeCod),
+    }
+    const logs = await logsRepository.createlogsEmployee(data3)
     req.flash("sucess", "Adicionado com sucesso!");
     return res.status(200).json({ success: "Cadastrado Com sucesso" });
   }else{

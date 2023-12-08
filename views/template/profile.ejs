@@ -132,102 +132,34 @@
                
             
             </div>
-            <div class="col-xxl-4">
+            <div class="col-xxl-12">
                 <div class="card h-100">
                   <div class="card-header">
-                    <h6 class="mb-0">Actividades &amp; log</h6>
+                    <h6 class="mb-0">Actividades &amp; logs</h6>
                   </div>
                   <div class="card-body scrollbar recent-activity-body-height ps-2">
-                    <div class="row g-3 timeline timeline-primary timeline-past pb-x1">
-                      <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                          <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span class="text-primary fas fa-envelope"></span></div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="row gx-0 border-bottom pb-x1">
-                          <div class="col">
-                            <h6 class="text-800 mb-1">Antony Hopkins sent an Email</h6>
-                            <p class="fs--1 text-600 mb-0">Got an email for previous year sale report</p>
-                          </div>
-                          <div class="col-auto">
-                            <p class="fs--2 text-500 mb-0">2m ago</p>
+                    <% logs.forEach(element => { %>
+                      <div class="row g-3 timeline timeline-primary timeline-past pb-x1">
+                        <div class="col-auto ps-4 ms-2">
+                          <div class="ps-2">
+                            <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span class="text-primary fas fa-envelope"></span></div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="row g-3 timeline timeline-primary timeline-past pb-x1">
-                      <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                          <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span class="text-primary fas fa-archive"></span></div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="row gx-0 border-bottom pb-x1">
-                          <div class="col">
-                            <h6 class="text-800 mb-1">Emma archived a board</h6>
-                            <p class="fs--1 text-600 mb-0">A finished project's board is archived recently</p>
-                          </div>
-                          <div class="col-auto">
-                            <p class="fs--2 text-500 mb-0">26m ago</p>
+                        <div class="col">
+                          <div class="row gx-0 border-bottom pb-x1">
+                            <div class="col">
+                              <h6 class="text-800 mb-1"><%=element.titulo  %></h6>
+                              <p class="fs--1 text-600 mb-0"><%=element.designacao %></p>
+                            </div>
+                            <div class="col-auto">
+                              <p class="fs--2 text-500 mb-0"><%=element.createdAt  %></p>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="row g-3 timeline timeline-primary timeline-current pb-x1">
-                      <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                          <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span class="text-primary fas fa-code"></span></div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="row gx-0 border-bottom pb-x1">
-                          <div class="col">
-                            <h6 class="text-800 mb-1">Falcon v3.0.0 released with new features</h6>
-                            <p class="fs--1 text-600 mb-0">Falcon new version is released successfully with new Dashboards</p>
-                          </div>
-                          <div class="col-auto">
-                            <p class="fs--2 text-500 mb-0">1h ago</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row g-3 timeline timeline-primary  pb-x1">
-                      <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                          <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span class="text-primary fas fa-code-branch"></span></div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="row gx-0 border-bottom pb-x1">
-                          <div class="col">
-                            <h6 class="text-800 mb-1">Rowan shared a link to the board</h6>
-                            <p class="fs--1 text-600 mb-0">A link is shared with attachments</p>
-                          </div>
-                          <div class="col-auto">
-                            <p class="fs--2 text-500 mb-0">3h ago</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row g-3 timeline timeline-primary">
-                      <div class="col-auto ps-4 ms-2">
-                        <div class="ps-2">
-                          <div class="icon-item icon-item-sm rounded-circle bg-200 shadow-none"><span class="text-primary far fa-file-code"></span></div>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <div class="row gx-0">
-                          <div class="col">
-                            <h6 class="text-800 mb-1">Anna updated a file</h6>
-                            <p class="fs--1 text-600 mb-0">Fixed some bugs and spelling errors on this update</p>
-                          </div>
-                          <div class="col-auto">
-                            <p class="fs--2 text-500 mb-0">4h ago</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <% }) %>
+                  
+                   
                   </div>
                 </div>
               </div>
