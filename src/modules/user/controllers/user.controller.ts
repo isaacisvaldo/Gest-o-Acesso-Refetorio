@@ -100,8 +100,8 @@ export async function dashboard(req:Request, res:Response){
       const user = req.session.user;
       console.log(user)
       const historyPayment = await registoPagamentoRepository.findAll()
-      console.log(historyPayment)
-      res.render("template/dashboard",{user,historyPayment})
+      const employeer = await employeeRepository.findAll()
+      res.render("template/dashboard",{user,historyPayment,employeer})
     } catch (error) {
       console.log(error);
     }
