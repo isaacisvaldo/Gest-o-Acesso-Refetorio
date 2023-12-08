@@ -105,32 +105,71 @@
               navbarTopCombo.remove(navbarTopCombo);
             }
           </script>
-            <div class="card mb-3">
-              <div class="card-header position-relative min-vh-25 mb-7">
-                <div class="bg-holder rounded-3 rounded-bottom-0" style="background-image:url(../../assets/img/generic/4.jpg);"></div><!--/.bg-holder-->
-                <div class="avatar avatar-5xl avatar-profile"><img class="rounded-circle img-thumbnail shadow-sm"  src="\uploads\<%=user.img %>" alt="" width="200" alt="" /></div>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-lg-8">
-                    <h4 class="mb-1"> <%=user.nome  %> <%= user.sobrenome %><span data-bs-toggle="tooltip" data-bs-placement="right" title="Verified"><small class="fa fa-check-circle text-primary" data-fa-transform="shrink-4 down-2"></small></span></h4>
-                    <h5 class="fs-0 fw-normal"><%=user.perfil  %></h5>
-                    <p class="text-500">Minit, USER</p><button class="btn btn-falcon-primary btn-sm px-3" type="button">Editar perfil</button>
-                    <div class="border-bottom border-dashed my-4 d-lg-none"></div>
+          <div class="row g-3 mb-3">
+            <div class="col-xxl-6">
+              <div class="row g-3">
+                <div class="col-12">
+                  <div class="card font-sans-serif">
+                    <div class="card-body d-flex gap-3 flex-column flex-sm-row align-items-center"><img class="rounded-3" src="\uploads\<%=employee.img  %>" alt="" width="112" />
+                      <table class="table table-borderless fs--1 fw-medium mb-0">
+                        <tbody>
+                          <tr>
+                            <td class="p-1" style="width: 35%;">Nome:</td>
+                            <td class="p-1 text-600"><%=employee.nome  %></td>
+                          </tr>
+                          <tr>
+                            <td class="p-1" style="width: 35%;">Joined:</td>
+                            <td class="p-1 text-600"><%=employee.createdAt  %></td>
+                          </tr>
+                          <tr>
+                            <td class="p-1" style="width: 35%;">Email:</td>
+                            <td class="p-1"><a class="text-600 text-decoration-none" href="mailto:goodguy@nicemail.com"><%=employee.email  %> </a></td>
+                          </tr>
+                          <tr>
+                            <td class="p-1" style="width: 35%;">Telefone:</td>
+                            <td class="p-1"><a class="text-600 text-decoration-none" href="tel:+01234567890 "><%=employee.telefone  %> </a></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    
+                    </div>
                   </div>
-                  <div class="col ps-2 ps-lg-3"><a class="d-flex align-items-center mb-2" href="#"><span class="fas fa-user-circle fs-3 me-2 text-700" data-fa-transform="grow-2"></span>
-                      <div class="flex-1">
-                        <h6 class="mb-0">See followers (330)</h6>
+                </div>
+                <div class="col-md-6">
+                  <div class="card font-sans-serif">
+                    <div class="card-header pb-0">
+                      <h6 class="mb-0">Registros Pagos</h6>
+                    </div>
+                    <div class="card-body">
+                      <div class="row g-0">
+                        <div class="col-6">
+                          <h4 class="text-700 lh-1 mb-1"> <%=registerpay.length  %></h4>
+                        </div>
+                        <div class="col-6 mt-n4 d-flex justify-content-end">
+                          <div class="echart-default" data-echart-responsive="true" data-echarts='{"xAxis":{"data":["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7","Day 8","Day 9","Day 10"]},"series":[{"type":"line","data":[85,60,120,70,100,15,65,80,60,75,45],"smooth":true,"lineStyle":{"width":2}}],"grid":{"bottom":"2%","top":"2%","right":"0px","left":"0px"}}'></div>
+                        </div>
                       </div>
-                    </a>
-                    </a></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="card font-sans-serif">
+                    <div class="card-header pb-0">
+                      <h6 class="mb-0">Registros a Pagar</h6>
+                    </div>
+                    <div class="card-body">
+                      <div class="row g-0">
+                        <div class="col-6">
+                          <h4 class="text-700 lh-1 mb-1"> <%=registernopay.length  %></h4>
+                        </div>
+                        <div class="col-6 mt-n4 d-flex justify-content-end">
+                          <div class="echart-default" data-echart-responsive="true" data-echarts='{"xAxis":{"data":["Day 1","Day 2","Day 3","Day 4","Day 5","Day 6","Day 7","Day 8"]},"series":[{"type":"line","data":[55,60,40,120,70,80,35,80,85],"smooth":true,"lineStyle":{"width":2}}],"grid":{"bottom":"2%","top":"2%","right":"0px","left":"10px"}}'></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="row g-0">
-              <div class="col-lg-12 pe-lg-2">
-               
-            
             </div>
             <div class="col-xxl-4">
                 <div class="card h-100">
@@ -231,8 +270,7 @@
                   </div>
                 </div>
               </div>
-         <%-include("partials/footer")  %>
-        </div>
+          </div>
     
       </div>
     </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->

@@ -61,11 +61,9 @@
             container.classList.add('container-fluid');
           }
         </script>
-       <% if(user.perfil==="QrcodeRead"){%>
-        <%-include("partials/QRcodereade/sidebar") %>
-        <%   }else{%>
-          <%-include("partials/sidebar") %>
-          <%   } %> 
+        
+     <%-include("partials/sidebar") %>
+     <%-include("partials/navbar") %>
     
         <div class="content">
             <%-include("partials/complementNav") %>
@@ -107,56 +105,95 @@
               navbarTopCombo.remove(navbarTopCombo);
             }
           </script>
-            <div class="card mb-3">
-              <div class="card-header position-relative min-vh-25 mb-7">
-                <div class="bg-holder rounded-3 rounded-bottom-0" style="background-image:url(../../assets/img/generic/4.jpg);"></div><!--/.bg-holder-->
-                <div class="avatar avatar-5xl avatar-profile"><img class="rounded-circle img-thumbnail shadow-sm"  src="\uploads\<%=data.registro.employee.img  %>" alt="" width="200" alt="" /></div>
-              </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-lg-8">
-                    <h4 class="mb-1"> <%=data.registro.employee.nome  %> <span data-bs-toggle="tooltip" data-bs-placement="right" title="Verified"><small class="fa fa-check-circle text-primary" data-fa-transform="shrink-4 down-2"></small></span></h4>
-                    <h5 class="fs-0 fw-normal"><%=data.registro.employee.title  %></h5>
-                    <p class="text-500"> <%=data.designacao %></p><button class="btn btn-falcon-primary btn-sm px-3" type="button" disabled>Perfil Ativo</button>
-                    <div class="border-bottom border-dashed my-4 d-lg-none"></div>
+          <div class="row g-3 mb-3">
+            <div class="col-xxl-6">
+              <div class="row g-3">
+                <div class="col-12">
+                  <div class="card font-sans-serif">
+                    <div class="card-body d-flex gap-3 flex-column flex-sm-row align-items-center"><img class="rounded-3" src="\uploads\user.png" alt="" width="112" />
+                      <table class="table table-borderless fs--1 fw-medium mb-0">
+                        <tbody>
+                          <tr>
+                            <td class="p-1" style="width: 35%;">Nome:</td>
+                            <td class="p-1 text-600"><%=data.registro.employee.nome  %></td>
+                          </tr>
+                          <tr>
+                            <td class="p-1" style="width: 35%;">Joined:</td>
+                            <td class="p-1 text-600">2021/01/12 23:13</td>
+                          </tr>
+                          <tr>
+                            <td class="p-1" style="width: 35%;">Email:</td>
+                            <td class="p-1"><a class="text-600 text-decoration-none" href="mailto:goodguy@nicemail.com">minint@nicemail.com </a><small class="badge rounded badge-subtle-success false">Verified</small></td>
+                          </tr>
+                          <tr>
+                            <td class="p-1" style="width: 35%;">Telefone:</td>
+                            <td class="p-1"><a class="text-600 text-decoration-none" href="tel:+01234567890 ">+012-345-67890 </a><small class="badge rounded badge-subtle-primary false">2-step verification</small></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                     
+                    </div>
                   </div>
-                  <div class="col ps-2 ps-lg-3"><a class="d-flex align-items-center mb-2" href="#"><span class="fas fa-user-circle fs-3 me-2 text-700" data-fa-transform="grow-2"></span>
-                      <div class="flex-1">
-                        <h6 class="mb-0">Código :<%=data.registro.employee.cod  %></h6>
-                      </div>
-                    </a></div>
                 </div>
+             
+              
               </div>
             </div>
             <div class="row g-0">
-              <div class="col-lg-12 pe-lg-2">
-               
-                <div class="card mb-3">
-                  <div class="card-header bg-body-tertiary d-flex justify-content-between">
-                    <h5 class="mb-0">Informação </h5>
-                  </div>
-                  <div class="card-body fs--1 p-0">
-                  
-  
-                    <a class="border-bottom-0 notification rounded-0 border-x-0 border border-300" href="#!">
-                      <div class="notification-avatar">
-                        <div class="avatar avatar-xl me-3">
-                          <div class="avatar-emoji rounded-circle "><span role="img" aria-label="Emoji">📋️</span></div>
+                <div class="row g-3 mb-3">
+                    <div class="col-lg-12">
+                      <div class="card h-100 mb-3">
+                        <div class="card-header bg-body-tertiary d-flex flex-between-center py-2">
+                          <h6 class="mb-0">Metodo de Pagamento</h6>
+                         
+                        </div>
+                        <div class="card-body">
+                          <div class="row g-3 h-100">
+                            <div class="col-sm-6 col-lg-12">
+                              <div class="card position-relative rounded-4">
+                                <div class="bg-holder bg-card rounded-4" style="background-image:url(/assets/img/icons/spot-illustrations/corner-2.png);"></div><!--/.bg-holder-->
+                                <div class="card-body p-3 pt-5 pt-xxl-4"><img class="mb-3" src="/assets/img/icons/chip.png" alt="" width="30" />
+                                  <h6 class="text-primary font-base lh-1 mb-1">**** **** **** 9876</h6>
+                                  <h6 class="fs--2 fw-semi-bold text-facebook mb-3">12/26</h6>
+                                  <h6 class="mb-0 text-facebook"><%=data.registro.employee.nome  %></h6><img class="position-absolute end-0 bottom-0 mb-2 me-2" src="/assets/img/icons/master-card.png" alt="" width="70" />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-sm-6 col-lg-12">
+                              <table class="table table-borderless fw-medium font-sans-serif fs--1 mb-2">
+                                <tbody>
+                                  <tr>
+                                    <td class="p-1" style="width: 35%;">Tipo:</td>
+                                    <td class="p-1 text-600">Cartão de Consumo</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="p-1" style="width: 35%;">Nome:</td>
+                                    <td class="p-1 text-600"><%=data.registro.employee.nome  %></td>
+                                  </tr>
+                                  <tr>
+                                    <td class="p-1" style="width: 35%;">Expires:</td>
+                                    <td class="p-1 text-600">DEC 2026</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="p-1" style="width: 35%;">Issuer:</td>
+                                    <td class="p-1 text-600">Falcon Finances</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="p-1" style="width: 35%;">ID:</td>
+                                    <td class="p-1 text-600"><%= cod %></td>
+                                  </tr>
+                                </tbody>
+                              </table><small class="badge rounded badge-subtle-success false">verificado</small><small class="badge rounded badge-subtle-warning false">True</small>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div class="notification-body">
-                        <p class="mb-1"><strong>Bilhete</strong> requisitado <strong>pelo(a) </strong> <strong><%=data.registro.employee.nome  %></strong> no dia </p>
-                        <span class="notification-time"><%= data.createdAt %></span>
-                      </div>
-                    </a>
-  
+                    </div>
                   
                   </div>
-                </div>
-            
-            </div>
-         <%-include("partials/footer")  %>
-        </div>
+           <%-include("partials/footer")  %>
+          </div>
+          </div>
     
       </div>
     </main><!-- ===============================================--><!--    End of Main Content--><!-- ===============================================-->

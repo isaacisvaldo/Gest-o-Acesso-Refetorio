@@ -18,6 +18,7 @@ interface UserSessionData {
   sobrenome: string;
   username: string;
   img: string;
+  perfil:string | undefined
   
 }
 declare module "express-session" {
@@ -73,7 +74,8 @@ export async function login(req: Request, res: Response) {
             nome: find.nome,
             sobrenome: find.sobrenome,
             username: find.username,
-            img:find.img
+            img:find.img,
+            perfil:find.perfil?.designacao
           
         };
 

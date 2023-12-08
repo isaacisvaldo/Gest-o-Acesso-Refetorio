@@ -156,6 +156,37 @@ export async function listEmployee(req: Request, res: Response) {
     return res.status(500).json({ error: "Failed to create user." });
   }
 }
+export async function perfilEmployee(req: Request, res: Response) {
+    try {
+        const user = req.session.user;
+      const {cod}=req.params
+    const formatte =parseInt(cod)
+    console.log(formatte)
+  
+   const employee = await employeeRepository.findBycod(formatte)
+   const registerpay = await employeeRepository.findByRangeEmployeeIdEstado(formatte,1)
+   const registernopay = await employeeRepository.findByRangeEmployeeIdEstado(formatte,0)
+   if(employee){
+    res.render("template/perfilemployee",{
+        user,
+        domain,
+        registerpay,
+        employee,
+        registernopay,
+        error: req.flash("error"),
+        warning: req.flash("warning"),
+        sucess: req.flash("sucess"),
+      }) 
+   }else{
+    res.send("No Data  to send !!")
+   }
+ 
+     
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Failed to create user." });
+    }
+  }
 export async function controlRegisterEmployee(req: Request, res: Response) {
   try {
       const user = req.session.user;

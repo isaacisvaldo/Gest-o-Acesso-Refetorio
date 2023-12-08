@@ -6,6 +6,9 @@ export const userRepository = {
          const user = await conexao.user.findFirst({
             where:{
                 username:username,
+            },
+            include:{
+                perfil:true
             }
         
         })
