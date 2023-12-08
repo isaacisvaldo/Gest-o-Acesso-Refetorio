@@ -158,7 +158,19 @@
                             <td class="name"><a href=""><%=element.nome  %></a> </td> 
                               <td class="email"><%=element.sobrenome  %></td>
                               <td class="email"><%=element.perfil.designacao  %></td>
-                              <td class="email"> </td>
+                              <td class="email"> 
+                                <div class="bg-300 mx-3 d-none d-lg-block d-xl-none" style="width:1px; height:29px"></div>
+                              
+                                <div class="d-flex align-items-center" id="table-ticket-replace-element">
+                                 <div class="dropdown font-sans-serif ms-2"><button class="btn btn-falcon-default text-600 btn-sm dropdown-toggle dropdown-caret-none" type="button" id="preview-dropdown" data-bs-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false"><span class="fas fa-ellipsis-h fs--2"></span></button>
+                                    <div class="dropdown-menu dropdown-menu-end border py-2" aria-labelledby="preview-dropdown">
+                                      <a class="dropdown-item" href="#">Editar</a>
+                                      <a class="dropdown-item" href="#">Eliminar</a>
+                                     
+                                    </div>
+                                  </div>
+                                </div>
+                              </div></td>
                              
                             </tr>
                           <% }) %>
