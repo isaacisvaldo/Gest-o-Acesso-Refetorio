@@ -111,8 +111,7 @@
             <div class="row flex-between-center">
               <div class="col-md">
               
-               De <input type="date" class="form-control-sm" name="" id="init"> Até
-                <input type="date" class="form-control-sm" name="" id="last"> 
+             <input type="text" class="form-control-sm" placeholder="Id Funcionário" name="" id="init"> 
                 <select name="type" id="type" class="form-control-sm">
                     <option value="1">Pago</option>
                     <option value="0">Não Pago</option>
@@ -158,6 +157,7 @@
                             <th class="text-900 sort" data-sort="name">Nome</th>
                             <th class="text-900 sort" data-sort="name">Data</th>
                             <th class="text-900 sort" data-sort="name">Estado do Pagamento</th>
+                            <th class="text-900 sort" data-sort="name">Acção</th>
                           
                           </tr>
                         </thead>
@@ -174,7 +174,7 @@
                   </div>
                 </div>
               
-            
+                </div>
               </div>
             </div>
           </div>
@@ -215,8 +215,55 @@ function preencherTabela(dados) {
     }else{
       estadoCell.textContent = "Pago"; 
     }
-   
     row.appendChild(estadoCell);
+    if(item.estado===0){
+      const idDoRegistro = item.Id; // Supondo que 'id' seja a propriedade que contém o ID do registro
+       row.setAttribute('data-id', idDoRegistro); // Definir o ID do registro como um atributo personalizado na linha
+
+      const accao = document.createElement('td');
+    const botao = document.createElement('button');
+    // Aplicando estilos ao botão
+botao.style.backgroundColor = 'red'; // Cor de fundo vermelha
+botao.style.color = 'white'; // Cor do texto branca
+botao.style.padding = '8px 16px'; // Padding interno do botão
+botao.style.border = 'none'; // Sem borda
+     botao.textContent = 'Liquidar';
+     accao.appendChild(botao);
+     botao.addEventListener('click', function() {
+      const confirmacao = confirm('Tem certeza que deseja eliminar estes dados?');
+
+if (confirmacao) {
+    // Encontrar a linha atual e removê-la
+    const tableRow = this.parentNode.parentNode;
+    const idDaLinha = tableRow.getAttribute('data-id');
+     console.log(idDaLinha)
+     fetch(`${domain}/updatehistoryFinancialEm/${idDaLinha}`, {
+        method: 'GET'
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Ocorreu um erro.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Resposta do servidor:', data);
+           tableRow.parentNode.removeChild(tableRow);
+    })
+    .catch(error => {
+        // Lidar com erros
+        console.error('Erro:', error);
+    });
+   } else {
+    // Se o usuário cancelar, não faz nada
+    console.log('Ação de eliminar cancelada.');
+}
+});
+row.appendChild(accao);
+    }else{
+      estadoCell.textContent = "Pago"; 
+    }
+   
 
     tabelaCorpo.appendChild(row);
   });
@@ -225,28 +272,20 @@ function preencherTabela(dados) {
       function getDataFinancial(){
         const tabelaCorpo = document.getElementById('tabela-corpo');
         tabelaCorpo.innerHTML = '';
-      const init =document.getElementById("init").value
-      const last =document.getElementById("last").value
+      const employee =document.getElementById("init").value
       const type =document.getElementById("type").value
       var btnExport = document.getElementById('btn-export');
       var btnfind = document.getElementById('btn-find');
 
-      if(init===""){
+      if(employee===""){
         document.getElementById('result').innerHTML = "Data de Inicio não pode estar  vazio";
         document.getElementById('result').setAttribute('class', 'text-danger')
 
-      }else if(last===""){
-        document.getElementById('result').innerHTML = "Data do fim da pesquisanão pode estar  vazio";
-        document.getElementById('result').setAttribute('class', 'text-danger')
-      }else{
+        }else{
         document.getElementById('result').innerHTML = "";
-        const partesD1 = init.split('-');
-      const partesD2 = last.split('-');
-      const dataInit = partesD1[2] + '-' + partesD1[1] + '-' + partesD1[0];
-      const dataLast = partesD2[2] + '-' + partesD2[1] + '-' + partesD2[0];
+ 
                     const data ={
-                      dateStart: dataInit,
-                      dateEnd: dataLast,
+                      employee: parseInt(employee),
                       status: type
                   }
                 const options = {
@@ -256,7 +295,7 @@ function preencherTabela(dados) {
                   },
                   body: JSON.stringify(data),
                 };
-                fetch(`${domain}/dataOfFinancial`, options)
+                fetch(`${domain}/historyFinancialEm`, options)
                   .then((response) => response.json())
                   .then((data) => {
                     if (!data.error) {

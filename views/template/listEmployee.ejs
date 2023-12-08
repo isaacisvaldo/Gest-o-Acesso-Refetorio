@@ -120,7 +120,7 @@
             <div class="card-body pt-0">
               <div class="tab-content">
                 <div class="tab-pane preview-tab-pane active" role="tabpanel" aria-labelledby="tab-dom-192e75b3-c1ce-4d4d-81da-2bbe4857a478" id="dom-192e75b3-c1ce-4d4d-81da-2bbe4857a478">
-                  <div id="tableExample3" data-list='{"valueNames":["name","email","age"],"page":5,"pagination":true}'>
+                  <div id="tableExample3" data-list='{"valueNames":["cod","nome","estado","email","telefone"],"page":5,"pagination":true}'>
                     <div class="row justify-content-end g-0">
                       <div class="col-auto col-sm-5 mb-3">
                         <form>
@@ -135,17 +135,17 @@
                         <thead class="bg-200">
                           <tr>
                             <th class="text-900 sort" data-sort="cod">Código</th>
-                            <th class="text-900 sort" data-sort="name">Nome</th>
-                            <th class="text-900 sort" data-sort="name">Telefone</th>
-                            <th class="text-900 sort" data-sort="name">Email</th>
-                            <th class="text-900 sort" data-sort="age">Ativo</th>
+                            <th class="text-900 sort" data-sort="nome">Nome</th>
+                            <th class="text-900 sort" data-sort="telefone">Telefone</th>
+                            <th class="text-900 sort" data-sort="email">Email</th>
+                            <th class="text-900 sort" data-sort="estado">Ativo</th>
                           </tr>
                         </thead>
                         <tbody class="list">
                           <% employeer.forEach(element => { %>
                             <tr>
-                              <td class="name"><%=element.cod  %></td>
-                            <td class="name"><a href=""><%=element.nome  %></a> </td> 
+                              <td class="cod"><%=element.cod  %></td>
+                              <td class="name"><a href=""><%=element.nome  %></a> </td> 
                               <td class="email"><%=element.telefone  %></td>
                               <td class="email"><%=element.email  %></td>
                               <td class="age"><%=element.ativo  %></td>

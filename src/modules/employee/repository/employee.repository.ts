@@ -93,5 +93,41 @@ export const employeeRepository = {
          } catch (error) {
             throw new Error(`Erro ao adicionar : ${error}`);  
          }  
-     }
+     },
+     async findByRangeEmployeeId(cod_fk:any){
+      try {
+          const registro = await conexao.registro.findMany({
+              where: {
+               cod_fk:cod_fk
+                },
+                include:{
+                  employee:true,
+                  registroCodAcesso:true,
+                }
+          })
+          return registro
+          
+       } catch (error) {
+          throw new Error(`Erro ao adicionar : ${error}`);  
+       }  
+   },
+   async findByRangeEmployeeIdEstado(cod_fk:any,status:any){
+      try {
+          const registro = await conexao.registro.findMany({
+              where: {
+                  cod_fk:cod_fk,
+                  estado:status
+                },
+                
+                include:{
+                  employee:true,
+                  registroCodAcesso:true,
+                }
+          })
+          return registro
+          
+       } catch (error) {
+          throw new Error(`Erro ao adicionar : ${error}`);  
+       }  
+   }
 }

@@ -326,5 +326,20 @@ export async function scannerQrCodeValidate(req: Request, res: Response) {
     return res.status(500).json({ error: "Failed to create user." });
   }
 }
+export async function verifydebt(req: Request, res: Response) {
+  try {
+   const user = req.session.user;
+  
+    res.render("template/verifydebt",{
+        user,
+        domain,
+      }) 
+     
+ 
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: "Failed to create user." });
+  }
+}
 
   

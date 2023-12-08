@@ -15,6 +15,7 @@ employeeRouter.get('/InsertDataFile/:name/:cod',employeeController.InsertDataFil
 employeeRouter.post('/uploadFile',upload.single('file'),employeeController.uploadFile)
 employeeRouter.post('/employeePaymentRegister',userAuth,employeeController.employeePaymentRegister)
 employeeRouter.get('/listEmployee',userAuth,employeeController.listEmployee)
+employeeRouter.get('/verifydebt',userAuth,employeeController.verifydebt)
 employeeRouter.get('/printFicha/:cod',userAuth,employeeController.printFicha)
 employeeRouter.get('/getQrcodeScanner',userAuth,employeeController.getQrcodeScanner)
 employeeRouter.get('/scannerQrCodeValidate/:cod',userAuth,employeeController.scannerQrCodeValidate)
