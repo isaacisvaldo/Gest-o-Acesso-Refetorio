@@ -105,49 +105,43 @@
               navbarTopCombo.remove(navbarTopCombo);
             }
           </script>
-          <div class="card mb-3">
-            <div class="card-body">
-              <div class="row flex-between-center">
-                <div class="col-md">
-                  <h5 class="mb-2 mb-md-0">Importar Registos de Entrada</h5>
+           <div class="card">
+            <div class="card-body overflow-hidden p-lg-6">
+              <div class="row align-items-center">
+                <div class="col-lg-6"><img class="img-fluid" src="../assets/img/icons/spot-illustrations/21.png" alt="" /></div>
+                <div class="col-lg-6 ps-lg-4 my-5 text-center text-lg-start">
+                  <h3 class="text-primary">Importar dados de Registros</h3>
+                  <div class="card-body" id="card1">
+                    <form enctype="multipart/form-data" id="formUpload">
+                    <div>
+                      <label for="customFile" class="form-label">Adicionar o ficheiro</label>
+                      <input required class="form-control form-control-lg" id="customFile" name="file" type="file" onchange= "ValidarExt()" >
+                    </div>
+                <br>
+             
+                    </form>
+                 
+                  <button  class="btn btn-outline-primary me-1 mb-1" type="button" id="btnupload" onclick="enviar()"  hidden>Enviar Ficheiro</button>
                 </div>
-                
+               </div>
+               <div class="card-body bg-body-tertiary" hidden id="card2">
+                <div class="row justify-content-center">
+                  <div class="col-lg-8 col-xxl-6">
+                    <div class="card shadow-none mb-3">
+                      <div class="card-body">
+                        <h3 class="fw-semi-bold">Adicionar os dados do ficheiro <p id="info"></p></h3>
+                        <div class="text-center"><button class="btn btn-primary btn-lg my-3" type="button" onclick="adicionar()">Inserir os dados </button><small class="d-block">Os dados presente no arquivo serão adicionados na Base de dados !</small></div>
+                      </div>
+                    </div>
+                   
+                  </div>
+                </div>
+              </div>
               </div>
             </div>
           </div>
           <div class="row g-0">
-            <div class="col-lg-12 pe-lg-2">
             
-              <div class="card mb-3">
-                <div class="card-header bg-body-tertiary">
-              
-                </div>
-                <div class="card-body" id="card1">
-                  <form enctype="multipart/form-data" id="formUpload">
-                  <div>
-                    <label for="customFile" class="form-label">Adicionar o ficheiro</label>
-                    <input required class="form-control form-control-lg" id="customFile" name="file" type="file" onchange= "ValidarExt()" >
-                  </div>
-              <br>
-              <button  class="btn btn-outline-primary me-1 mb-1" type="button" id="btnupload" onclick="enviar()"  hidden>Enviar Ficheiro</button>
-                  </form>
-                </div>
-                <div class="card-body bg-body-tertiary" hidden id="card2">
-                  <div class="row justify-content-center">
-                    <div class="col-lg-8 col-xxl-6">
-                      <div class="card shadow-none mb-3"><img class="card-img-top" src="/assets/img/4170004.jpg" alt="" />
-                        <div class="card-body">
-                          <h3 class="fw-semi-bold">Adicionar os dados do ficheiro <p id="info"></p></h3>
-                          <div class="text-center"><button class="btn btn-primary btn-lg my-3" type="button" onclick="adicionar()">Inserir os dados </button><small class="d-block">Os dados presente no arquivo serão adicionados na Base de dados !</small></div>
-                        </div>
-                      </div>
-                     
-                    </div>
-                  </div>
-                </div>
-              </div>
-           
-          </div>
           <%-include("../partials/footer")  %>
           <%-include("../alerts/alerts")  %>
         </div>

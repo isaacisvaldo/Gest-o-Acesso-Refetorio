@@ -112,7 +112,10 @@
                   <div class="col-lg-8">
                     <h3>Qrcode Scanner </h3>
                     <p class="mt-2">Ler um QR code = Obter informações escondidas, como links, texto ou ações, como abrir um site ou salvar contatos.</p>
-                    <div class="col-auto"><button class="btn btn-primary" role="button"  onclick="iniciarLeitura()">Scanner </button></div>
+                    <div class="col-auto"><button class="btn btn-primary" role="button"  onclick="iniciarLeitura()">Scanner </button>
+                      <button class="btn btn-primary" role="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">OTN </button>
+                    </div>
+                  
            
                 </div>
               </div>
@@ -175,6 +178,43 @@
     
       </div>
     </main>
+    <div class="modal fade" id="staticBackdrop" data-bs-keyboard="false" data-bs-backdrop="static" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg mt-6" role="document">
+        <div class="modal-content border-0">
+          <div class="position-absolute top-0 end-0 mt-3 me-3 z-1"><button class="btn-close btn btn-sm btn-circle d-flex flex-center transition-base" data-bs-dismiss="modal" aria-label="Close"></button></div>
+          <div class="modal-body p-0">
+            <div class="rounded-top-3 bg-body-tertiary py-3 ps-4 pe-6">
+              <h4 class="mb-1" id="staticBackdropLabel">Consultar </h4>
+            </div>
+            <div class="p-4">
+              <div class="row">
+                <div class="col-lg-9">
+                  <div class="d-flex" ><span class="fa-stack ms-n1 me-3"><i class="fas fa-circle fa-stack-2x text-200"></i><i class="fa-inverse fa-stack-1x text-primary fas fa-tag" data-fa-transform="shrink-2"></i></span>
+                    <div class="flex-1" id="teste">
+                      <h5 class="mb-2 fs-0">Código da Compra</h5>
+                      <form>
+                          <div class="mb-3">
+                            
+                            <input class="form-control" required id="recipientId" type="text" />
+                          </div>
+         
+                        </form>
+                      </div>
+                      <hr class="my-4" />
+                    </div>
+                  </div>
+               
+                </div>
+               
+                <div class="modal-footer" >
+                  <button class="btn btn-secondary" id="btn1" type="button" data-bs-dismiss="modal">fechar</button>
+                  <button class="btn btn-primary" type="button" id="btn2"  onclick="find()" >Localizar </button></div>
+                 </div>
+             
+                </div>
+            </div>
+          </div>
+        </div>
 
     <script src="../../vendors/popper/popper.min.js"></script>
     <script src="../../vendors/bootstrap/bootstrap.min.js"></script>
@@ -189,6 +229,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/jsqr@1.0.0/dist/jsQR.min.js"></script>
     <script>
+      var domain =`<%=domain%>`
       function iniciarLeitura() {
         const video = document.getElementById('video');
         const canvasElement = document.getElementById('canvas');
@@ -223,7 +264,15 @@
           requestAnimationFrame(tick);
         }
       }
-    </script>
+
+      function find() {
+       var recipientId = document.getElementById('recipientId').value
+        console.log(recipientId)
+
+       window.location=`${domain}/scannerQrCodeValidate/${recipientId}`
+        }
+
+</script>
   </body>
 
 </html>

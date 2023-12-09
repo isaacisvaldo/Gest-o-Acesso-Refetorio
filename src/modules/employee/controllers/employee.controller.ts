@@ -323,6 +323,7 @@ export async function getQrcodeScanner(req: Request, res: Response) {
 
     res.render("template/pageScanner",{
      user,
+     domain
     }) 
 
  
@@ -356,7 +357,7 @@ export async function scannerQrCodeValidate(req: Request, res: Response) {
       
     }, 5000); // 5000 milissegundos = 5 segundos
    }else{
-    const info=" Codigo ja foi Usado !"
+    const info=" Código Inserido Não foi encontrado !"
    res.render("template/error/invalidCod",{info})
    }
  
