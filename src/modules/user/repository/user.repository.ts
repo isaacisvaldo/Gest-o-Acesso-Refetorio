@@ -8,7 +8,8 @@ export const userRepository = {
                 username:username,
             },
             include:{
-                perfil:true
+                perfil:true,
+                Grupos:true
             }
         
         })

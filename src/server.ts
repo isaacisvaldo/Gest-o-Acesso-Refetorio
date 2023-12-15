@@ -14,12 +14,12 @@ import flash from "express-flash"
 import cors from 'cors';
 // import PDFDocument from 'pdfkit';
 import initCron from './node-cron/insert.file.excel'
-const redisClient = createClient()
-redisClient.connect().catch(console.error)
-const redisStore = new RedisStore({
-  client: redisClient,
-  prefix: "Ref:",
-})
+// const redisClient = createClient()
+// redisClient.connect().catch(console.error)
+// const redisStore = new RedisStore({
+//   client: redisClient,
+//   prefix: "Ref:",
+// })
 config();
 const main = async () => {
   //initCron(); 
@@ -28,7 +28,7 @@ const main = async () => {
   app.use(flash());
   app.use(
     session({
-      store: redisStore,
+    //   store: redisStore,
       secret: process.env.SESSION_PASSWORD || "Testando@##123",
       resave: false,
       saveUninitialized: false,

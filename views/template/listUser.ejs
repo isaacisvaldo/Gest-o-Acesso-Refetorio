@@ -62,7 +62,13 @@
           }
         </script>
           
-          <%-include("partials/sidebar") %>
+          <% if(user.grupo_Id=='0c1bc367-c4ec-415e-b620-8c2052b3edf1'|| user.grupo_designacao=='Administrativo'){ %>
+            <%-include("partials/sidebar") %>
+    <% }else if(user.grupo_Id=='42a0c39b-77cd-4489-9f28-6889f2ee103b'|| user.grupo_designacao=='Refetorios'){%>
+        <%-include("partials/refetorio/sidebar") %>
+        <% }else if(user.grupo_Id=='16d2a233-ecb9-4ed3-8d8b-1f2e1990e979'|| user.grupo_designacao=='Financas'){%>
+            <%-include("partials/financas/sidebar") %>
+        <% }%>
           <%-include("partials/navbar") %>
         <div class="content">
           <%-include("partials/complementNav") %>
@@ -214,12 +220,19 @@
                           <div class="col-lg-6"> <label class="form-label" for="first-name">Nome</label><input class="form-control" id="nome" type="text"   /></div>
                           <div class="col-lg-6"> <label class="form-label" for="last-name">Sobrenome</label><input class="form-control"  type="text"   id="sobrenome" /></div>
                           <div class="col-lg-6"> <label class="form-label" for="email1">User Name</label><input class="form-control" id="username" type="text"  /></div>
-                          <div class="col-lg-6"> <label class="form-label" for="email2">Perfil</label>  <select class="form-control" name="perfil" id="perfil">
-                           <% perfil.forEach(element => { %>
+                          <div class="col-lg-6"> <label class="form-label" for="email2">Grupo</label>
+                              <select class="form-control" name="grupo" id="grupo">
+                           <% grupos.forEach(element => { %>
                             <option value="<%=element.Id %>"><%=element.designacao %></option>
                            <% }) %>
                            
                           </select></div>
+                          <div class="col-lg-12"> <label class="form-label" for="email2">Perfil</label>  <select class="form-control" name="perfil" id="perfil">
+                            <% perfil.forEach(element => { %>
+                             <option value="<%=element.Id %>"><%=element.designacao %></option>
+                            <% }) %>
+                            
+                           </select></div>
                        
                         </div>
                    
@@ -258,12 +271,14 @@
   const sobrenome =document.getElementById("sobrenome").value;
   const username= document.getElementById("username").value;
   const perfil =document.getElementById("perfil").value;
+  const grupo =document.getElementById("grupo").value;
 
   const data= {
     nome:nome,
     sobrenome:sobrenome,
     username:username,
-    fk_perfil:perfil
+    fk_perfil:perfil,
+    fk_grupo:grupo
   }
 
   fetch(`${domain}/user`, {

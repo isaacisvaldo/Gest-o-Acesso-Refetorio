@@ -20,6 +20,8 @@ interface UserSessionData {
   username: string;
   img: string;
   perfil:string | undefined
+  grupo_Id?:string | undefined
+  grupo_designacao?:string | undefined
   
 }
 declare module "express-session" {
@@ -32,7 +34,7 @@ declare module "express-session" {
 export  async function create(req: Request, res: Response){
   try {
     const sugest="admin"
-    const {nome,sobrenome,username,fk_perfil}= req.body
+    const {nome,sobrenome,username,fk_perfil,fk_grupo}= req.body
     const saltOrRounds = 10;
     const password = await hash(sugest, saltOrRounds);
     console.log(req.body);
@@ -42,6 +44,7 @@ export  async function create(req: Request, res: Response){
       username: username,
       password: password,
       fk_perfil:fk_perfil,
+      fk_grupo:fk_grupo
     }
     const validate = await UserService.validationUser(data)
     if(!validate.error){
@@ -76,7 +79,9 @@ export async function login(req: Request, res: Response) {
             sobrenome: find.sobrenome,
             username: find.username,
             img:find.img,
-            perfil:find.perfil?.designacao
+            perfil:find.perfil?.designacao,
+            grupo_Id:find.Grupos?.Id,
+            grupo_designacao:find.Grupos?.designacao
           
         };
         const data :UserLogDTO ={
@@ -137,11 +142,13 @@ export async function logout(req: Request, res: Response) {
     try {
         const user = req.session.user;
         const perfil= await perfilRepository.findAll()
+        const grupos =await perfilRepository.FindAllGroup()
         const users = await userRepository.findAll()
         console.log(users)
         res.render("template/listUser",{
           user,
           domain,
+          grupos,
           perfil,
           users,
           error: req.flash("error"),

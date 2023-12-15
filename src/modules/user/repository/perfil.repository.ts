@@ -2,10 +2,10 @@ import conexao from "../../../config/index";
 
 export const perfilRepository = {
   
-    async create(data:any){
+    async FindAllGroup(){
         try {
-            const user = await conexao.perfil.createMany({data}) 
-            return user
+            const grupos = await conexao.grupos.findMany() 
+            return grupos
         } catch (error) {
             throw new Error(`Erro ao Cadastrar : ${error}`);
         }

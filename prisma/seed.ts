@@ -1,13 +1,16 @@
 
 import { PrismaClient } from '@prisma/client';
 import { perfil } from './seeds/perfil.seed';
+import { grupos } from './seeds/grupos.seed';
 import { statusPayment } from './seeds/statusPayment';
 
 const prisma = new PrismaClient();
 async function main() {
 
   await prisma.perfil.deleteMany(); 
+  await prisma.grupos.deleteMany(); 
   await prisma.perfil.createMany({ data: perfil })
+  await prisma.grupos.createMany({ data: grupos })
 
 }
 main()

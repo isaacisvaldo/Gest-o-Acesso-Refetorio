@@ -61,8 +61,15 @@
             container.classList.add('container-fluid');
           }
         </script>
-        
-     <%-include("partials/sidebar") %>
+        <% if(user.grupo_Id=='0c1bc367-c4ec-415e-b620-8c2052b3edf1'|| user.grupo_designacao=='Administrativo'){ %>
+    <%-include("partials/sidebar") %>
+    <% }else if(user.grupo_Id=='42a0c39b-77cd-4489-9f28-6889f2ee103b'|| user.grupo_designacao=='Refetorios'){%>
+        <%-include("partials/refetorio/sidebar") %>
+        <% }else if(user.grupo_Id=='16d2a233-ecb9-4ed3-8d8b-1f2e1990e979'|| user.grupo_designacao=='Financas'){%>
+            <%-include("partials/financas/sidebar") %>
+        <% }%>
+     
+     
      <%-include("partials/navbar") %>
     
         <div class="content">

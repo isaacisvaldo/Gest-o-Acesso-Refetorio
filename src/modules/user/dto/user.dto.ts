@@ -4,6 +4,7 @@ export interface  UserDTO {
     username: string;
     password: string;
     fk_perfil?: string | null;
+    fk_grupo?: string | null;
   }
 
   export interface  UserLogDTO {

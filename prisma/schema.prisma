@@ -24,9 +24,19 @@ model User {
   img       String   @default("user.png")
   perfil    Perfil?  @relation(fields: [fk_perfil], references: [Id])
   fk_perfil String
+ Grupos    Grupos?  @relation(fields: [fk_grupo], references: [Id])
+ fk_grupo String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
    userlogs      UserLogs[]
+}
+
+model Grupos {
+   Id         String   @id @default(uuid())
+  designacao String   @unique
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User[]
 }
 model UserLogs {
   Id         String   @id @default(uuid())
