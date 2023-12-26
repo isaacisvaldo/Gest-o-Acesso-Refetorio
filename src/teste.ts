@@ -4,8 +4,6 @@ import * as fs from 'fs';
 
 const fileURL = 'URL_DO_ARQUIVO_EXCEL';
 const destFilePath = 'caminho/para/salvar/o/arquivo/localmente.xlsx';
-
-// Fazer uma solicitação para o servidor para obter o arquivo Excel
 axios({
   method: 'get',
   url: fileURL,
@@ -23,9 +21,9 @@ axios({
         // const workbook = xlsx.readFile(destFilePath);
         // const sheetName = workbook.SheetNames[0];
         // const sheetData = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
-        
+
       })
-      .on('error', (err) => {
+      .on('error', (err: any) => {
         console.error('Erro ao baixar o arquivo:', err);
       })
       .pipe(destFile);
