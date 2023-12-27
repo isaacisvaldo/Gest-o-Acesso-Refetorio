@@ -2,7 +2,6 @@
 import { PrismaClient } from '@prisma/client';
 import { perfil } from './seeds/perfil.seed';
 import { grupos } from './seeds/grupos.seed';
-import { statusPayment } from './seeds/statusPayment';
 
 const prisma = new PrismaClient();
 async function main() {

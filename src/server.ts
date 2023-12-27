@@ -12,14 +12,13 @@ import session, { SessionOptions } from 'express-session';
 import {createClient} from "redis"
 import flash from "express-flash"
 import cors from 'cors';
-// import PDFDocument from 'pdfkit';
-import initCron from './node-cron/insert.file.excel'
-// const redisClient = createClient()
-// redisClient.connect().catch(console.error)
-// const redisStore = new RedisStore({
-//   client: redisClient,
-//   prefix: "Ref:",
-// })
+//import initCron from './node-cron/insert.file.excel'
+const redisClient = createClient()
+redisClient.connect().catch(console.error)
+const redisStore = new RedisStore({
+  client: redisClient,
+  prefix: "Ref:",
+})
 config();
 const main = async () => {
   //initCron(); 
@@ -28,7 +27,7 @@ const main = async () => {
   app.use(flash());
   app.use(
     session({
-    //   store: redisStore,
+      store: redisStore,
       secret: process.env.SESSION_PASSWORD || "Testando@##123",
       resave: false,
       saveUninitialized: false,
@@ -51,19 +50,6 @@ const main = async () => {
   app.use(userRouter)
   app.use(employeeRouter)
   app.get('/', (req, res) => {
-    // res.writeHead(200, {
-    //   'Content-Type': 'application/pdf',
-    //   'Content-Disposition': 'attachment; filename=exemplo.pdf'
-    // });
-  
-    // const doc = new PDFDocument();
-  
-    // // Escrever no documento PDF
-    // doc.fontSize(20).text('Exemplo de PDF criado com Node.js e pdfkit!', 100, 100);
-  
-    // // Salvar o PDF no stream da resposta
-    // doc.pipe(res);
-    // doc.end();
    res.render("template/form/sign")
   });
   app.use(function  (req,res,next){
