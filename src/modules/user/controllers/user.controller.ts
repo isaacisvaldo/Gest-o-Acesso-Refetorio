@@ -33,7 +33,7 @@ declare module "express-session" {
 
 export  async function create(req: Request, res: Response){
   try {
-    const sugest="admin"
+    const sugest="DDT123"
     const {nome,sobrenome,username,fk_perfil,fk_grupo}= req.body
     const saltOrRounds = 10;
     const password = await hash(sugest, saltOrRounds);
