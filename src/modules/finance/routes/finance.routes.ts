@@ -6,5 +6,4 @@ financeRouter.get('/getFinancial',userAuth,financeController.getFinancial)
 financeRouter.get('/updatehistoryFinancialEm/:Id',userAuth,financeController.updatehistoryFinancialEm)
 financeRouter.post('/dataOfFinancial',financeController.dataOfFinancial)
 financeRouter.post('/historyFinancialEm',financeController.historyFinancialEm)
-
 export {financeRouter};
