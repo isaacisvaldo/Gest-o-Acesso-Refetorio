@@ -23,7 +23,7 @@ model User {
   password  String
   img       String   @default("user.png")
   perfil    Perfil?  @relation(fields: [fk_perfil], references: [Id])
-  fk_perfil String
+  fk_perfil String?
  Grupos    Grupos?  @relation(fields: [fk_grupo], references: [Id])
  fk_grupo String?
   createdAt DateTime @default(now())

@@ -32,7 +32,29 @@ async function main() {
 ];
 await prisma.user.createMany({ data: user })
 
+ const perfil2 = await prisma.perfil.findFirst({ 
+  where:{
+    designacao:'Admin'
+  }
+ })
+ const grupo2 = await prisma.grupos.findFirst({ 
+  where:{
+    designacao:'Administrativo'
+  }
+ })
+
+ const user= {
+    nome: 'admin Geral',
+    sobrenome: 'Geral',
+    username: 'admin',
+    password:  await hash('admin', 10),
+    fk_perfil:perfil2?.Id,
+    fk_grupo:grupo2?.Id
+  }
+  await prisma.user.deleteMany()
+  await prisma.user.createMany({ data: user })
 }
+
 main()
   .then(async () => {
     await prisma.$disconnect();

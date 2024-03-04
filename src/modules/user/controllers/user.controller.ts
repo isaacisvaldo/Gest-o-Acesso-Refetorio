@@ -37,7 +37,6 @@ export  async function create(req: Request, res: Response){
     const {nome,sobrenome,username,fk_perfil,fk_grupo}= req.body
     const saltOrRounds = 10;
     const password = await hash(sugest, saltOrRounds);
-    console.log(req.body);
     const data:UserDTO={
       nome: nome,
       sobrenome: sobrenome,
